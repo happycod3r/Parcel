@@ -1,0 +1,17 @@
+
+*.parcel
+*.key
+*.data
+*.enc
+*.log
+*.todo
+*.swp
+*.txt
+*.tmp
+
+TODO
+
+dev/
+tests/
+temp/
+tmp/
