@@ -3,7 +3,6 @@
 *.key
 *.data
 *.enc
-*.log
 *.todo
 *.swp
 *.txt
@@ -15,3 +14,5 @@ dev/
 tests/
 temp/
 tmp/
+parcel/
+Parcels/
