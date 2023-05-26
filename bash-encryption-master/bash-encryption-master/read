@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CIPHER='-aes-256-cbc -salt'
+DATAPATH=$(dirname "$0")
+DATAFILE=${1:-"${DATAPATH}/data"}
+
+trap 'exit 1' SIGHUP SIGINT SIGTERM
+
+RC=1
+while [[ RC -ne 0 ]]; do
+    OUTPUT=$(openssl enc -d $CIPHER -salt -in "$DATAFILE")
+    RC=$?
+done
+
+cat <<< "$OUTPUT"

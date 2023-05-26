@@ -7,6 +7,7 @@ function parcel() {
     function parcel-log() {
         if [[ ! -f "parcel.log" ]]; then
             touch "parcel.log"
+            mv "parcel-log" "logs"
         fi
         echo "$@" >> parcel.log
     }
@@ -14,6 +15,7 @@ function parcel() {
     function debug-log() {
         if [[ ! -f "debug.log" ]]; then
             touch "debug.log"
+            mv "debug.log" "logs"
         fi
         echo "$@" >> debug.log
     }
@@ -80,6 +82,29 @@ function parcel() {
         sudo rm "$_file"
     }
 
+    #iterate through files in a folder and its sub folders.
+    function process-files() {
+        local directory="$1"
+        local action="$2"
+    
+        # Iterate through all files and directories in the given directory
+        for file in "$directory"/*; do
+            if [ -f "$file" ]; then
+                # Perform the desired action on the file
+                "$action" "$file"
+            elif [ -d "$file" ]; then
+                # Recursively call the function for subdirectories
+                process_files "$file" "$action"
+            fi
+        done
+    }
+
+    # function is the second argument to process-files.
+    print-file-path() {
+        local file="$1"
+        echo "File: $file"
+    }
+
     # ask the user if they want to continue.
     read -p "[parcel]: turn your file/s into a parcell archive. 
     Continue? (yes/no) " answer
@@ -89,14 +114,17 @@ function parcel() {
         exit 0
     fi 
     
-    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER
-    
+    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_DIRECTORY LOG_DIRECTORY CACHE_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER
+
     THIS_DIRECTORY="$(pwd)"
     iteration_count=0
     targets=$@
     total_targets=$#
     current_directory="$(pwd)"
     parcel_directory="./parcel"
+    OUTPUT_DIRECTORY="Parcels/"
+    CACHE_DIRECTORY="cache/"
+    LOG_DIRECTORY="logs/"
     PARCEL_DATA_FILE="parcel.data"
     LOG_START_DELIMETER="--------  $(date)  --------"
     LOG_ENDING_DELIMETER="-------------------- $(date "+%I:%M:%S") -------------------"
@@ -117,11 +145,13 @@ function parcel() {
     
     make-encryption-key
     touch $PARCEL_DATA_FILE
-    OUTPUT_DIRECTORY="Parcels/"
 
-    if [[ ! -d $OUTPUT_DIRECTORY ]]; then
+    if [[ ! -d $OUTPUT_DIRECTORY || ! -d $CACHE_DIRECTORY || ! -d $LOG_DIRECTORY ]]; then
         sudo mkdir "$OUTPUT_DIRECTORY"
+        sudo mkdir "$CACHE_DIRECTORY"
+        sudo mkdir "$LOG_DIRECTORY"
     fi
+
     debug-log "Created encryption.key, $PARCEL_DATA_FILE, $OUTPUT_DIRECTORY"
     #/////////////////////////////////////////////////////
     # ITERATING THROUGH TARGETS BEYOND THIS POINT.
@@ -146,12 +176,13 @@ function parcel() {
                 TARGET_DATA_STRING="$target : $extension : $parcel_id : $parcel_name"
                 encrypt-file "$target"
                 local _base="$(get-base-file-name $target)"
+                # sudo rm $target Not sure if I need this, but thought that the original file may still be left behind after encryption... 
                 target="${_base}.enc"
 
-                #gpg-encrypt-file "$target"
-                #sudo rm $target
+                gpg-encrypt-file "$target"
+                sudo rm $target
+                target="${target}.gpg"
 
-                #target="${target}.gpg"
                 sudo mv "$target" "$parcel_directory/"
                 debug-log "${_base}$extension encrypted: ${_base}$extension ---> $target"
                 debug-log "$target ---> $parcel_directory/"
@@ -184,7 +215,7 @@ function parcel() {
     parcel-log "$LOG_ENDING_DELIMETER"
     parcel-log ""
     write-parcel-data "$LOG_ENDING_DELIMETER"
-    debug-log "logs ended."
+    debug-log "logs ended." 
     #/////////////////////////////////////////////////////
     # ANY LAST MINUTE FILES THAT SHOULD GO IN parcel/ GOES HERE.
     
