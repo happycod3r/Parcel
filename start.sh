@@ -19,8 +19,12 @@ function start() {
     
 }
 
-my_function() {
+start-parcel() { 
+    local verbose SOURCE targets_string
+
     verbose=false
+    SOURCE="parcel.sh" #default
+    targets_string=""
 
     # Parse options
     while getopts "v" option; do
@@ -40,18 +44,30 @@ my_function() {
 
     # Process files/folders
     for arg in "$@"; do
+        # Make sure file/folder exists.
         if [ -e "$arg" ]; then
-        if [ -f "$arg" ]; then
-            echo "Processing file: $arg"
-        elif [ -d "$arg" ]; then
-            echo "Processing folder: $arg"
-        fi
-        if [ "$verbose" = true ]; then
+            # If file...
+            if [ -f "$arg" ]; then
+                echo "Processing file: $arg"
+                targets_string+="$arg "
+            # If folder...
+            elif [ -d "$arg" ]; then
+                echo "Processing folder: $arg"
+                targets_string+="$arg "
+            fi
+            
+            if [ "$verbose" = true ]; then
             # Add verbose processing logic here
-            echo "Verbose output for $arg"
-        fi
+                echo "Verbose output"
+                SOURCE="parcel-dev.sh"
+            fi
         else
-        echo "File or folder not found: $arg"
+            echo "File or folder not found: $arg"
         fi
     done
+    echo "Source: $SOURCE"
+    echo "targets: $targets_string"
+    bash $SOURCE $targets_string
 }
+
+start-parcel $@
