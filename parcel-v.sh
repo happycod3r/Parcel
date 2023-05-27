@@ -71,14 +71,14 @@ function parcel() {
     }
 
     # file1.enc ---> file1.enc.gpg
-    function gpg-encrypt-file() {
+    function gpg-encrypt-target() {
         local _file="$1"
         gpg --symmetric $_file 
         sudo rm "$_file"
     }
 
     # file1.enc.gpg ---> file1.enc
-    function gpg-decrypt-file() {
+    function gpg-decrypt-target() {
         local _file="$1"
         # Goes back to .enc to be decrypted by internal encryption.
         bname="$(get-base-file-name $_file)"
@@ -88,7 +88,7 @@ function parcel() {
     }
 
     # file1.txt ---> file1.enc
-    function encrypt-file() { #file="$1"
+    function encrypt-target() { #file="$1"
         local _file enc_file bname
         file="$1"
         bname="$(get-base-file-name $file)"
@@ -99,7 +99,7 @@ function parcel() {
     }
 
     # file1.enc ---> file1.txt
-    function decrypt-file() {
+    function decrypt-target() {
         local _file bname
         _file="$1"
         bname="$(get-base-file-name $_file)"
@@ -107,29 +107,28 @@ function parcel() {
         sudo rm "$_file"
     }
 
+    #function zip-target() {
+
+    #}
+
     #iterate through files in a folder and its sub folders.
-    function process-files() {
+    function process-files() { # directory="$1", action="$2"
         local directory action
-        #NOTE: I should probably hard code the parcel/ directory here instead of passing it in as it's never going to be another directory anyway. Plus it's safer that way.
         directory="$1"
         action="$2"
-    
         # Iterate through all files and directories in the given directory
         for file in "$directory"/*; do
             if [ -f "$file" ]; then
-                # Perform the desired action on the file
+                echo "Processing: $file"
+                #Use encrypt.sh on file.
                 "$action" "$file"
-                bname="$(get-base-file-name $file)"
-                gpg-encrypt-file "$(get-target-directory $file)/${bname}.enc"
-            
             elif [ -d "$file" ]; then
                 # Recursively call the function for subdirectories
-                process_files "$file" "$action"
+                process-files "$file" "$action"
             fi
         done
     }
 
-    # ask the user if they want to continue.
     read -p "[parcel]: turn your file/s into a parcell archive. 
     Continue? (yes/no) " answer
     
@@ -154,7 +153,7 @@ function parcel() {
     LOG_ENDING_DELIMETER="-------------------- $(date "+%I:%M:%S") -------------------"
 
     #/////////////////////////////////////////////////////
-    #NOTE: NEW ID AND PARCEL NAME ASSIGNMENT STARTS HERE.
+    #NOTE: NEW ID AND PARCEL NAME ASSIGNMENT.
     random_suffix=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
     parcel_id="${random_suffix^^}"
     parcel_name="${parcel_id}.parcel"
@@ -204,14 +203,17 @@ function parcel() {
                 #/////////////////////////////////////////////////////
                 #NOTE: ADDING FILES HERE.
                 TARGET_DATA_STRING="$target : $extension : $parcel_id : $parcel_name"
-                encrypt-file "$target"
+
+                # Encrypt the target with encrypt.sh
+                encrypt-target "$target"
                 local _base="$(get-base-file-name $target)"
-                #NOTE: sudo rm $target Not sure if I need this, but thought that the original file may still be left behind after encryption... 
+                #NOTE: sudo rm $target Not sure if I need this, but thought that the original file may still be left behind after encryption...?
                 target="${_base}.enc"
 
-                gpg-encrypt-file "$target"
-                sudo rm $target
-                target="${target}.gpg"
+                # GPG-Encrypt the target.
+                #gpg-encrypt-target "$target"
+                #sudo rm $target
+                #target="${target}.gpg"
 
                 sudo mv "$target" "$parcel_directory/"
                 debug-log "${_base}$extension encrypted: ${_base}$extension ---> $target"
@@ -221,7 +223,13 @@ function parcel() {
                 #NOTE: ADDING FOLDERS HERE.
                 TARGET_DATA_STRING="$target : $non_extension : $parcel_id : $parcel_name"
 
-                process-files "$target" "encrypt-file"
+                # Encrypt all files.
+                local action
+                action="encrypt-target"
+                process-files "$target" "$action"
+                
+                action="gpg-encrypt-target"
+                process-files "$target" "$action"
 
                 sudo zip -r "./${target}.zip" "$target"
                 debug-log "$target ---> ${target}.zip"
