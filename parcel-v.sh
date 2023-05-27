@@ -74,6 +74,7 @@ function parcel() {
     function gpg-encrypt-file() {
         local _file="$1"
         gpg --symmetric $_file 
+        sudo rm "$_file"
     }
 
     # file1.enc.gpg ---> file1.enc
@@ -82,6 +83,8 @@ function parcel() {
         # Goes back to .enc to be decrypted by internal encryption.
         bname="$(get-base-file-name $_file)"
         echo "$(gpg --decrypt $_file)" >> "${bname}.enc"
+        # probably have to do the following instead so the .enc goes back where it belongs like I did in encrypt-file:
+        # echo "$(gpg --decrypt $_file)" >> "(get-target-directory $file)${bname}.enc"
     }
 
     # file1.txt ---> file1.enc
@@ -91,6 +94,7 @@ function parcel() {
         bname="$(get-base-file-name $file)"
         enc_file="${bname}.enc"
         bash src/encrypt.sh -e -i "$file" -o "$(get-target-directory $file)/${enc_file}" -k "$(cat encryption.key)"
+        debug-log "Encrypted: $(get-target-directory $file)$file -> $(get-target-directory $enc_file)$enc_file"
         sudo rm "$file"
     }
 
@@ -115,6 +119,9 @@ function parcel() {
             if [ -f "$file" ]; then
                 # Perform the desired action on the file
                 "$action" "$file"
+                bname="$(get-base-file-name $file)"
+                gpg-encrypt-file "$(get-target-directory $file)/${bname}.enc"
+            
             elif [ -d "$file" ]; then
                 # Recursively call the function for subdirectories
                 process_files "$file" "$action"
