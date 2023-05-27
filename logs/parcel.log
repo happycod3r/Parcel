@@ -1,73 +1,10 @@
--------- Fri 26 May 2023 11:38:39 PM EDT --------
-test1.txt : .txt : 3DCIOILD1Y : 3DCIOILD1Y.parcel
--------------------- 11:38:39 -------------------
-
--------- Fri 26 May 2023 11:41:43 PM EDT --------
-test1.txt : .txt : HJL8IYCXMM : HJL8IYCXMM.parcel
--------------------- 11:41:43 -------------------
-
--------- Fri 26 May 2023 11:44:21 PM EDT --------
-test.txt : .txt : GM5HK59UTG : GM5HK59UTG.parcel
-test1 : test1/ : GM5HK59UTG : GM5HK59UTG.parcel
--------------------- 11:44:21 -------------------
-
--------- Sat 27 May 2023 12:24:52 AM EDT --------
-test1 : test1/ : ZNNJ0BEOLV : ZNNJ0BEOLV.parcel
--------------------- 12:24:52 -------------------
-
--------- Sat 27 May 2023 12:28:10 AM EDT --------
-test1 : test1/ : 7RBRUPHRTF : 7RBRUPHRTF.parcel
--------------------- 12:28:10 -------------------
-
--------- Sat 27 May 2023 12:30:28 AM EDT --------
-test5 : test5/ : BKBH8BTWZW : BKBH8BTWZW.parcel
--------------------- 12:30:28 -------------------
-
--------- Sat 27 May 2023 12:38:29 AM EDT --------
-test1 : test1/ : CAVT1CGK4N : CAVT1CGK4N.parcel
--------------------- 12:38:29 -------------------
-
--------- Sat 27 May 2023 12:40:27 AM EDT --------
-test1 : test1/ : QOLQX0ZZ8G : QOLQX0ZZ8G.parcel
--------------------- 12:40:27 -------------------
-
--------- Sat 27 May 2023 12:41:20 AM EDT --------
-test1 : test1/ : AM8FRLGZSP : AM8FRLGZSP.parcel
--------------------- 12:41:20 -------------------
-
--------- Sat 27 May 2023 12:47:35 AM EDT --------
-test1 : test1/ : 2S8BF0PXDN : 2S8BF0PXDN.parcel
--------------------- 12:47:35 -------------------
-
--------- Sat 27 May 2023 03:02:23 PM EDT --------
-test99 : test99/ : WNGOC7NC96 : WNGOC7NC96.parcel
--------------------- 03:02:23 -------------------
-
--------- Sat 27 May 2023 03:24:04 PM EDT --------
-test1 : test1/ : TTTO6UFHT1 : TTTO6UFHT1.parcel
--------------------- 03:24:04 -------------------
-
--------- Sat 27 May 2023 03:28:13 PM EDT --------
-test1 : test1/ : TIODMO8JNU : TIODMO8JNU.parcel
--------------------- 03:28:13 -------------------
-
--------- Sat 27 May 2023 03:30:52 PM EDT --------
-test2 : test2/ : 4IW3C7COAD : 4IW3C7COAD.parcel
--------------------- 03:30:52 -------------------
-
--------- Sat 27 May 2023 03:39:16 PM EDT --------
-test1 : test1/ : YF2SZYIUVK : YF2SZYIUVK.parcel
--------------------- 03:39:16 -------------------
-
--------- Sat 27 May 2023 03:58:40 PM EDT --------
-test1 : test1/ : FYTHOOS4OM : FYTHOOS4OM.parcel
--------------------- 03:58:40 -------------------
-
--------- Sat 27 May 2023 04:05:47 PM EDT --------
-test1 : test1/ : U5SAZRO233 : U5SAZRO233.parcel
--------------------- 04:05:47 -------------------
-
--------- Sat 27 May 2023 04:17:29 PM EDT --------
-test1 : test1/ : 3ETKRXF5IG : 3ETKRXF5IG.parcel
--------------------- 04:17:29 -------------------
+-------- Sat 27 May 2023 07:23:45 PM EDT --------
+test1/test1.txt : .test1 : VWSRUTBHCB : VWSRUTBHCB.parcel
+test1/test2/test2.txt : .test1 : VWSRUTBHCB : VWSRUTBHCB.parcel
+test1/test2/test3/test3.txt : .test1 : VWSRUTBHCB : VWSRUTBHCB.parcel
+test1/test2/test3/test4.txt : .test1 : VWSRUTBHCB : VWSRUTBHCB.parcel
+test1/test2/test3 : test1/ : VWSRUTBHCB : VWSRUTBHCB.parcel
+test1/test2 : test1/ : VWSRUTBHCB : VWSRUTBHCB.parcel
+test1 : test1/ : VWSRUTBHCB : VWSRUTBHCB.parcel
+-------------------- 07:23:45 -------------------
 

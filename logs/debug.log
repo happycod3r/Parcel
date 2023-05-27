@@ -1,6 +1,6 @@
--------- Sat 27 May 2023 04:05:47 PM EDT --------
-Parcel id: U5SAZRO233
-Parcel name: U5SAZRO233.parcel
+-------- Sat 27 May 2023 07:23:45 PM EDT --------
+Parcel id: VWSRUTBHCB
+Parcel name: VWSRUTBHCB.parcel
 Created encryption.key, parcel.data, Parcels/
 [targets] {test1}
 -----------------------------
@@ -11,32 +11,11 @@ Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/
 Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
 test1 ---> test1.zip
 test1.zip ---> ./parcel/
-test1 : test1/ : U5SAZRO233 : U5SAZRO233.parcel
+test1 : test1/ : VWSRUTBHCB : VWSRUTBHCB.parcel
 -----------------------------
 logs ended.
 encryption.key, parcel.data ---> ./parcel
 parcel.zip ---> parcel.parcel
-parcel.parcel ---> U5SAZRO233.parcel
--------------------- 04:05:47 -------------------
-
--------- Sat 27 May 2023 04:17:29 PM EDT --------
-Parcel id: 3ETKRXF5IG
-Parcel name: 3ETKRXF5IG.parcel
-Created encryption.key, parcel.data, Parcels/
-[targets] {test1}
------------------------------
-Iteration [0] beginning on [test1]
-Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
-Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
-Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
-Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
-test1 ---> test1.zip
-test1.zip ---> ./parcel/
-test1 : test1/ : 3ETKRXF5IG : 3ETKRXF5IG.parcel
------------------------------
-logs ended.
-encryption.key, parcel.data ---> ./parcel
-parcel.zip ---> parcel.parcel
-parcel.parcel ---> 3ETKRXF5IG.parcel
--------------------- 04:17:29 -------------------
+parcel.parcel ---> VWSRUTBHCB.parcel
+-------------------- 07:23:45 -------------------
 
