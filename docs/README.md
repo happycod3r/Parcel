@@ -1,4 +1,4 @@
-![Alt](../res/Parcel.png)
+﻿![Alt](../res/Parcel.png)
 
 # .parcel
 
@@ -8,7 +8,9 @@
 
 ---
 ## About
-I created the .parcel archive after my company data was breached. I wanted to create something in which bad actors wouldn't recognize - at least right away. .parcel is not 100% hacker/bad actor proof by any means as nothing really is, but it's my way of trying to create something as close to it as possible. In order to do this I employed multiple layers of encryption, archiving, scrambling methods, and id protected access in order to create as many layers as possible on top of the original data so that anyone trying to get the raw data in a .parcel archive will have a truly hard time reverse engineering it.
+I have created the ***.parcel*** archive after my companies data was breached. I wanted to create something in which bad actors wouldn't recognize - at least right away. Parcel is not 100% hacker/bad actor proof by any means as nothing really is, but it's my way of trying to create something as close to it as possible. In order to do this I employed multiple layers of encryption, archiving, scrambling methods and ID protected access in order to create as many layers as possible on top of the original data so that anyone trying to get the raw data in a ***.parcel*** archive will have a truly hard time reverse engineering it and getting that data.
+Although what happens under the hood of Parcel is complex, Parcel is as easy to use as any other archiving methods such as `.rar` or `.zip` archives. 
+
 ---
 ## Archiving/Encryption Methods
 
