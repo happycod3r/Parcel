@@ -2,7 +2,7 @@
 
 
 function parcel() {
-
+    echo "parcel-v.sh"
     # Data --> parcel.log
     function parcel-log() {
         if [[ ! -f "logs/parcel.log" ]]; then
@@ -43,6 +43,21 @@ function parcel() {
         echo "$@" >> parcel.data
     }
 
+    # Returns my/file/path/file.txt
+    print-file-fqp() {
+        local file="$1"
+        echo "File: $file"
+    }
+
+    # Returns: my/target/files/directory
+    function get-target-directory() {
+        _file="$1"
+        _file_fqp="$(readlink -f $_file)"
+        _file_path=$(echo "${_file_fqp%/*}")
+        echo "$_file_path"
+    }
+
+    # Returns: file1.txt ---> file1
     function get-base-file-name() {
         local _file bname
         _file="$1"
@@ -50,15 +65,18 @@ function parcel() {
         echo "$bname"
     }
 
+    # Creates encryption.key
     function make-encryption-key() {
         bash src/encrypt.sh -g > encryption.key
     }
 
+    # file1.enc ---> file1.enc.gpg
     function gpg-encrypt-file() {
         local _file="$1"
         gpg --symmetric $_file 
     }
 
+    # file1.enc.gpg ---> file1.enc
     function gpg-decrypt-file() {
         local _file="$1"
         # Goes back to .enc to be decrypted by internal encryption.
@@ -66,14 +84,17 @@ function parcel() {
         echo "$(gpg --decrypt $_file)" >> "${bname}.enc"
     }
 
-    function encrypt-file() {
-        local _file bname
-        _file="$1"
-        bname="$(get-base-file-name $_file)"
-        bash src/encrypt.sh -e -i "$_file" -o "${bname}.enc" -k "$(cat encryption.key)"
-        sudo rm "$_file"
+    # file1.txt ---> file1.enc
+    function encrypt-file() { #file="$1"
+        local _file enc_file bname
+        file="$1"
+        bname="$(get-base-file-name $file)"
+        enc_file="${bname}.enc"
+        bash src/encrypt.sh -e -i "$file" -o "$(get-target-directory $file)/${enc_file}" -k "$(cat encryption.key)"
+        sudo rm "$file"
     }
 
+    # file1.enc ---> file1.txt
     function decrypt-file() {
         local _file bname
         _file="$1"
@@ -84,8 +105,10 @@ function parcel() {
 
     #iterate through files in a folder and its sub folders.
     function process-files() {
-        local directory="$1"
-        local action="$2"
+        local directory action
+        #NOTE: I should probably hard code the parcel/ directory here instead of passing it in as it's never going to be another directory anyway. Plus it's safer that way.
+        directory="$1"
+        action="$2"
     
         # Iterate through all files and directories in the given directory
         for file in "$directory"/*; do
@@ -97,12 +120,6 @@ function parcel() {
                 process_files "$file" "$action"
             fi
         done
-    }
-
-    # function is the second argument to process-files.
-    print-file-path() {
-        local file="$1"
-        echo "File: $file"
     }
 
     # ask the user if they want to continue.
@@ -130,15 +147,15 @@ function parcel() {
     LOG_ENDING_DELIMETER="-------------------- $(date "+%I:%M:%S") -------------------"
 
     #/////////////////////////////////////////////////////
-    # NEW ID AND PARCEL NAME ASSIGNMENT STARTS HERE.
+    #NOTE: NEW ID AND PARCEL NAME ASSIGNMENT STARTS HERE.
     random_suffix=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
     parcel_id="${random_suffix^^}"
     parcel_name="${parcel_id}.parcel"
     #/////////////////////////////////////////////////////
-    # THE PARCEL ID AND NAME ARE NOW AVAILABLE FOR USE.
+    #NOTE: THE PARCEL ID AND NAME ARE NOW AVAILABLE FOR USE.
 
     #/////////////////////////////////////////////////////
-    # MAKE ALL FILES/FOLDERS FOR THE CURRENT PARCEL HERE.
+    #NOTE: MAKE ALL FILES/FOLDERS FOR THE CURRENT PARCEL HERE.
     sudo mkdir $parcel_directory
     
     make-encryption-key
@@ -154,13 +171,13 @@ function parcel() {
         sudo mkdir "$CACHE_DIRECTORY"
     fi
     #/////////////////////////////////////////////////////
-    # ALL LOGS CAN BE USED NOW AS THEIR PATHS ARE CREATED.
+    #NOTE: Logs shouldn't be used before this point.
     debug-log $LOG_START_DELIMETER 
     debug-log "Parcel id: $parcel_id"
     debug-log "Parcel name: $parcel_name"
     debug-log "Created encryption.key, $PARCEL_DATA_FILE, $OUTPUT_DIRECTORY"
     #/////////////////////////////////////////////////////
-    # ITERATING THROUGH TARGETS BEYOND THIS POINT.
+    #NOTE: ITERATING THROUGH TARGETS BEYOND THIS POINT.
     parcel-log $LOG_START_DELIMETER
     write-parcel-data $LOG_START_DELIMETER
     debug-log "[targets] {$targets}"
@@ -170,7 +187,7 @@ function parcel() {
 
         if [[ $iteration_count -ne $total_targets ]]; then
             #/////////////////////////////////////////////////////
-            # BEGINNING OF ITERATION.
+            #NOTE: BEGINNING OF ITERATION.
             debug-log "-----------------------------"
             debug-log "Iteration [$iteration_count] beginning on [$target]"
             iteration_count=$((iteration_count + 1))
@@ -178,11 +195,11 @@ function parcel() {
             # If the target is a file...
             if [[ -f "$target" ]]; then
                 #/////////////////////////////////////////////////////
-                # ADDING FILES HERE.
+                #NOTE: ADDING FILES HERE.
                 TARGET_DATA_STRING="$target : $extension : $parcel_id : $parcel_name"
                 encrypt-file "$target"
                 local _base="$(get-base-file-name $target)"
-                # sudo rm $target Not sure if I need this, but thought that the original file may still be left behind after encryption... 
+                #NOTE: sudo rm $target Not sure if I need this, but thought that the original file may still be left behind after encryption... 
                 target="${_base}.enc"
 
                 gpg-encrypt-file "$target"
@@ -194,17 +211,20 @@ function parcel() {
                 debug-log "$target ---> $parcel_directory/"
             elif [[ -d "$target" ]]; then
                 #/////////////////////////////////////////////////////
-                # ADDING FOLDERS HERE.
+                #NOTE: ADDING FOLDERS HERE.
                 TARGET_DATA_STRING="$target : $non_extension : $parcel_id : $parcel_name"
+
+                process-files "$target" "encrypt-file"
+
                 sudo zip -r "./${target}.zip" "$target"
                 debug-log "$target ---> ${target}.zip"
                 sudo rm -r "$target"
     
                 sudo mv "${target}.zip" "$parcel_directory/"
-                debug-l og "${target}.zip ---> $parcel_directory/"
+                debug-log "${target}.zip ---> $parcel_directory/"
             else
                 #/////////////////////////////////////////////////////
-                # INVALID FILE/FOLDER OPTIONS HERE.
+                #NOTE: INVALID FILE/FOLDER OPTIONS HERE.
             
                 TARGET_DATA_STRING="$target : [unknown] : $parcel_id : $parcel_name"
             fi
@@ -217,19 +237,19 @@ function parcel() {
         fi
     done
     #/////////////////////////////////////////////////////
-    # LOOP DONE BEYOND THIS. ALL FILES/FOLDERS ADDED TO parcel/
+    #NOTE: LOOP DONE BEYOND THIS. ALL FILES/FOLDERS ADDED TO parcel/
     parcel-log "$LOG_ENDING_DELIMETER"
     parcel-log ""
     write-parcel-data "$LOG_ENDING_DELIMETER"
     debug-log "logs ended." 
     #/////////////////////////////////////////////////////
-    # ANY LAST MINUTE FILES THAT SHOULD GO IN parcel/ GOES HERE.
+    #NOTE: ANY LAST MINUTE FILES THAT SHOULD GO IN parcel/ GOES HERE.
     
     sudo mv "encryption.key" "$parcel_directory/"
     sudo mv $PARCEL_DATA_FILE "$parcel_directory/"
     debug-log "encryption.key, $PARCEL_DATA_FILE ---> $parcel_directory"
     #/////////////////////////////////////////////////////
-    # ARCHIVING STARTS HERE.
+    #NOTE: ARCHIVING STARTS HERE.
     sudo zip -r "./parcel.zip" "$parcel_directory"
     sudo rm -r "$parcel_directory"
 
@@ -239,7 +259,7 @@ function parcel() {
     debug-log "parcel.parcel ---> ${parcel_name}"
     sudo mv $parcel_name $OUTPUT_DIRECTORY
 
-    # Store the finished fqp for later use.
+    #NOTE: Store the finished fqp for later use.
     PARCEL="$(pwd)/$OUTPUT_DIRECTORY${parcel_name}"
     debug-log "$LOG_ENDING_DELIMETER"
     debug-log ""

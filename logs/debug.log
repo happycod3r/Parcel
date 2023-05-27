@@ -1,83 +1,57 @@
--------- Fri 26 May 2023 03:19:29 AM EDT --------
-Parcel id: 5ITPY3Q8LH
-Parcel name: 5ITPY3Q8LH.parcel
-Created encryption.key, parcel.data, Parcels/
-[targets] {test1.txt test1}
------------------------------
-Iteration [0] beginning on [test1.txt]
-test1.txt encrypted: test1.txt ---> test1.enc.gpg
-test1.enc.gpg ---> ./parcel/
-test1.txt : .txt : 5ITPY3Q8LH : 5ITPY3Q8LH.parcel
------------------------------
------------------------------
-Iteration [1] beginning on [test1]
-test1 ---> test1.zip
-test1 : test1/ : 5ITPY3Q8LH : 5ITPY3Q8LH.parcel
------------------------------
-logs ended.
-encryption.key, parcel.data ---> ./parcel
-parcel.zip ---> parcel.parcel
-parcel.parcel ---> 5ITPY3Q8LH.parcel
--------------------- 03:19:29 -------------------
-
--------- Fri 26 May 2023 03:27:40 AM EDT --------
-Parcel id: BVL3VROZGV
-Parcel name: BVL3VROZGV.parcel
+-------- Fri 26 May 2023 11:38:39 PM EDT --------
+Parcel id: 3DCIOILD1Y
+Parcel name: 3DCIOILD1Y.parcel
 Created encryption.key, parcel.data, Parcels/
 [targets] {test1.txt}
 -----------------------------
 Iteration [0] beginning on [test1.txt]
 test1.txt encrypted: test1.txt ---> test1.enc.gpg
 test1.enc.gpg ---> ./parcel/
-test1.txt : .txt : BVL3VROZGV : BVL3VROZGV.parcel
+test1.txt : .txt : 3DCIOILD1Y : 3DCIOILD1Y.parcel
 -----------------------------
 logs ended.
 encryption.key, parcel.data ---> ./parcel
 parcel.zip ---> parcel.parcel
-parcel.parcel ---> BVL3VROZGV.parcel
--------------------- 03:27:40 -------------------
+parcel.parcel ---> 3DCIOILD1Y.parcel
+-------------------- 11:38:39 -------------------
 
--------- Fri 26 May 2023 03:31:02 AM EDT --------
-Parcel id: 7XQBZWBR9W
-Parcel name: 7XQBZWBR9W.parcel
+-------- Fri 26 May 2023 11:41:43 PM EDT --------
+Parcel id: HJL8IYCXMM
+Parcel name: HJL8IYCXMM.parcel
 Created encryption.key, parcel.data, Parcels/
-[targets] {test1.txt test1}
+[targets] {test1.txt}
 -----------------------------
 Iteration [0] beginning on [test1.txt]
 test1.txt encrypted: test1.txt ---> test1.enc.gpg
 test1.enc.gpg ---> ./parcel/
-test1.txt : .txt : 7XQBZWBR9W : 7XQBZWBR9W.parcel
------------------------------
------------------------------
-Iteration [1] beginning on [test1]
-test1 ---> test1.zip
-test1 : test1/ : 7XQBZWBR9W : 7XQBZWBR9W.parcel
+test1.txt : .txt : HJL8IYCXMM : HJL8IYCXMM.parcel
 -----------------------------
 logs ended.
 encryption.key, parcel.data ---> ./parcel
 parcel.zip ---> parcel.parcel
-parcel.parcel ---> 7XQBZWBR9W.parcel
--------------------- 03:31:02 -------------------
+parcel.parcel ---> HJL8IYCXMM.parcel
+-------------------- 11:41:43 -------------------
 
--------- Fri 26 May 2023 03:32:14 AM EDT --------
-Parcel id: SGAQQWZJZ5
-Parcel name: SGAQQWZJZ5.parcel
+-------- Fri 26 May 2023 11:44:21 PM EDT --------
+Parcel id: GM5HK59UTG
+Parcel name: GM5HK59UTG.parcel
 Created encryption.key, parcel.data, Parcels/
-[targets] {test1.txt test1}
+[targets] {test.txt test1}
 -----------------------------
-Iteration [0] beginning on [test1.txt]
-test1.txt encrypted: test1.txt ---> test1.enc.gpg
-test1.enc.gpg ---> ./parcel/
-test1.txt : .txt : SGAQQWZJZ5 : SGAQQWZJZ5.parcel
+Iteration [0] beginning on [test.txt]
+test.txt encrypted: test.txt ---> test.enc.gpg
+test.enc.gpg ---> ./parcel/
+test.txt : .txt : GM5HK59UTG : GM5HK59UTG.parcel
 -----------------------------
 -----------------------------
 Iteration [1] beginning on [test1]
 test1 ---> test1.zip
-test1 : test1/ : SGAQQWZJZ5 : SGAQQWZJZ5.parcel
+test1.zip ---> ./parcel/
+test1 : test1/ : GM5HK59UTG : GM5HK59UTG.parcel
 -----------------------------
 logs ended.
 encryption.key, parcel.data ---> ./parcel
 parcel.zip ---> parcel.parcel
-parcel.parcel ---> SGAQQWZJZ5.parcel
--------------------- 03:32:15 -------------------
+parcel.parcel ---> GM5HK59UTG.parcel
+-------------------- 11:44:21 -------------------
 

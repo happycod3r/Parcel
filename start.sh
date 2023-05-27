@@ -1,25 +1,6 @@
 #!/bin/bash
 
-function start() {
-
-    is_file_empty() {
-        local file="$1"
-        if [ -s "$file" ]; then
-            echo "The file $file is not empty."
-        else
-            echo "The file $file is empty."
-        fi
-    }   
-
-    if [[ ! -f "state.data" ]]; then
-        touch state.data
-        echo "setup" >> state.data
-    fi
-
-    
-}
-
-start-parcel() { 
+function start-parcel() { 
     local verbose SOURCE targets_string
 
     verbose=false
@@ -56,18 +37,18 @@ start-parcel() {
                 targets_string+="$arg "
             fi
             
-            if [ "$verbose" = true ]; then
-            # Add verbose processing logic here
-                echo "Verbose output"
-                SOURCE="parcel-dev.sh"
-            fi
         else
             echo "File or folder not found: $arg"
         fi
     done
+    if [ "$verbose" = true ]; then
+        # Add verbose processing logic here
+        echo "Verbose output"
+        SOURCE="parcel-v.sh"
+    fi
     echo "Source: $SOURCE"
     echo "targets: $targets_string"
-    bash $SOURCE $targets_string
+    bash "$SOURCE" "$targets_string"
 }
 
 start-parcel $@
