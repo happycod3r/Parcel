@@ -3,8 +3,14 @@
 
 function parcel() {
     
-    echo "parcel-v.sh"
-    # Data --> parcel.log
+    function fatal() {
+        CYAN='\033[0;36m'
+        RED='\033[0;31m'
+        NC='\033[0m'
+        echo -e "${CYAN}[parcel]$0: ${RED}fatal error:${CYAN} $@ \nPlease provide file name/s and/or folder name/s to create an encrypted ${CYAN}.parcel archive. \nUsage: ${RED}start <file> <file> <folder>${NC}" >&2
+        exit 0
+    }
+
     function parcel-log() {
         if [[ ! -f "logs/parcel.log" ]]; then
             touch "parcel.log"
@@ -12,7 +18,7 @@ function parcel() {
         fi
         echo "$@" >> "logs/parcel.log"
     }
-    # Data --> debug.log
+    
     function debug-log() {
         if [[ ! -f "logs/debug.log" ]]; then
             touch "debug.log"
@@ -20,7 +26,7 @@ function parcel() {
         fi
         echo "$@" >> logs/debug.log
     }
-    # Data --> terminal 
+
     function out() {
         CYAN='\033[0;36m'
         PURPLE='\033[0;35m'
@@ -28,15 +34,12 @@ function parcel() {
         echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
         sleep 1
     }
-    # Data --> terminal
+
     function error-out {
-        CYAN='\033[0;36m'
-        RED='\033[0;31m'
-        NC='\033[0m'
-        echo -e "${CYAN}[parcel]${RED}$@${NC}"
+        echo -e "$@"
         sleep 1
     }
-    # Data --> parcel.data
+    
     function write-parcel-data() {
         if [[ ! -f "parcel.data" ]]; then
             touch parcel.data
@@ -44,13 +47,6 @@ function parcel() {
         echo "$@" >> parcel.data
     }
 
-    # Returns my/file/path/file.txt
-    print-file-fqp() {
-        local file="$1"
-        echo "File: $file"
-    }
-
-    # Returns: my/target/files/directory
     function get-target-directory() {
         local _file _file_fqp _file_path
         _file="$1"
@@ -59,7 +55,6 @@ function parcel() {
         echo "$_file_path"
     }
 
-    # Returns: file1.txt ---> file1
     function get-base-file-name() {
         local _file bname
         _file="$1"
@@ -67,25 +62,18 @@ function parcel() {
         echo "$bname"
     }
 
-    # file1.enc ---> file1.enc.gpg
     function gpg-encrypt-target() {
-        local pin _file
-        pin="123456789"
+        local _file
         _file="$1"
-        
-        echo "$pin" | gpg --pasphrase-fd 0 --batch --command-to-put PIN --symmetric $_file
-        #gpg --symmetric $_file 
-        #echo "$pin" | gpg --symmetric --passphrase-fd 0 --batch --command-to-put PIN $_file
+        gpg --symmetric $_file 
         sudo rm "$_file"
     }
     
-    # Creates encryption.key
     function make-encryption-key() {
         bash src/encrypt.sh -g > encryption.key
         PARCEL_KEY="$(cat -u encryption.key)"
     }
 
-    # file1.txt ---> file1.enc
     function encrypt-target() { #file="$1"
         local _file enc_file bname
         file="$1"
@@ -96,31 +84,21 @@ function parcel() {
         sudo rm "$file"
     }
 
-    # file1.enc ---> file1.arc
     function arc-target() {
-        local bname target
+        local bname target file1 file2
         target="$1"
         bname="$(get-base-file-name $target)"
         ./src/bin/arc ao $bname $target
         sudo rm "$target"
+
         file1="${bname}.arc"
         file2="$(get-target-directory $target)/${bname}.arc"
 
-        #FIXME: The "problem" with this part is that when parcel archiving any files in the same directory as this script the command:
-        #  mv "${bname}.arc" "$(get-target-directory $target)/${bname}.arc"
-        #fails because the output says both files are the same when trying to move.
-        # This isn't the case though when the directory or files are in a different directory. Both $file & $file2 are reported to be different. 
-        if [[ "$(realpath $file1)" == "$(realpath $file2)" ]]; then
-            echo "#### The files '$file1' and '$file2' are the same."
-            # do nothing...
-
-        else
-            echo "#### The files '$file1' and '$file2' are different."
+        if [[ "$(realpath $file1)" != "$(realpath $file2)" ]]; then
             mv "${bname}.arc" "$(get-target-directory $target)/${bname}.arc"
-        fi
-        
+            return 0
+        fi        
     }
-
 
     function zip-target() {
         local target
@@ -128,7 +106,6 @@ function parcel() {
         sudo zip -r "./${target}.zip" "$target"
     }
 
-    #iterate through files in a folder and its sub folders.
     function process-files() { # directory="$1", action="$2"
         local directory action extension non_extension TARGET_DATA_STRING
         directory="$1"
@@ -140,7 +117,7 @@ function parcel() {
                 TARGET_DATA_STRING="$file : $extension : $parcel_id : $parcel_name"
                 "$action" "$file"
             elif [ -d "$file" ]; then
-                # Recursively call the function for sub-directories
+                # Recursively call process-files for any sub-directories.
                 TARGET_DATA_STRING="$file : $non_extension : $parcel_id : $parcel_name"
                 process-files "$file" "$action"
             fi
@@ -186,6 +163,7 @@ function parcel() {
     sudo mkdir $parcel_directory
     make-encryption-key
     touch $PARCEL_DATA_FILE
+
     if [[ ! -d $OUTPUT_DIRECTORY ]]; then
         sudo mkdir "$OUTPUT_DIRECTORY"
     fi
@@ -204,6 +182,7 @@ function parcel() {
     debug-log "Parcel name: $parcel_name"
     debug-log "Created encryption.key, $PARCEL_DATA_FILE, $OUTPUT_DIRECTORY"
     debug-log "$PARCEL_KEY"
+
     #/////////////////////////////////////////////////////
     #NOTE: ITERATING THROUGH TARGETS BEYOND THIS POINT.
     
@@ -211,6 +190,7 @@ function parcel() {
     write-parcel-data $LOG_START_DELIMETER
     write-parcel-data "key:$PARCEL_KEY"
     debug-log "[targets] {$targets}"
+
     for target in ${targets}; do
         extension=".${target##*.}" # For Files.
         non_extension="${target##*.}/" # For directories
@@ -235,11 +215,6 @@ function parcel() {
                 _base="$(get-base-file-name $target)"
                 target="${_base}.enc"
                 
-                # GPG-Encrypt the target.
-                #gpg-encrypt-target "$target"
-                #sudo rm $target
-                #target="${target}.gpg"
-                echo "target being passed to arc-target: $target"
                 arc-target "$target"
 
                 _base="$(get-base-file-name $target)"
@@ -249,6 +224,7 @@ function parcel() {
             
                 debug-log "${_base}$extension encrypted: ${_base}$extension ---> $target"
                 debug-log "$target ---> $parcel_directory/"
+
             elif [[ -d "$target" ]]; then
 
                 #/////////////////////////////////////////////////////
@@ -259,9 +235,6 @@ function parcel() {
                 local action
                 action="encrypt-target"
                 process-files "$target" "$action"
-                
-                #action="gpg-encrypt-target"
-                #process-files "$target" "$action"
 
                 action="arc-target"
                 process-files "$target" "$action"
@@ -273,12 +246,14 @@ function parcel() {
     
                 sudo mv "${target}.zip" "$parcel_directory/"
                 debug-log "${target}.zip ---> $parcel_directory/"
+
             else
 
                 #/////////////////////////////////////////////////////
                 #NOTE: INVALID FILE/FOLDER OPTIONS HERE.
-            
+
                 TARGET_DATA_STRING="$target : [unknown] : $parcel_id : $parcel_name"
+                error-out "\n$TARGET_DATA_STRING\n"            
             fi
 
             write-parcel-data $TARGET_DATA_STRING
@@ -287,6 +262,7 @@ function parcel() {
             debug-log $TARGET_DATA_STRING
             debug-log "-----------------------------"
             continue
+
         fi
     done
 

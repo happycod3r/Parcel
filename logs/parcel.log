@@ -673,3 +673,68 @@ test1.txt : .txt : TJTX69K1T5 : TJTX69K1T5.parcel
 key:44ac97ddf9133acbe14e21dce8fdddb7ea6d01a2b7e8343bc5c9711a5b3bd309f546d4344e6fa15ff031ff76e3b7d7edc37f124daa9fa9364f5e8725ad713f39
 -------------------- 02:52:41 -------------------
 
+-------- Sun 28 May 2023 05:38:24 PM EDT --------
+test1.js : .js : AXIJBK0WCP : AXIJBK0WCP.parcel
+key:a8800906aef62ab51e3e039d834d69e60e0f5d06c967c59b82ffc9eb2c6f366cfea933dd46d3ef5447b8ab2a1c8c2b89138a58a60c21d3f48ce72cb69810a28d
+-------------------- 05:38:24 -------------------
+
+-------- Sun 28 May 2023 05:39:05 PM EDT --------
+test1/test1.txt : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test2.txt : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test3/test3.txt : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test3/test4.txt : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test3 : test1/ : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2 : test1/ : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test1.enc : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test2.enc : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test3/test3.enc : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test3/test4.enc : .test1 : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2/test3 : test1/ : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1/test2 : test1/ : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+test1 : test1/ : P3Y77VMMMJ : P3Y77VMMMJ.parcel
+key:b6104f039aff6cda5b9314c5cb27a07468668cd9e4170b592c5920b184809de92c93471c5fcd1729e32d2d8df1db02b97838e6d7fdeacc25820d86447aaffb65
+-------------------- 05:39:05 -------------------
+
+-------- Sun 28 May 2023 06:41:28 PM EDT --------
+test1.txt : .txt : R3GOZLYGSU : R3GOZLYGSU.parcel
+key:74d8414e0b1890bc7d07447c3d3ea8ce940f39ce4926628417c84f72ee2552696e1396227cec26e0ca10d991d6b4632e432e64b9cdb8e756fcfcb73c0cb8ba91
+test2.txt : .txt : R3GOZLYGSU : R3GOZLYGSU.parcel
+key:74d8414e0b1890bc7d07447c3d3ea8ce940f39ce4926628417c84f72ee2552696e1396227cec26e0ca10d991d6b4632e432e64b9cdb8e756fcfcb73c0cb8ba91
+test1/test1.txt : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test2.txt : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test3/test3.txt : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test3/test4.txt : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test3 : test1/ : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2 : test1/ : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test1.enc : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test2.enc : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test3/test3.enc : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test3/test4.enc : .test1 : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2/test3 : test1/ : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1/test2 : test1/ : R3GOZLYGSU : R3GOZLYGSU.parcel
+test1 : test1/ : R3GOZLYGSU : R3GOZLYGSU.parcel
+key:74d8414e0b1890bc7d07447c3d3ea8ce940f39ce4926628417c84f72ee2552696e1396227cec26e0ca10d991d6b4632e432e64b9cdb8e756fcfcb73c0cb8ba91
+-------------------- 06:41:28 -------------------
+
+-------- Sun 28 May 2023 06:55:14 PM EDT --------
+-------------------- 06:55:14 -------------------
+
+-------- Sun 28 May 2023 07:09:58 PM EDT --------
+test1.txt : .txt : XSOIXTIMJR : XSOIXTIMJR.parcel
+key:b29e5a72ab5aaf3c7a4dda3b743141270cdf2469b5e85e1f77e7107f660bafb2019048c56fe70528204fb14744ae8a59a90f98c0c4cdcea5a9b64dc42ef572c5
+test1/test1.txt : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test2.txt : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test3/test3.txt : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test3/test4.txt : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test3 : test1/ : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2 : test1/ : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test1.enc : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test2.enc : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test3/test3.enc : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test3/test4.enc : .test1 : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2/test3 : test1/ : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1/test2 : test1/ : XSOIXTIMJR : XSOIXTIMJR.parcel
+test1 : test1/ : XSOIXTIMJR : XSOIXTIMJR.parcel
+key:b29e5a72ab5aaf3c7a4dda3b743141270cdf2469b5e85e1f77e7107f660bafb2019048c56fe70528204fb14744ae8a59a90f98c0c4cdcea5a9b64dc42ef572c5
+-------------------- 07:09:58 -------------------
+
