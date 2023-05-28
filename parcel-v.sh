@@ -101,14 +101,23 @@ function parcel() {
         local bname target
         target="$1"
         bname="$(get-base-file-name $target)"
-        echo "#### bname: $bname, target: $target"
         ./src/bin/arc ao $bname $target
-        echo "target after arc(target being rm): $target"
         sudo rm "$target"
-        echo "target trying to mv:" 
-        echo "########### {bname}.arc: ${bname}.arc"
-        echo "#### directory being retrieved: $(get-target-directory $target)"
-        mv "${bname}.arc" "$(get-target-directory $target)/${bname}.arc"
+        file1="${bname}.arc"
+        file2="$(get-target-directory $target)/${bname}.arc"
+
+        #FIXME: The "problem" with this part is that when parcel archiving any files in the same directory as this script the command:
+        #  mv "${bname}.arc" "$(get-target-directory $target)/${bname}.arc"
+        #fails because the output says both files are the same when trying to move.
+        # This isn't the case though when the directory or files are in a different directory. Both $file & $file2 are reported to be different. 
+        if [[ "$(realpath $file1)" == "$(realpath $file2)" ]]; then
+            echo "#### The files '$file1' and '$file2' are the same."
+            # do nothing...
+
+        else
+            echo "#### The files '$file1' and '$file2' are different."
+            mv "${bname}.arc" "$(get-target-directory $target)/${bname}.arc"
+        fi
         
     }
 
@@ -154,7 +163,6 @@ function parcel() {
     targets=$@
     total_targets=$#
     current_directory="$(pwd)"
-    parcel_directory="./parcel"
     OUTPUT_DIRECTORY="Parcels/"
     CACHE_DIRECTORY="cache/"
     LOG_DIRECTORY="logs/"
@@ -168,6 +176,7 @@ function parcel() {
     random_suffix=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
     parcel_id="${random_suffix^^}"
     parcel_name="${parcel_id}.parcel"
+    parcel_directory="$parcel_id"
     
     #/////////////////////////////////////////////////////
     #NOTE: THE PARCEL ID AND NAME ARE NOW AVAILABLE FOR USE.

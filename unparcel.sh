@@ -74,10 +74,25 @@ function unparcel() {
         unzip -o "$target" -d "open_parcel"
     }
 
-    local parcel 
+    local parcel parcel_id ARCHIVED_PARCEL_DIR OPENED_PARCEL_DIR bname new_name 
     parcel="$1"
-
-    mkdir "opened_parcel"
-    sudo mv "$parcel" 
-
+    parcel_id="$(get-base-file-name $parcel)"
+    OPENED_PARCEL_DIR="./Opened-Parcels"
+    ARCHIVED_PARCEL_DIR="./Parcels"
+    if [[ ! -d "$OPENED_PARCEL_DIR" ]]; then
+        mkdir "$OPENED_PARCEL_DIR"
+    fi
+    echo "current: $(pwd)"
+    echo "archived ${ARCHIVED_PARCEL_DIR}/${parcel} : $OPENED_PARCEL_DIR"
+    sudo mv "${ARCHIVED_PARCEL_DIR}/${parcel}" "$OPENED_PARCEL_DIR"
+    bname="$(get-base-file-name $parcel)"
+    new_name="${bname}.zip"     
+    sudo mv "$parcel" "$new_name"
+    parcel="$new_name"
+    unzip "$parcel"
+    sudo rm "$new_name"
+    unzip "${OPENED_PARCEL_DIR}/${parcel_id}/*.zip"
+    sudo rm "${OPENED_PARCEL_DIR}/${parcel_id}/*.zip"
 }
+
+unparcel "$1"
