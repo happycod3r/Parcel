@@ -1,4 +1,6 @@
 
+clean.sh
+
 *.parcel
 *.key
 *.data
@@ -7,6 +9,8 @@
 *.swp
 *.txt
 *.tmp
+*.zip
+*.arc
 
 TODO
 

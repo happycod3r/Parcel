@@ -1,6 +1,24 @@
--------- Sat 27 May 2023 07:23:45 PM EDT --------
-Parcel id: VWSRUTBHCB
-Parcel name: VWSRUTBHCB.parcel
+-------- Sat 27 May 2023 10:24:45 PM EDT --------
+Parcel id: CHDFAHPPAM
+Parcel name: CHDFAHPPAM.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test.txt}
+-----------------------------
+Iteration [0] beginning on [test.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest.enc
+test.txt encrypted: test.txt ---> test.arc
+test.arc ---> ./parcel/
+test.txt : .txt : CHDFAHPPAM : CHDFAHPPAM.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> CHDFAHPPAM.parcel
+-------------------- 10:24:45 -------------------
+
+-------- Sat 27 May 2023 10:29:58 PM EDT --------
+Parcel id: SOPUDFUQ1V
+Parcel name: SOPUDFUQ1V.parcel
 Created encryption.key, parcel.data, Parcels/
 [targets] {test1}
 -----------------------------
@@ -11,11 +29,461 @@ Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/
 Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
 test1 ---> test1.zip
 test1.zip ---> ./parcel/
-test1 : test1/ : VWSRUTBHCB : VWSRUTBHCB.parcel
+test1 : test1/ : SOPUDFUQ1V : SOPUDFUQ1V.parcel
 -----------------------------
 logs ended.
 encryption.key, parcel.data ---> ./parcel
 parcel.zip ---> parcel.parcel
-parcel.parcel ---> VWSRUTBHCB.parcel
--------------------- 07:23:45 -------------------
+parcel.parcel ---> SOPUDFUQ1V.parcel
+-------------------- 10:29:58 -------------------
+
+-------- Sat 27 May 2023 10:33:40 PM EDT --------
+Parcel id: EINK9IPF0V
+Parcel name: EINK9IPF0V.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test.txt}
+-----------------------------
+Iteration [0] beginning on [test.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest.enc
+test.txt encrypted: test.txt ---> test.arc
+test.arc ---> ./parcel/
+test.txt : .txt : EINK9IPF0V : EINK9IPF0V.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> EINK9IPF0V.parcel
+-------------------- 10:33:40 -------------------
+
+-------- Sat 27 May 2023 10:35:31 PM EDT --------
+Parcel id: 92TOKKAZN5
+Parcel name: 92TOKKAZN5.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test1}
+-----------------------------
+Iteration [0] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : 92TOKKAZN5 : 92TOKKAZN5.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> 92TOKKAZN5.parcel
+-------------------- 10:35:31 -------------------
+
+-------- Sat 27 May 2023 10:55:36 PM EDT --------
+Parcel id: J4Q84JJVCC
+Parcel name: J4Q84JJVCC.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test.txt}
+-----------------------------
+Iteration [0] beginning on [test.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest.enc
+test.txt encrypted: test.txt ---> test.arc
+test.arc ---> ./parcel/
+test.txt : .txt : J4Q84JJVCC : J4Q84JJVCC.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> J4Q84JJVCC.parcel
+-------------------- 10:55:36 -------------------
+
+-------- Sat 27 May 2023 11:00:19 PM EDT --------
+Parcel id: 2CWZOL9FHS
+Parcel name: 2CWZOL9FHS.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test.txt test1}
+-----------------------------
+Iteration [0] beginning on [test.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest.enc
+test.txt encrypted: test.txt ---> test.arc
+test.arc ---> ./parcel/
+test.txt : .txt : 2CWZOL9FHS : 2CWZOL9FHS.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : 2CWZOL9FHS : 2CWZOL9FHS.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> 2CWZOL9FHS.parcel
+-------------------- 11:00:19 -------------------
+
+-------- Sat 27 May 2023 11:07:33 PM EDT --------
+Parcel id: X3WOV04CA1
+Parcel name: X3WOV04CA1.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test2}
+-----------------------------
+Iteration [0] beginning on [test2]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2test2/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2/test2test2/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2/test2/test3test2/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2/test2/test3test2/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test2 ---> test2.zip
+test2.zip ---> ./parcel/
+test2 : test2/ : X3WOV04CA1 : X3WOV04CA1.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> X3WOV04CA1.parcel
+-------------------- 11:07:33 -------------------
+
+-------- Sat 27 May 2023 11:14:22 PM EDT --------
+Parcel id: SEPLRHSMQM
+Parcel name: SEPLRHSMQM.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test1}
+-----------------------------
+Iteration [0] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : SEPLRHSMQM : SEPLRHSMQM.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> SEPLRHSMQM.parcel
+-------------------- 11:14:22 -------------------
+
+-------- Sat 27 May 2023 11:19:00 PM EDT --------
+Parcel id: CZ4NNTKIWM
+Parcel name: CZ4NNTKIWM.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test1}
+-----------------------------
+Iteration [0] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : CZ4NNTKIWM : CZ4NNTKIWM.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> CZ4NNTKIWM.parcel
+-------------------- 11:19:00 -------------------
+
+-------- Sat 27 May 2023 11:21:20 PM EDT --------
+Parcel id: QYT0X5WOQX
+Parcel name: QYT0X5WOQX.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test1}
+-----------------------------
+Iteration [0] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : QYT0X5WOQX : QYT0X5WOQX.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> QYT0X5WOQX.parcel
+-------------------- 11:21:20 -------------------
+
+-------- Sat 27 May 2023 11:24:36 PM EDT --------
+Parcel id: CNLCWZLDII
+Parcel name: CNLCWZLDII.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test2}
+-----------------------------
+Iteration [0] beginning on [test2]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2test2/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2/test2test2/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2/test2/test3test2/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test2/test2/test3test2/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test2 ---> test2.zip
+test2.zip ---> ./parcel/
+test2 : test2/ : CNLCWZLDII : CNLCWZLDII.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> CNLCWZLDII.parcel
+-------------------- 11:24:36 -------------------
+
+-------- Sat 27 May 2023 11:27:14 PM EDT --------
+Parcel id: QPCLHX6S47
+Parcel name: QPCLHX6S47.parcel
+Created encryption.key, parcel.data, Parcels/
+[targets] {test3.txt test3}
+-----------------------------
+Iteration [0] beginning on [test3.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+test3.txt encrypted: test3.txt ---> test3.arc
+test3.arc ---> ./parcel/
+test3.txt : .txt : QPCLHX6S47 : QPCLHX6S47.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test3]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test3test3/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test3/test2test3/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test3/test2/test3test3/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test3/test2/test3test3/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test3 ---> test3.zip
+test3.zip ---> ./parcel/
+test3 : test3/ : QPCLHX6S47 : QPCLHX6S47.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> QPCLHX6S47.parcel
+-------------------- 11:27:14 -------------------
+
+-------- Sat 27 May 2023 11:50:38 PM EDT --------
+Parcel id: GRCX3LBZG0
+Parcel name: GRCX3LBZG0.parcel
+Created encryption.key, parcel.data, Parcels/
+663d3001764776965d63783151f0e4fa87b96b7fb7eaca67a4c81d1b4217b3f266795ddd106fce9b8a658e418b2d46f6b887fb4c34e0155207c694d05c47ce89
+[targets] {test1.txt test1}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> ./parcel/
+test1.txt : .txt : GRCX3LBZG0 : GRCX3LBZG0.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/Parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/Parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : GRCX3LBZG0 : GRCX3LBZG0.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> GRCX3LBZG0.parcel
+-------------------- 11:50:38 -------------------
+
+-------- Sat 27 May 2023 11:57:04 PM EDT --------
+Parcel id: FEGTR5UHAL
+Parcel name: FEGTR5UHAL.parcel
+Created encryption.key, parcel.data, Parcels/
+4751e0629f414ca292eccc260c3434684743097dd80ac87eb40a1eba0f28698e7f61b10cce12501da39742580a062e2120028dc36693eb3f8434db7a22ccbb78
+[targets] {test7.txt test1}
+-----------------------------
+Iteration [0] beginning on [test7.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest7.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest7.enc
+test7.txt encrypted: test7.txt ---> test7.arc
+test7.arc ---> ./parcel/
+test7.txt : .txt : FEGTR5UHAL : FEGTR5UHAL.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : FEGTR5UHAL : FEGTR5UHAL.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> FEGTR5UHAL.parcel
+-------------------- 11:57:04 -------------------
+
+-------- Sat 27 May 2023 11:59:36 PM EDT --------
+Parcel id: UPCWZYTGVM
+Parcel name: UPCWZYTGVM.parcel
+Created encryption.key, parcel.data, Parcels/
+2e11ff6042aa3b30db2708f7716f8bdd8b4332c6a6ffc08b196fa4c6f1e652211c27a6080ef1813e2d8b4b798cf9480af2b0f2cf85a0be38f4e17ec460ea83f5
+[targets] {test1.txt test1}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> ./parcel/
+test1.txt : .txt : UPCWZYTGVM : UPCWZYTGVM.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : UPCWZYTGVM : UPCWZYTGVM.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> UPCWZYTGVM.parcel
+-------------------- 11:59:36 -------------------
+
+-------- Sun 28 May 2023 12:04:13 AM EDT --------
+Parcel id: CHSMIDTUZR
+Parcel name: CHSMIDTUZR.parcel
+Created encryption.key, parcel.data, Parcels/
+97a0d48b7ec517bc9c34e42858862f1a3dccfa477516e3cd0ea144573365b543e2ec1653c1c98e4e991a35c6aa8424a7ea15940b5d3ef7ac30133a33d64e1044
+[targets] {test1.txt test1}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> ./parcel/
+test1.txt : .txt : CHSMIDTUZR : CHSMIDTUZR.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : CHSMIDTUZR : CHSMIDTUZR.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> CHSMIDTUZR.parcel
+-------------------- 12:04:13 -------------------
+
+-------- Sun 28 May 2023 12:06:14 AM EDT --------
+Parcel id: LDRNONLSIR
+Parcel name: LDRNONLSIR.parcel
+Created encryption.key, parcel.data, Parcels/
+f2e83594f0c980207fbb35a6a1456a3c548571f6bfebfef8b8c7f8d1fbd5be5df62744a0eb83e623237d04b2b7133df6b07403d52cfd1240df3ce714db17c04a
+[targets] {test1.txt test1}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> ./parcel/
+test1.txt : .txt : LDRNONLSIR : LDRNONLSIR.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : LDRNONLSIR : LDRNONLSIR.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> LDRNONLSIR.parcel
+-------------------- 12:06:14 -------------------
+
+-------- Sun 28 May 2023 12:09:18 AM EDT --------
+Parcel id: 4EDBUFEEDB
+Parcel name: 4EDBUFEEDB.parcel
+Created encryption.key, parcel.data, Parcels/
+0d53981801b5cc054c3428090e02acb94985897ed26b62e60738a6ebf4de77d7ae5f3bd9a6009993579afc81f3a23e3016c31cc08ea380d4096e8b8ac52d1a61
+[targets] {test1.txt test1}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> ./parcel/
+test1.txt : .txt : 4EDBUFEEDB : 4EDBUFEEDB.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : 4EDBUFEEDB : 4EDBUFEEDB.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> 4EDBUFEEDB.parcel
+-------------------- 12:09:18 -------------------
+
+-------- Sun 28 May 2023 12:16:14 AM EDT --------
+Parcel id: 4FZI91321L
+Parcel name: 4FZI91321L.parcel
+Created encryption.key, parcel.data, Parcels/
+51277e110d21f9abd8b6bb9a51500d23a97951eab2ba39bbe83acdc401766a88072db6aa48e1f4bda2ffc16786c39b52376dd511009cb876a39c41e1d179367e
+[targets] {test1.txt test1}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> ./parcel/
+test1.txt : .txt : 4FZI91321L : 4FZI91321L.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : 4FZI91321L : 4FZI91321L.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> 4FZI91321L.parcel
+-------------------- 12:16:14 -------------------
+
+-------- Sun 28 May 2023 12:23:43 AM EDT --------
+Parcel id: J2JQPPMUT3
+Parcel name: J2JQPPMUT3.parcel
+Created encryption.key, parcel.data, Parcels/
+2ea08c16850ee68f70339d8231f8b26dbfd08e40a9f2fe509ea8ca22bf0f53d7a1b2261f86a430dbb5b79c2fbe3dfe08c9a3da6ad42d216a47620d95c44378f1
+[targets] {test1.txt test1}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> ./parcel/
+test1.txt : .txt : J2JQPPMUT3 : J2JQPPMUT3.parcel
+-----------------------------
+-----------------------------
+Iteration [1] beginning on [test1]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+test1 ---> test1.zip
+test1.zip ---> ./parcel/
+test1 : test1/ : J2JQPPMUT3 : J2JQPPMUT3.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ./parcel
+parcel.zip ---> parcel.parcel
+parcel.parcel ---> J2JQPPMUT3.parcel
+-------------------- 12:23:43 -------------------
 

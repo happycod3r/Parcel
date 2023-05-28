@@ -2,6 +2,7 @@
 
 
 function parcel() {
+    
     echo "parcel-v.sh"
     # Data --> parcel.log
     function parcel-log() {
@@ -51,6 +52,7 @@ function parcel() {
 
     # Returns: my/target/files/directory
     function get-target-directory() {
+        local _file _file_fqp _file_path
         _file="$1"
         _file_fqp="$(readlink -f $_file)"
         _file_path=$(echo "${_file_fqp%/*}")
@@ -65,11 +67,6 @@ function parcel() {
         echo "$bname"
     }
 
-    # Creates encryption.key
-    function make-encryption-key() {
-        bash src/encrypt.sh -g > encryption.key
-    }
-
     # file1.enc ---> file1.enc.gpg
     function gpg-encrypt-target() {
         local pin _file
@@ -81,15 +78,11 @@ function parcel() {
         #echo "$pin" | gpg --symmetric --passphrase-fd 0 --batch --command-to-put PIN $_file
         sudo rm "$_file"
     }
-
-    # file1.enc.gpg ---> file1.enc
-    function gpg-decrypt-target() {
-        local _file="$1"
-        # Goes back to .enc to be decrypted by internal encryption.
-        bname="$(get-base-file-name $_file)"
-        echo "$(gpg --decrypt $_file)" >> "${bname}.enc"
-        # probably have to do the following instead so the .enc goes back where it belongs like I did in encrypt-file:
-        # echo "$(gpg --decrypt $_file)" >> "(get-target-directory $file)${bname}.enc"
+    
+    # Creates encryption.key
+    function make-encryption-key() {
+        bash src/encrypt.sh -g > encryption.key
+        PARCEL_KEY="$(cat -u encryption.key)"
     }
 
     # file1.txt ---> file1.enc
@@ -103,14 +96,22 @@ function parcel() {
         sudo rm "$file"
     }
 
-    # file1.enc ---> file1.txt
-    function decrypt-target() {
-        local _file bname
-        _file="$1"
-        bname="$(get-base-file-name $_file)"
-        bash src/encrypt.sh -d -i "$_file" -o "${bname}.txt" -k "$(cat encryption.key)"
-        sudo rm "$_file"
+    # file1.enc ---> file1.arc
+    function arc-target() {
+        local bname target
+        target="$1"
+        bname="$(get-base-file-name $target)"
+        echo "#### bname: $bname, target: $target"
+        ./src/bin/arc ao $bname $target
+        echo "target after arc(target being rm): $target"
+        sudo rm "$target"
+        echo "target trying to mv:" 
+        echo "########### {bname}.arc: ${bname}.arc"
+        echo "#### directory being retrieved: $(get-target-directory $target)"
+        mv "${bname}.arc" "$(get-target-directory $target)/${bname}.arc"
+        
     }
+
 
     function zip-target() {
         local target
@@ -135,7 +136,6 @@ function parcel() {
                 process-files "$file" "$action"
             fi
             parcel-log $TARGET_DATA_STRING
-            write-target-data-string "$file"
         done
     }
 
@@ -145,9 +145,9 @@ function parcel() {
     if [[ $answer != "yes" ]]; then
         out "Script aborted."
         exit 0
-    fi 
+    fi
     
-    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_DIRECTORY LOG_DIRECTORY CACHE_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER
+    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_DIRECTORY LOG_DIRECTORY CACHE_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY
 
     THIS_DIRECTORY="$(pwd)"
     iteration_count=0
@@ -194,12 +194,13 @@ function parcel() {
     debug-log "Parcel id: $parcel_id"
     debug-log "Parcel name: $parcel_name"
     debug-log "Created encryption.key, $PARCEL_DATA_FILE, $OUTPUT_DIRECTORY"
-    
+    debug-log "$PARCEL_KEY"
     #/////////////////////////////////////////////////////
     #NOTE: ITERATING THROUGH TARGETS BEYOND THIS POINT.
     
     parcel-log $LOG_START_DELIMETER
     write-parcel-data $LOG_START_DELIMETER
+    write-parcel-data "key:$PARCEL_KEY"
     debug-log "[targets] {$targets}"
     for target in ${targets}; do
         extension=".${target##*.}" # For Files.
@@ -211,7 +212,8 @@ function parcel() {
     
             debug-log "-----------------------------"
             debug-log "Iteration [$iteration_count] beginning on [$target]"
-            iteration_count=$((iteration_count + 1))    
+            iteration_count=$((iteration_count + 1))   
+            
             if [[ -f "$target" ]]; then
 
                 #/////////////////////////////////////////////////////
@@ -228,9 +230,14 @@ function parcel() {
                 #gpg-encrypt-target "$target"
                 #sudo rm $target
                 #target="${target}.gpg"
+                echo "target being passed to arc-target: $target"
+                arc-target "$target"
+
+                _base="$(get-base-file-name $target)"
+                target="${_base}.arc"
 
                 sudo mv "$target" "$parcel_directory/"
-
+            
                 debug-log "${_base}$extension encrypted: ${_base}$extension ---> $target"
                 debug-log "$target ---> $parcel_directory/"
             elif [[ -d "$target" ]]; then
@@ -246,6 +253,9 @@ function parcel() {
                 
                 #action="gpg-encrypt-target"
                 #process-files "$target" "$action"
+
+                action="arc-target"
+                process-files "$target" "$action"
 
                 zip-target "$target"
                 
@@ -264,6 +274,7 @@ function parcel() {
 
             write-parcel-data $TARGET_DATA_STRING
             parcel-log $TARGET_DATA_STRING
+            parcel-log "key:${PARCEL_KEY}"
             debug-log $TARGET_DATA_STRING
             debug-log "-----------------------------"
             continue
