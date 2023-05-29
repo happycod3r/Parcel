@@ -240,10 +240,9 @@ function parcel() {
                 process-files "$target" "$action"
 
                 zip-target "$target"
-                
                 debug-log "$target ---> ${target}.zip"
                 sudo rm -r "$target"
-    
+            
                 sudo mv "${target}.zip" "$parcel_directory/"
                 debug-log "${target}.zip ---> $parcel_directory/"
 
@@ -251,9 +250,9 @@ function parcel() {
 
                 #/////////////////////////////////////////////////////
                 #NOTE: INVALID FILE/FOLDER OPTIONS HERE.
-            
+
                 TARGET_DATA_STRING="$target : [unknown] : $parcel_id : $parcel_name"
-            
+                error-out "\n$TARGET_DATA_STRING\n"            
             fi
 
             write-parcel-data $TARGET_DATA_STRING
@@ -287,9 +286,11 @@ function parcel() {
     sudo zip -r "./parcel.zip" "$parcel_directory"
     sudo rm -r "$parcel_directory"
 
-    sudo mv ./parcel.zip ./parcel.parcel
-    debug-log "parcel.zip ---> parcel.parcel"
-    sudo mv "./parcel.parcel" "./${parcel_name}"
+    gpg-encrypt-target "./parcel.zip" #  RVVZI3JUAV.zip.gpg ---> RVVZI3JUAV.parcel 
+
+    sudo mv ./parcel.zip.gpg ./parcel.gpg.parcel
+    debug-log "parcel.zip.gpg ---> parcel.parcel"
+    sudo mv "./parcel.gpg.parcel" "./${parcel_name}"
     debug-log "parcel.parcel ---> ${parcel_name}"
     sudo mv $parcel_name $OUTPUT_DIRECTORY
 

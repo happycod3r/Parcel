@@ -1,9 +1,16 @@
 #!/bin/bash
 
+function doc-out() {
+    echo "- ### $@" >> CONTROL_FLOW.md
+}
 
 function parcel() {
-    
+
+    doc-out "parcel()"
+
     function fatal() {
+        doc-out "fatal()"
+
         CYAN='\033[0;36m'
         RED='\033[0;31m'
         NC='\033[0m'
@@ -12,6 +19,7 @@ function parcel() {
     }
 
     function parcel-log() {
+        doc-out "parcel-log()" 
         if [[ ! -f "logs/parcel.log" ]]; then
             touch "parcel.log"
             sudo mv "parcel.log" "logs/"
@@ -20,6 +28,7 @@ function parcel() {
     }
     
     function debug-log() {
+        #doc-out "debug-log()" 
         if [[ ! -f "logs/debug.log" ]]; then
             touch "debug.log"
             sudo mv "debug.log" "logs/"
@@ -28,6 +37,7 @@ function parcel() {
     }
 
     function out() {
+        doc-out "out()" 
         CYAN='\033[0;36m'
         PURPLE='\033[0;35m'
         NC='\033[0m'
@@ -36,11 +46,13 @@ function parcel() {
     }
 
     function error-out {
+        doc-out "error-out()" 
         echo -e "$@"
         sleep 1
     }
     
     function write-parcel-data() {
+        doc-out "write-parcel-data()" 
         if [[ ! -f "parcel.data" ]]; then
             touch parcel.data
         fi
@@ -48,6 +60,7 @@ function parcel() {
     }
 
     function get-target-directory() {
+        doc-out "get-target-directory()" 
         local _file _file_fqp _file_path
         _file="$1"
         _file_fqp="$(readlink -f $_file)"
@@ -56,6 +69,7 @@ function parcel() {
     }
 
     function get-base-file-name() {
+        doc-out "get-base-file-name()" 
         local _file bname
         _file="$1"
         bname=$(echo "$_file" | awk '{gsub(/.*[/]|[.].*/, "", $0)} 1')
@@ -63,6 +77,7 @@ function parcel() {
     }
 
     function gpg-encrypt-target() {
+        doc-out "gpg-encrypt-target()" 
         local _file
         _file="$1"
         gpg --symmetric $_file 
@@ -70,11 +85,13 @@ function parcel() {
     }
     
     function make-encryption-key() {
+        doc-out "make-encryption-key()" 
         bash src/encrypt.sh -g > encryption.key
         PARCEL_KEY="$(cat -u encryption.key)"
     }
 
     function encrypt-target() { #file="$1"
+        doc-out "encrypt-target()" 
         local _file enc_file bname
         file="$1"
         bname="$(get-base-file-name $file)"
@@ -85,6 +102,7 @@ function parcel() {
     }
 
     function arc-target() {
+        doc-out "arc-target()" 
         local bname target file1 file2
         target="$1"
         bname="$(get-base-file-name $target)"
@@ -101,12 +119,14 @@ function parcel() {
     }
 
     function zip-target() {
+        doc-out "zip-target()"
         local target
         target="$1"
         sudo zip -r "./${target}.zip" "$target"
     }
 
-    function process-files() { # directory="$1", action="$2"
+    function process-files() {
+        doc-out "process-files()"
         local directory action extension non_extension TARGET_DATA_STRING
         directory="$1"
         action="$2"
@@ -240,10 +260,9 @@ function parcel() {
                 process-files "$target" "$action"
 
                 zip-target "$target"
-                
                 debug-log "$target ---> ${target}.zip"
                 sudo rm -r "$target"
-    
+            
                 sudo mv "${target}.zip" "$parcel_directory/"
                 debug-log "${target}.zip ---> $parcel_directory/"
 
@@ -287,9 +306,11 @@ function parcel() {
     sudo zip -r "./parcel.zip" "$parcel_directory"
     sudo rm -r "$parcel_directory"
 
-    sudo mv ./parcel.zip ./parcel.parcel
-    debug-log "parcel.zip ---> parcel.parcel"
-    sudo mv "./parcel.parcel" "./${parcel_name}"
+    gpg-encrypt-target "./parcel.zip" #  RVVZI3JUAV.zip.gpg ---> RVVZI3JUAV.parcel 
+
+    sudo mv ./parcel.zip.gpg ./parcel.gpg.parcel
+    debug-log "parcel.zip.gpg ---> parcel.parcel"
+    sudo mv "./parcel.gpg.parcel" "./${parcel_name}"
     debug-log "parcel.parcel ---> ${parcel_name}"
     sudo mv $parcel_name $OUTPUT_DIRECTORY
 
