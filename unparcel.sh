@@ -21,12 +21,6 @@ function unparcel() {
         sleep 1
     }
 
-    # Returns my/file/path/file.txt
-    print-file-fqp() {
-        local file="$1"
-        echo "File: $file"
-    }
-
     # Returns: my/target/files/directory
     function get-target-directory() {
         local _file _file_fqp _file_path
@@ -43,44 +37,35 @@ function unparcel() {
         echo "$bname"
     }
 
-    # file1.enc ---> file1.txt
     function decrypt-target() {
-        local _file bname
-        _file="$1"
-        bname="$(get-base-file-name $_file)"
-        bash src/encrypt.sh -d -i "$_file" -o "${bname}.txt" -k "$(cat encryption.key)"
-        sudo rm "$_file"
+        local target bname parcel_dir parcel_id
+        target="$1"
+        extension=".${target##*.}"
+        parcel_id="$2"
+
+        if [[ "$extension" == ".enc" ]]; then
+            bname="$(get-base-file-name $target)"
+            parcel_dir="$(pwd)/${parcel_id}"
+            out "$parcel_dir"
+            bash "${SRC}/encrypt.sh" -d -i "$target" -o "${bname}.txt" -k "$(cat $parcel_dir/encryption.key)"
+            sudo rm "$target"        
+        fi
     }
 
     function unarc-target() {
-        out "--------------------------------"
         local target extension target_dir
-
         target="$1"
-        out "1) target: $target"
-        
         target_dir="$(get-target-directory $target)"
-        current_dir="current dir: $(pwd)"
-        out "2) target: $target"
         target_base="$(get-base-file-name $target)"
-
         extension=".${target##*.}"
-        
         if [[ "$extension" == ".arc" ]]; then
-            out "3) target: $target"
-            out "target in if statement: $target"
             $BIN/arc xo $target
-
             target="${target%.*}"
-            out "4) target: $target"
             sudo rm "${target}.arc"
-            out "5) target: $target"
-            out "tb: $target_base" 
             sudo mv "${target_base}.enc" "${target_dir}/${target_base}.enc"
-            out "Moving: ${target_base}.enc ----> ${target_dir}/${target_base}.enc"
         fi
-        out "--------------------------------"
     }
+
     function unzip-target() {
 
         local target
@@ -96,7 +81,19 @@ function unparcel() {
     function process-files() {
         local directory action
         directory="$1"
-        action="$2"
+        action="$2" 
+        if [[ "$action" == "decrypt-target" ]]; then
+        action_arg="$3"
+            for file in "$directory"/*; do
+                if [ -f "$file" ]; then
+                    "$action" "$file" "$action_arg"
+                elif [ -d "$file" ]; then
+                    # Recursively call process-files for any sub-directories.
+                    process-files "$file" "$action" "$action_arg"
+                fi
+            done
+        fi
+
         for file in "$directory"/*; do
             if [ -f "$file" ]; then
                 "$action" "$file"
@@ -130,7 +127,7 @@ function unparcel() {
     OPENED_PARCEL_DIR="./Opened-Parcels"
     ARCHIVED_PARCEL_DIR="./Parcels"
     BIN="$(pwd)/src/bin"
-
+    SRC="$(pwd)/src"
 
     if [[ ! -d "$OPENED_PARCEL_DIR" ]]; then
         mkdir "$OPENED_PARCEL_DIR"
@@ -151,9 +148,14 @@ function unparcel() {
     action="unzip-target"
     process-zips "$parcel_id" "$action"
 
-    # ------------ GOOD SO FAR BEFORE THIS LINE ------------#
     action="unarc-target"
     process-files "$parcel_id" "$action"
+
+    # ------------ GOOD SO FAR BEFORE THIS LINE ------------#
+
+    action="decrypt-target"
+    action_arg="$parcel_id"
+    process-files "$parcel_id" "$action" "$action_arg"
 
 }
 
