@@ -13,6 +13,7 @@ function start-parcel() {
     if [[ $# -eq 0 ]]; then
         fatal "No files or folders provided!"
     fi 
+    
 
     local verbose SOURCE targets_string
 

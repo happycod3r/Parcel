@@ -1589,3 +1589,126 @@ parcel.zip.gpg ---> parcel.parcel
 parcel.parcel ---> CZ897JYJH4.parcel
 -------------------- 11:42:53 -------------------
 
+-------- Mon 29 May 2023 01:41:39 PM EDT --------
+Parcel id: 7UCHTXQJ4F
+Parcel name: 7UCHTXQJ4F.parcel
+Created encryption.key, parcel.data, Parcels/
+108353f95de805741819be57c946f4d57363212eafb6849ed48f443e28b50231a54252243e96a736a48643628be83504c65ff8c44f981179d916f3ca453d495e
+[targets] {test1.txt}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> 7UCHTXQJ4F/
+test1.txt : .txt : 7UCHTXQJ4F : 7UCHTXQJ4F.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> 7UCHTXQJ4F
+-------- Mon 29 May 2023 01:44:27 PM EDT --------
+Parcel id: XNKNM80AMR
+Parcel name: XNKNM80AMR.parcel
+Created encryption.key, parcel.data, Parcels/
+942239fc27dd495eb2e386ae5a99e48d405d8432d4f0d5db72771b9e1ec7bde3a93b175670a6763cadbfd535ae83b621df53caeaa0d1364480b40e60b73aa4c6
+[targets] {test2.txt}
+-----------------------------
+Iteration [0] beginning on [test2.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+test2.txt encrypted: test2.txt ---> test2.arc
+test2.arc ---> XNKNM80AMR/
+test2.txt : .txt : XNKNM80AMR : XNKNM80AMR.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> XNKNM80AMR
+-------- Mon 29 May 2023 01:48:12 PM EDT --------
+Parcel id: ZD3LAUTM1B
+Parcel name: ZD3LAUTM1B.parcel
+Created encryption.key, parcel.data, Parcels/
+a35495ac0071b95377adf0a8a5c8bfeb59ed69c6adc30ad130dcc28eafb51412d98f930220cd0cf9a6ccd83f0656d3d4e0eb762db604834b8ac481fbcbe8c4e7
+[targets] {test3.txt}
+-----------------------------
+Iteration [0] beginning on [test3.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+test3.txt encrypted: test3.txt ---> test3.arc
+test3.arc ---> ZD3LAUTM1B/
+test3.txt : .txt : ZD3LAUTM1B : ZD3LAUTM1B.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> ZD3LAUTM1B
+-------- Mon 29 May 2023 01:50:34 PM EDT --------
+Parcel id: GBZQF2ARJG
+Parcel name: GBZQF2ARJG.parcel
+Created encryption.key, parcel.data, Parcels/
+39aa0b943f237f2e282817c7bedc82c8a6a4c46b29e687a792690d81c638846d31e8c6698146bd7ebdacd68c741a48af49ffaec7e6fc8633067d93ae24fd541f
+[targets] {test1.txt}
+-----------------------------
+Iteration [0] beginning on [test1.txt]
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+test1.txt encrypted: test1.txt ---> test1.arc
+test1.arc ---> GBZQF2ARJG/
+test1.txt : .txt : GBZQF2ARJG : GBZQF2ARJG.parcel
+-----------------------------
+logs ended.
+encryption.key, parcel.data ---> GBZQF2ARJG
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+-------------------- 02:30:34 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+-------------------- 03:49:50 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+-------------------- 04:29:45 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+-------------------- 04:47:35 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+-------------------- 05:11:40 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelfile1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelfile1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelfile2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelfile2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/test3test1/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test2test2/test1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test2/test2test2/test2/test2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test2/test2/test3test2/test2/test3/test3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test2/test2/test3test2/test2/test3/test4.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceltest4.enc
+-------------------- 08:59:02 -------------------
+

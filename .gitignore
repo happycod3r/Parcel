@@ -11,7 +11,9 @@ clean.sh
 *.tmp
 *.zip
 *.arc
+*.gpg
 
+DEBUG.md
 TODO
 
 dev/
@@ -20,3 +22,5 @@ temp/
 tmp/
 parcel/
 Parcels/
+cache/
+

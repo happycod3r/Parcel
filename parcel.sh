@@ -1,9 +1,16 @@
 #!/bin/bash
 
+function doc-out() {
+    echo "- ### $@" >> DEBUG.md
+}
 
 function parcel() {
-    
+
+    doc-out "parcel()"
+
     function fatal() {
+        doc-out "fatal()"
+
         CYAN='\033[0;36m'
         RED='\033[0;31m'
         NC='\033[0m'
@@ -12,6 +19,7 @@ function parcel() {
     }
 
     function parcel-log() {
+        doc-out "parcel-log()" 
         if [[ ! -f "logs/parcel.log" ]]; then
             touch "parcel.log"
             sudo mv "parcel.log" "logs/"
@@ -20,6 +28,7 @@ function parcel() {
     }
     
     function debug-log() {
+        #doc-out "debug-log()" 
         if [[ ! -f "logs/debug.log" ]]; then
             touch "debug.log"
             sudo mv "debug.log" "logs/"
@@ -28,6 +37,7 @@ function parcel() {
     }
 
     function out() {
+        doc-out "out()" 
         CYAN='\033[0;36m'
         PURPLE='\033[0;35m'
         NC='\033[0m'
@@ -36,11 +46,13 @@ function parcel() {
     }
 
     function error-out {
+        doc-out "error-out()" 
         echo -e "$@"
         sleep 1
     }
     
     function write-parcel-data() {
+        doc-out "write-parcel-data()" 
         if [[ ! -f "parcel.data" ]]; then
             touch parcel.data
         fi
@@ -48,6 +60,7 @@ function parcel() {
     }
 
     function get-target-directory() {
+        doc-out "get-target-directory()" 
         local _file _file_fqp _file_path
         _file="$1"
         _file_fqp="$(readlink -f $_file)"
@@ -56,6 +69,7 @@ function parcel() {
     }
 
     function get-base-file-name() {
+        doc-out "get-base-file-name()" 
         local _file bname
         _file="$1"
         bname=$(echo "$_file" | awk '{gsub(/.*[/]|[.].*/, "", $0)} 1')
@@ -63,6 +77,7 @@ function parcel() {
     }
 
     function gpg-encrypt-target() {
+        doc-out "gpg-encrypt-target()" 
         local _file
         _file="$1"
         gpg --symmetric $_file 
@@ -70,11 +85,13 @@ function parcel() {
     }
     
     function make-encryption-key() {
+        doc-out "make-encryption-key()" 
         bash src/encrypt.sh -g > encryption.key
         PARCEL_KEY="$(cat -u encryption.key)"
     }
 
     function encrypt-target() { #file="$1"
+        doc-out "encrypt-target()" 
         local _file enc_file bname
         file="$1"
         bname="$(get-base-file-name $file)"
@@ -85,6 +102,7 @@ function parcel() {
     }
 
     function arc-target() {
+        doc-out "arc-target()" 
         local bname target file1 file2
         target="$1"
         bname="$(get-base-file-name $target)"
@@ -101,12 +119,14 @@ function parcel() {
     }
 
     function zip-target() {
+        doc-out "zip-target()"
         local target
         target="$1"
         sudo zip -r "./${target}.zip" "$target"
     }
 
-    function process-files() { # directory="$1", action="$2"
+    function process-files() {
+        doc-out "process-files()"
         local directory action extension non_extension TARGET_DATA_STRING
         directory="$1"
         action="$2"
@@ -177,19 +197,13 @@ function parcel() {
     #/////////////////////////////////////////////////////
     #NOTE: Logs shouldn't be used before this point.
     
-    debug-log $LOG_START_DELIMETER 
-    debug-log "Parcel id: $parcel_id"
-    debug-log "Parcel name: $parcel_name"
-    debug-log "Created encryption.key, $PARCEL_DATA_FILE, $OUTPUT_DIRECTORY"
-    debug-log "$PARCEL_KEY"
 
     #/////////////////////////////////////////////////////
     #NOTE: ITERATING THROUGH TARGETS BEYOND THIS POINT.
     
     parcel-log $LOG_START_DELIMETER
     write-parcel-data $LOG_START_DELIMETER
-    write-parcel-data "key:$PARCEL_KEY"
-    debug-log "[targets] {$targets}"
+    write-parcel-data "[$PARCEL_KEY]"
 
     for target in ${targets}; do
         extension=".${target##*.}" # For Files.
@@ -199,8 +213,6 @@ function parcel() {
             #/////////////////////////////////////////////////////
             #NOTE: BEGINNING OF ITERATION.
     
-            debug-log "-----------------------------"
-            debug-log "Iteration [$iteration_count] beginning on [$target]"
             iteration_count=$((iteration_count + 1))   
             
             if [[ -f "$target" ]]; then
@@ -221,9 +233,6 @@ function parcel() {
                 target="${_base}.arc"
 
                 sudo mv "$target" "$parcel_directory/"
-            
-                debug-log "${_base}$extension encrypted: ${_base}$extension ---> $target"
-                debug-log "$target ---> $parcel_directory/"
 
             elif [[ -d "$target" ]]; then
 
@@ -240,11 +249,9 @@ function parcel() {
                 process-files "$target" "$action"
 
                 zip-target "$target"
-                debug-log "$target ---> ${target}.zip"
                 sudo rm -r "$target"
             
                 sudo mv "${target}.zip" "$parcel_directory/"
-                debug-log "${target}.zip ---> $parcel_directory/"
 
             else
 
@@ -257,9 +264,7 @@ function parcel() {
 
             write-parcel-data $TARGET_DATA_STRING
             parcel-log $TARGET_DATA_STRING
-            parcel-log "key:${PARCEL_KEY}"
-            debug-log $TARGET_DATA_STRING
-            debug-log "-----------------------------"
+            parcel-log "[$PARCEL_KEY]"
             continue
 
         fi
@@ -268,30 +273,21 @@ function parcel() {
     #/////////////////////////////////////////////////////
     #NOTE: LOOP DONE BEYOND THIS. ALL FILES/FOLDERS ADDED TO parcel/
 
-    parcel-log "$LOG_ENDING_DELIMETER"
-    parcel-log ""
     write-parcel-data "$LOG_ENDING_DELIMETER"
-    debug-log "logs ended." 
 
     #/////////////////////////////////////////////////////
     #NOTE: ANY LAST MINUTE FILES THAT SHOULD GO IN parcel/ GOES HERE.
-    
     sudo mv "encryption.key" "$parcel_directory/"
     sudo mv $PARCEL_DATA_FILE "$parcel_directory/"
-    debug-log "encryption.key, $PARCEL_DATA_FILE ---> $parcel_directory"
 
     #/////////////////////////////////////////////////////
     #NOTE: ARCHIVING STARTS HERE.
-    
-    sudo zip -r "./parcel.zip" "$parcel_directory"
+
+    sudo zip -r "./${parcel_directory}.zip" "$parcel_directory"
     sudo rm -r "$parcel_directory"
 
-    gpg-encrypt-target "./parcel.zip" #  RVVZI3JUAV.zip.gpg ---> RVVZI3JUAV.parcel 
-
-    sudo mv ./parcel.zip.gpg ./parcel.gpg.parcel
-    debug-log "parcel.zip.gpg ---> parcel.parcel"
-    sudo mv "./parcel.gpg.parcel" "./${parcel_name}"
-    debug-log "parcel.parcel ---> ${parcel_name}"
+    sudo mv ./${parcel_directory}.zip  ./${parcel_name}
+    
     sudo mv $parcel_name $OUTPUT_DIRECTORY
 
     PARCEL="$(pwd)/$OUTPUT_DIRECTORY${parcel_name}"
