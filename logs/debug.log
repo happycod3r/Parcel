@@ -1904,3 +1904,43 @@ Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2/
 
 -------------------- 12:31:22 -------------------
 
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelas.js -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelas.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfolder/innerdirmyfolder/innerdir/t8.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt8.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfoldermyfolder/ui.sh -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelui.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfoldermyfolder/y.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcely.enc
+-------------------- 01:36:40 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/t2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt2.enc
+-------------------- 01:54:17 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/mydirmydir/t3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt3.enc
+-------------------- 02:01:20 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt2.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/mydirmydir/t3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt3.enc
+-------------------- 02:10:56 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelh.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelh.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1test1/i.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parceli.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/test1/test2test1/test2/s.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcels.enc
+-------------------- 02:20:52 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfolder/innermyfolder/inner/mf3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelmf3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfoldermyfolder/mf1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelmf1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfoldermyfolder/mf2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelmf2.enc
+-------------------- 10:07:03 -------------------
+
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelt1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfolder/innermyfolder/inner/mf3.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelmf3.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfoldermyfolder/mf1.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelmf1.enc
+Encrypted: /mnt/chromeos/removable/X/dev/projects/shell/bash/parcel/myfoldermyfolder/mf2.txt -> /mnt/chromeos/removable/X/dev/projects/shell/bash/parcelmf2.enc
+-------------------- 10:10:32 -------------------
+
+-------------------- 11:01:38 -------------------
+

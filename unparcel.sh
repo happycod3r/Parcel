@@ -38,13 +38,15 @@ function unparcel() {
     }
 
     function decrypt-target() {
-        local target bname parcel_dir parcel_id parcel_data_path
+        local target extension parcel_id parcel_dir parcel_data_path target_without_enc_ext bname
 
-        target="$1"
-        extension=".${target##*.}"
+        target="$1" # EAFKX1W1UB/myfolder/mf1.enc
+        extension=".${target##*.}" # .enc
         parcel_id="$2"
         parcel_data_path="$(pwd)/${parcel_id}/parcel.data"
         target_without_enc_ext="${target%.enc}"
+
+        out "$extension"
 
         if [[ -z "$parcel_id" ]]; then
             parcel_id="$(echo "$target" | cut -d "/" -f1)"
@@ -57,23 +59,25 @@ function unparcel() {
             sudo rm "$target"
         fi
     }
-    # f1.arc ---> f1.txt.enc
+    
     function unarc-target() {
         local target extension target_dir
-        target="$1"
-        target_dir="$(get-target-directory $target)"
-        target_base="$(get-base-file-name $target)"
-        extension=".${target##*.}"
+    
+        target="$1" # EAFKX1W1UB/myfolder/mf1.arc
+        target_dir="$(get-target-directory $target)" # Opened-Parcels/EAFKX1W1UB/myfolder
+        target_base="$(get-base-file-name $target)" # mf1
+        extension=".${target##*.}" # .arc
+
+
         if [[ "$extension" == ".arc" ]]; then
             $BIN/arc xo $target
-            target="${target%.*}"
-            sudo rm "${target}.arc"
-            sudo mv *.enc $target_dir 
+            target="${target%.*}" # EAFKX1W1UB/myfolder/mf1
+            sudo rm "${target}.arc" # EAFKX1W1UB/myfolder/mf1.arc
+            sudo mv *.enc $target_dir # mf1.txt.enc
         fi
     }
 
     function unzip-target() {
-
         local target
         target="$1"
         target_base="$(get-base-file-name $target)"
