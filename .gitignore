@@ -13,6 +13,8 @@ clean.sh
 *.arc
 *.gpg
 
+tmp.sh
+d.sh
 DEBUG.md
 TODO
 

@@ -3,7 +3,6 @@
 
 function unparcel() {
 
-    # Data --> terminal 
     function out() {
         CYAN='\033[0;36m'
         PURPLE='\033[0;35m'
@@ -12,7 +11,6 @@ function unparcel() {
         sleep 0.3
     }
 
-    # Data --> terminal
     function error-out {
         CYAN='\033[0;36m'
         RED='\033[0;31m'
@@ -21,13 +19,12 @@ function unparcel() {
         sleep 1
     }
 
-    # Returns: my/target/files/directory
     function get-target-directory() {
-        local _file _file_fqp _file_path
-        _file="$1"
-        _file_fqp="$(readlink -f $_file)"
-        _file_path=$(echo "${_file_fqp%/*}")
-        echo "$_file_path"
+        local target target_fqp target_path
+        target="$1"
+        target_fqp="$(readlink -f $target)"
+        target_path=$(echo "${target_fqp%/*}")
+        echo "$target_path"
     }
 
     function get-base-file-name() {
@@ -40,13 +37,11 @@ function unparcel() {
     function decrypt-target() {
         local target extension parcel_id parcel_dir parcel_data_path target_without_enc_ext bname
 
-        target="$1" # EAFKX1W1UB/myfolder/mf1.enc
-        extension=".${target##*.}" # .enc
+        target="$1"
+        extension=".${target##*.}"
         parcel_id="$2"
         parcel_data_path="$(pwd)/${parcel_id}/parcel.data"
         target_without_enc_ext="${target%.enc}"
-
-        out "$extension"
 
         if [[ -z "$parcel_id" ]]; then
             parcel_id="$(echo "$target" | cut -d "/" -f1)"
@@ -63,17 +58,16 @@ function unparcel() {
     function unarc-target() {
         local target extension target_dir
     
-        target="$1" # EAFKX1W1UB/myfolder/mf1.arc
-        target_dir="$(get-target-directory $target)" # Opened-Parcels/EAFKX1W1UB/myfolder
-        target_base="$(get-base-file-name $target)" # mf1
-        extension=".${target##*.}" # .arc
-
+        target="$1"
+        target_dir="$(get-target-directory $target)"
+        target_base="$(get-base-file-name $target)"
+        extension=".${target##*.}"
 
         if [[ "$extension" == ".arc" ]]; then
             $BIN/arc xo $target
-            target="${target%.*}" # EAFKX1W1UB/myfolder/mf1
-            sudo rm "${target}.arc" # EAFKX1W1UB/myfolder/mf1.arc
-            sudo mv *.enc $target_dir # mf1.txt.enc
+            target="${target%.*}"
+            sudo rm "${target}.arc"
+            sudo mv *.enc $target_dir
         fi
     }
 
@@ -98,7 +92,6 @@ function unparcel() {
                 if [ -f "$file" ]; then
                     "$action" "$file" "$action_arg"
                 elif [ -d "$file" ]; then
-                    # Recursively call process-files for any sub-directories.
                     process-files "$file" "$action" "$action_arg"
                 fi
             done
@@ -108,7 +101,6 @@ function unparcel() {
             if [ -f "$file" ]; then
                 "$action" "$file"
             elif [ -d "$file" ]; then
-                # Recursively call process-files for any sub-directories.
                 process-files "$file" "$action"
             fi
         done
@@ -156,8 +148,6 @@ function unparcel() {
 
     action="unarc-target"
     process-files "$parcel_id" "$action"
-
-    # ------------ GOOD SO FAR BEFORE THIS LINE ------------#
 
     action="decrypt-target"
     action_arg="$parcel_id"
