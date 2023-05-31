@@ -42,7 +42,7 @@ function parcel() {
         PURPLE='\033[0;35m'
         NC='\033[0m'
         echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
-        sleep 1
+        sleep 0.2
     }
 
     function error-out {
@@ -90,23 +90,35 @@ function parcel() {
         PARCEL_KEY="$(cat -u encryption.key)"
     }
 
-    function encrypt-target() { #file="$1"
+    function encrypt-target() {
+        out "---------------------------------------------"
         doc-out "encrypt-target()" 
-        local _file enc_file bname
-        file="$1"
-        bname="$(get-base-file-name $file)"
-        enc_file="${bname}.enc"
-        bash src/encrypt.sh -e -i "$file" -o "$(get-target-directory $file)/${enc_file}" -k "$(cat encryption.key)"
-        debug-log "Encrypted: $(get-target-directory $file)$file -> $(get-target-directory $enc_file)$enc_file"
-        sudo rm "$file"
+        local target enc_file bname
+        target="$1"
+        out "encrypt-target()"
+        out "$target" # f1.txt
+        bname="$(get-base-file-name $target)"
+        extension=".${target##*.}"
+        enc_file="${bname}${extension}.enc"
+        out "@@@@ $(get-target-directory $target)/${enc_file}"
+        bash src/encrypt.sh -e -i "$target" -o "$(get-target-directory $target)/${enc_file}" -k "$(cat encryption.key)"
+        out "$target" # f1.txt
+        sudo rm "$target" # f1.txt
+        out "---------------------------------------------"
     }
 
+    # f1.txt.enc
     function arc-target() {
         doc-out "arc-target()" 
         local bname target file1 file2
+
+        out "arc-target()"
         target="$1"
+        out "$target" # file1.txt.enc
+        
         bname="$(get-base-file-name $target)"
         ./src/bin/arc ao $bname $target
+
         sudo rm "$target"
 
         file1="${bname}.arc"
@@ -131,20 +143,31 @@ function parcel() {
         directory="$1"
         action="$2"
         extension=".${target##*.}" # For Files.
-        non_extension="${target##*.}/" # For directories
+        non_extension="${target##*.}/" # Not used at all. Only to distinguish extensions from folder names.
+        TARGET_DATA_STRING=""
+
         for file in "$directory"/*; do
+        
+            extension=".${file##*.}" # For Files.
+            non_extension="${file##*.}/"
+        
             if [ -f "$file" ]; then
                 TARGET_DATA_STRING="$file : $extension : $parcel_id : $parcel_name"
                 "$action" "$file"
+
             elif [ -d "$file" ]; then
+                
                 # Recursively call process-files for any sub-directories.
                 TARGET_DATA_STRING="$file : $non_extension : $parcel_id : $parcel_name"
                 process-files "$file" "$action"
             fi
-            parcel-log $TARGET_DATA_STRING
+            if [[ "$extension" != ".enc" ]]; then
+                write-parcel-data $TARGET_DATA_STRING
+                parcel-log $TARGET_DATA_STRING
+            fi
         done
     }
-
+    
     read -p "[parcel]: turn your file/s into a parcell archive. 
     Continue? (yes/no) " answer
     
@@ -203,7 +226,7 @@ function parcel() {
     
     parcel-log $LOG_START_DELIMETER
     write-parcel-data $LOG_START_DELIMETER
-    write-parcel-data "[$PARCEL_KEY]"
+    #write-parcel-data "[$PARCEL_KEY]"
 
     for target in ${targets}; do
         extension=".${target##*.}" # For Files.
@@ -224,8 +247,13 @@ function parcel() {
 
                 encrypt-target "$target"
                 
-                _base="$(get-base-file-name $target)"
-                target="${_base}.enc"
+                out "parcel()"
+                out "$target" # file1.txt
+
+                target="${target}.enc"
+
+                out "parcel()"
+                out "$target" # file1.txt.enc
                 
                 arc-target "$target"
 

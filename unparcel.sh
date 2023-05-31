@@ -38,20 +38,26 @@ function unparcel() {
     }
 
     function decrypt-target() {
-        local target bname parcel_dir parcel_id
+        local target bname parcel_dir parcel_id parcel_data_path
+
         target="$1"
         extension=".${target##*.}"
         parcel_id="$2"
+        parcel_data_path="$(pwd)/${parcel_id}/parcel.data"
+        target_without_enc_ext="${target%.enc}"
 
+        if [[ -z "$parcel_id" ]]; then
+            parcel_id="$(echo "$target" | cut -d "/" -f1)"
+        fi
+        
         if [[ "$extension" == ".enc" ]]; then
-            bname="$(get-base-file-name $target)"
-            parcel_dir="$(pwd)/${parcel_id}"
-            out "$parcel_dir"
-            bash "${SRC}/encrypt.sh" -d -i "$target" -o "${bname}.txt" -k "$(cat $parcel_dir/encryption.key)"
-            sudo rm "$target"        
+            bname="$(get-base-file-name $target)" # f1
+            parcel_dir="$(pwd)/${parcel_id}" 
+            bash "${SRC}/encrypt.sh" -d -i "$target" -o "$target_without_enc_ext" -k "$(cat $parcel_dir/encryption.key)"
+            sudo rm "$target"
         fi
     }
-
+    # f1.arc ---> f1.txt.enc
     function unarc-target() {
         local target extension target_dir
         target="$1"
@@ -62,7 +68,7 @@ function unparcel() {
             $BIN/arc xo $target
             target="${target%.*}"
             sudo rm "${target}.arc"
-            sudo mv "${target_base}.enc" "${target_dir}/${target_base}.enc"
+            sudo mv *.enc $target_dir 
         fi
     }
 
@@ -83,7 +89,7 @@ function unparcel() {
         directory="$1"
         action="$2" 
         if [[ "$action" == "decrypt-target" ]]; then
-        action_arg="$3"
+            action_arg="$3"
             for file in "$directory"/*; do
                 if [ -f "$file" ]; then
                     "$action" "$file" "$action_arg"
@@ -132,16 +138,12 @@ function unparcel() {
     if [[ ! -d "$OPENED_PARCEL_DIR" ]]; then
         mkdir "$OPENED_PARCEL_DIR"
     fi
-    
-    out "$parcel"
 
     sudo mv "${ARCHIVED_PARCEL_DIR}/${parcel}" "${OPENED_PARCEL_DIR}"
 
     reverted_parcel_name="$(get-base-file-name $parcel).zip"
 
     cd "$OPENED_PARCEL_DIR" && sudo mv "$parcel" "$reverted_parcel_name"
-
-    echo "$(pwd)" # Opened-Parcels/
 
     unzip-target "${parcel_id}.zip"
 
