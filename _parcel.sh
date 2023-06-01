@@ -144,7 +144,7 @@ function parcel() {
     total_targets=$#
     current_directory="$(pwd)"
     OUTPUT_DIRECTORY="Parcels/"
-    CACHE_DIRECTORY="cache/"
+    CACHE_DIRECTORY="cache/"    
     LOG_DIRECTORY="logs/"
     PARCEL_DATA_FILE="parcel.data"
     LOG_START_DELIMETER="--------  $(date)  --------"
@@ -230,7 +230,6 @@ function parcel() {
     sudo mv ./${parcel_directory}.zip  ./${parcel_name}    
     sudo mv $parcel_name $OUTPUT_DIRECTORY
     PARCEL="$(pwd)/$OUTPUT_DIRECTORY${parcel_name}"
-
 }
 
 parcel $@

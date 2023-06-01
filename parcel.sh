@@ -2,6 +2,8 @@
 
 function start-parcel() { 
 
+    source ./_init.sh
+
     function fatal() {
         CYAN='\033[0;36m'
         RED='\033[0;31m'
@@ -16,18 +18,6 @@ function start-parcel() {
         NC='\033[0m'
         echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
     }
-
-    out "
-                                                      oooo  
-                                                       888  
-    oo.ooooo.   .oooo.   oooo d8b  .ooooo.   .ooooo.   888  
-     888   88b  P  )88b   888  8P d88    Y8 d88   88b  888  
-     888   888  .oP-888   888     888       888ooo888  888  
-.o.  888   888 d8(  888   888     888   .o8 888    .o  888  
-Y8P  888bod8P   Y888  8o d888b     Y8bod8P   Y8bod8P  o888o 
-     888                                                    
-    o888o 
-"
 
     if [[ $# -eq 0 ]]; then
         fatal "No files or folders provided!"
@@ -50,7 +40,7 @@ Y8P  888bod8P   Y888  8o d888b     Y8bod8P   Y8bod8P  o888o
     targets_string=""
 
     #////// * GET OPTIONS * //////
-    while getopts "xdvhl" option; do
+    while getopts "xdvhlu" option; do
         case $option in
         x)
             extract_parcel=true
@@ -64,12 +54,18 @@ Y8P  888bod8P   Y888  8o d888b     Y8bod8P   Y8bod8P  o888o
         ;;
         h)
             out "
-To create an archive do:
+To encrypt and create an archive do:
     parcel myfile.txt myfolder
-To extract and decrypt an archive/s do:
+To decrypt and extract an archive/s do:
     parcel -x
 To delete an archive/s do:
     parcel -d
+To view this message do:
+    parcel -h
+For parcels current version do:
+    parcel -v
+For parcels install location do:
+    parcel -l
 
 for more information check out the README @ https://github.com/happycod3r/parcel
             "
@@ -77,7 +73,11 @@ for more information check out the README @ https://github.com/happycod3r/parcel
         ;;
         l)
             out "Parcel install Location: $(pwd)"
+            exit 0
         ;;
+        u)
+            read -p "This will remove .parcel from your system. Continue? [n/Yes]" answer
+        ;;  
         \?)
             fatal "Invalid option: -$OPTARG"
             return 1
@@ -101,6 +101,8 @@ for more information check out the README @ https://github.com/happycod3r/parcel
                 fi
             else # invalid.
                 out "File or folder not found: $arg"
+                read -p ""
+                exit 1
             fi
         fi
     done
