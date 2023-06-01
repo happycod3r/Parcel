@@ -1,10 +1,11 @@
 #!/bin/bash
 
 function doc-out() {
-    echo "- ### $@" >> DEBUG.md
+    echo "- ### $@" >> FUNCTION_CTRL_SHOW.md
 }
 
 function parcel() {
+    doc-out "parcel()"
 
     function fatal() {
         CYAN='\033[0;36m'

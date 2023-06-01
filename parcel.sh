@@ -1,33 +1,13 @@
 #!/bin/bash
 
-function doc-out() {
-    echo "- ### $@" >> DEBUG.md
-}
-
-function parcel() {
+function start-parcel() { 
 
     function fatal() {
         CYAN='\033[0;36m'
         RED='\033[0;31m'
         NC='\033[0m'
-        echo -e "${CYAN}[parcel]$0: ${RED}fatal error:${CYAN} $@ \nPlease provide file name/s and/or folder name/s to create an encrypted ${CYAN}.parcel archive. \nUsage: ${RED}start <file> <file> <folder>${NC}" >&2
+        echo -e "$0: ${RED}fatal error:${CYAN} $@ \nPlease provide file name/s and/or folder name/s to create an encrypted.parcel archive. \nFor usage info check out the man page at: ${RED}https://github.com/happycod3r/Parcel${NC}" >&2
         exit 0
-    }
-
-    function parcel-log() { 
-        if [[ ! -f "logs/parcel.log" ]]; then
-            touch "parcel.log"
-            sudo mv "parcel.log" "logs/"
-        fi
-        echo "$@" >> "logs/parcel.log"
-    }
-    
-    function debug-log() {
-        if [[ ! -f "logs/debug.log" ]]; then
-            touch "debug.log"
-            sudo mv "debug.log" "logs/"
-        fi
-        echo "$@" >> logs/debug.log
     }
 
     function out() {
@@ -37,199 +17,77 @@ function parcel() {
         echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
     }
 
-    function error-out {
-        echo -e "$@"
-        sleep 1
-    }
+    if [[ $# -eq 0 ]]; then
+        fatal "No files or folders provided!"
+    fi 
     
-    function write-parcel-data() {
-        if [[ ! -f "parcel.data" ]]; then
-            touch parcel.data
-        fi
-        echo "$@" >> parcel.data
-    }
+    local extract_parcel parcel_archive PARCELS_FOLDER SOURCE targets_string CYAN PURPLE NC
 
-    function get-target-directory() {
-        local target target_fqp target_path
-        target="$1"
-        target_fqp="$(readlink -f $target)"
-        target_path=$(echo "${target_fqp%/*}")
-        echo "$target_path"
-    }
+    CYAN='\033[0;36m'
+    PURPLE='\033[0;35m'
+    NC='\033[0m'
 
-    function get-base-file-name() {
-        local _file bname
-        _file="$1"
-        bname=$(echo "$_file" | awk '{gsub(/.*[/]|[.].*/, "", $0)} 1')
-        echo "$bname"
-    }
+    extract_parcel=false
+    parcel_archive="$2"
+    PARCELS_FOLDER="Parcels"
+    SOURCE="_parcel.sh"
+    targets_string=""
 
-    function gpg-encrypt-target() { 
-        local target
-        target="$1"
-        gpg --symmetric $target 
-        sudo rm "$target"
-    }
+    #////// * GET OPTIONS * //////
+    while getopts "x" option; do
+        case $option in
+        x)
+            extract_parcel=true
+        ;;
+        \?)
+            echo -e "${CYAN}[parcel] ${PURPLE}Invalid option:${NC} -$OPTARG" >&2
+            return 1
+        ;;
+        esac
+    done
     
-    function make-encryption-key() {
-        bash src/encrypt.sh -g > encryption.key
-        PARCEL_KEY="$(cat -u encryption.key)"
-    }
+    shift $((OPTIND - 1))
 
-    function encrypt-target() { 
-        local target enc_file bname
-        target="$1"
-        bname="$(get-base-file-name $target)"
-        extension=".${target##*.}"
-        enc_file="${bname}${extension}.enc"
-        bash src/encrypt.sh -e -i "$target" -o "$(get-target-directory $target)/${enc_file}" -k "$(cat encryption.key)"
-        sudo rm "$target"
-    }
-
-    function arc-target() {
-        local bname target file1 file2
-        target="$1"
-        bname="$(get-base-file-name $target)"
-        ./src/bin/arc ao $bname $target
-        sudo rm "$target"
-        file1="${bname}.arc"
-        file2="$(get-target-directory $target)/${bname}.arc"
-        if [[ "$(realpath $file1)" != "$(realpath $file2)" ]]; then
-            mv "${bname}.arc" "$(get-target-directory $target)/${bname}.arc"
-            return 0
-        fi        
-    }
-
-    function zip-target() {
-        local target
-        target="$1"
-        sudo zip -r "./${target}.zip" "$target"
-    }
-
-    function process-files() {
-        local directory action extension non_extension TARGET_DATA_STRING
-        directory="$1"
-        action="$2"
-        extension=".${target##*.}"
-        non_extension="${target##*.}/"
-        TARGET_DATA_STRING=""
-        for file in "$directory"/*; do
-            extension=".${file##*.}"
-            non_extension="${file##*.}/"
-            if [ -f "$file" ]; then
-                TARGET_DATA_STRING="$file : $extension : $parcel_id : $parcel_name"
-                "$action" "$file"
-            elif [ -d "$file" ]; then
-                TARGET_DATA_STRING="$file : $non_extension : $parcel_id : $parcel_name"
-                process-files "$file" "$action"
+    #////// * ADD TARGETS * //////
+    for arg in "$@"; do
+        # Note this outter clause will probably make it impossible to unarchive any .parcel files that are inside a parcel themselves.
+        if [[ ! "$arg" == *.parcel ]]; then
+            if [ -e "$arg" ]; then # if file/dir exists
+                if [ -f "$arg" ]; then # if file
+                    out "Processing file: $arg"
+                    targets_string+="$arg "
+                elif [ -d "$arg" ]; then # if dir
+                    out "Processing folder: $arg"
+                    targets_string+="$arg "
+                fi
+            else # invalid.
+                out "File or folder not found: $arg"
             fi
-            if [[ "$extension" != ".enc" ]]; then
-                write-parcel-data $TARGET_DATA_STRING
-                parcel-log $TARGET_DATA_STRING
-            fi
-        done
-    }
-
-    read -p "[parcel]: turn your file/s into a parcell archive. 
-    Continue? (yes/no) " answer
-    if [[ $answer != "yes" ]]; then
-        out "Script aborted."
-        exit 0
-    fi
-    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_DIRECTORY LOG_DIRECTORY CACHE_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY
-    THIS_DIRECTORY="$(pwd)"
-    iteration_count=0
-    targets=$@
-    total_targets=$#
-    current_directory="$(pwd)"
-    OUTPUT_DIRECTORY="Parcels/"
-    CACHE_DIRECTORY="cache/"
-    LOG_DIRECTORY="logs/"
-    PARCEL_DATA_FILE="parcel.data"
-    LOG_START_DELIMETER="--------  $(date)  --------"
-    LOG_ENDING_DELIMETER="-------------------- $(date "+%I:%M:%S") -------------------"
-    #/////////////////////////////////////////////////////
-    #NOTE: NEW ID AND PARCEL NAME ASSIGNMENT.
-    random_suffix=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
-    parcel_id="${random_suffix^^}"
-    parcel_name="${parcel_id}.parcel"
-    parcel_directory="$parcel_id"
-    #/////////////////////////////////////////////////////
-    #NOTE: THE PARCEL ID AND NAME ARE NOW AVAILABLE FOR USE.
-    #/////////////////////////////////////////////////////
-    #NOTE: MAKE ALL FILES/FOLDERS FOR THE CURRENT PARCEL HERE.
-    sudo mkdir $parcel_directory
-    make-encryption-key
-    touch $PARCEL_DATA_FILE
-    if [[ ! -d $OUTPUT_DIRECTORY ]]; then
-        sudo mkdir "$OUTPUT_DIRECTORY"
-    fi
-    if [[ ! -d $LOG_DIRECTORY ]]; then
-        sudo mkdir "$LOG_DIRECTORY"
-    fi
-    if [[ ! -d $CACHE_DIRECTORY ]]; then
-        sudo mkdir "$CACHE_DIRECTORY"
-    fi
-    #/////////////////////////////////////////////////////
-    #NOTE: Logs shouldn't be used before this point.
-    #/////////////////////////////////////////////////////
-    #NOTE: ITERATING THROUGH TARGETS BEYOND THIS POINT.
-    write-parcel-data $LOG_START_DELIMETER
-    #write-parcel-data "[$PARCEL_KEY]"
-    for target in ${targets}; do
-        extension=".${target##*.}" # For Files.
-        non_extension="${target##*.}/" # For directories
-        if [[ $iteration_count -ne $total_targets ]]; then
-            #/////////////////////////////////////////////////////
-            #NOTE: BEGINNING OF ITERATION.
-            iteration_count=$((iteration_count + 1))   
-            if [[ -f "$target" ]]; then
-                #/////////////////////////////////////////////////////
-                #NOTE: ADDING FILES HERE.
-                TARGET_DATA_STRING="$target : $extension : $parcel_id : $parcel_name"
-                encrypt-target "$target"
-                target="${target}.enc"
-                arc-target "$target"
-                _base="$(get-base-file-name $target)"
-                target="${_base}.arc"
-                sudo mv "$target" "$parcel_directory/"
-            elif [[ -d "$target" ]]; then
-                #/////////////////////////////////////////////////////
-                #NOTE: ADDING FOLDERS HERE.
-                TARGET_DATA_STRING="$target : $non_extension : $parcel_id : $parcel_name"
-                local action
-                action="encrypt-target"
-                process-files "$target" "$action"
-                action="arc-target"
-                process-files "$target" "$action"
-                zip-target "$target"
-                sudo rm -r "$target"
-                sudo mv "${target}.zip" "$parcel_directory/"
-            else
-                #/////////////////////////////////////////////////////
-                #NOTE: INVALID FILE/FOLDER OPTIONS HERE.
-                TARGET_DATA_STRING="$target : [unknown] : $parcel_id : $parcel_name"
-                error-out "\n$TARGET_DATA_STRING\n"            
-            fi
-            write-parcel-data $TARGET_DATA_STRING
-            continue
         fi
     done
-    #/////////////////////////////////////////////////////
-    #NOTE: LOOP DONE BEYOND THIS. ALL FILES/FOLDERS ADDED TO parcel/
-    write-parcel-data "$LOG_ENDING_DELIMETER"
-    #/////////////////////////////////////////////////////
-    #NOTE: ANY LAST MINUTE FILES THAT SHOULD GO IN parcel/ GOES HERE.
-    sudo mv "encryption.key" "$parcel_directory/"
-    sudo mv $PARCEL_DATA_FILE "$parcel_directory/"
-    #/////////////////////////////////////////////////////
-    #NOTE: ARCHIVING STARTS HERE.
-    sudo zip -r "./${parcel_directory}.zip" "$parcel_directory"
-    sudo rm -r "$parcel_directory"
-    sudo mv ./${parcel_directory}.zip  ./${parcel_name}    
-    sudo mv $parcel_name $OUTPUT_DIRECTORY
-    PARCEL="$(pwd)/$OUTPUT_DIRECTORY${parcel_name}"
 
+    #////// * EXTRACT TARGETS * //////
+    if [ "$extract_parcel" = true ]; then
+        out "hello"
+        targets_string="$parcel_archive"
+        SOURCE="_extract.sh"
+        selected_parcels=$(ls "$PARCELS_FOLDER" | fzf --multi --preview 'echo "$PARCELS_FOLDER/{}"')
+        for parcel in $selected_parcels; do
+            if [[ ! -f "$parcel" ]]; then
+                out "Parcel: ${parcel}"
+                out "Reading file: $PARCELS_FOLDER/$parcel"
+                targets_string="$parcel"
+
+                out "source: $SOURCE"
+                out "target: $targets_string"
+                bash "$SOURCE" "$targets_string"
+            fi
+        done 
+        return 0
+    fi
+
+    bash "$SOURCE" "$targets_string"
 }
 
-parcel $@
+start-parcel $@
+
