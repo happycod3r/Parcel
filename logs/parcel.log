@@ -1618,3 +1618,8 @@ mydir/newdir : mydir/newdir/ : E5JWIGAKVA : E5JWIGAKVA.parcel
 mydir/t2.txt : .txt : E5JWIGAKVA : E5JWIGAKVA.parcel
 mydir/t3.txt : .txt : E5JWIGAKVA : E5JWIGAKVA.parcel
 mydir/newdir : mydir/newdir/ : E5JWIGAKVA : E5JWIGAKVA.parcel
+dev/mydir/newdir/t4.txt : .txt : OCNQIAA2HB : OCNQIAA2HB.parcel
+dev/mydir/newdir : dev/mydir/newdir/ : OCNQIAA2HB : OCNQIAA2HB.parcel
+dev/mydir/t2.txt : .txt : OCNQIAA2HB : OCNQIAA2HB.parcel
+dev/mydir/t3.txt : .txt : OCNQIAA2HB : OCNQIAA2HB.parcel
+dev/mydir/newdir : dev/mydir/newdir/ : OCNQIAA2HB : OCNQIAA2HB.parcel

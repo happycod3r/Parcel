@@ -131,10 +131,10 @@ function parcel() {
         done
     }
 
-    read -p "[parcel]: turn your file/s into a parcell archive. 
+    read -p "[parcel]: turn your file/s into a parcel archive. 
     Continue? (yes/no) " answer
     if [[ $answer != "yes" ]]; then
-        out "Script aborted."
+        out "Archiving/encrypting aborted."
         exit 0
     fi
     local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_DIRECTORY LOG_DIRECTORY CACHE_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY
