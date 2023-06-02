@@ -1,4 +1,4 @@
-﻿![Alt](../res/Parcel.png)
+﻿![Alt](res/Parcel.png)
 
 # .parcel
 
