@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCE="_extract.sh"
+SOURCE="src/_extract.sh"
 
 if [[ -d "Parcels" ]]; then
 

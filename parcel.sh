@@ -36,7 +36,7 @@ function start-parcel() {
 
     parcel_archive="$2"
     PARCELS_FOLDER="Parcels"
-    SOURCE="_parcel.sh"
+    SOURCE="src/_parcel.sh"
     targets_string=""
 
     #////// * GET OPTIONS * //////
