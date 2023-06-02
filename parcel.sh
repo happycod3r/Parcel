@@ -33,6 +33,7 @@ function start-parcel() {
     uninstall=false
     get_version=false
     get_location=false
+    clean_opened=false
 
     parcel_archive="$2"
     PARCELS_FOLDER="Parcels"
@@ -44,6 +45,9 @@ function start-parcel() {
     while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
         -x | --extract) # Open a .parcel archive.
             extract_parcel=true
+        ;;
+        -c | --clean-opened) # Remove any opened parcels. Opened-Parcels/
+            clean_opened=true
         ;;
         -d | --delete) # Delete archived parcels from Parcels/.
             delete_parcels=true
@@ -101,6 +105,12 @@ function start-parcel() {
     #////// * DELETE PARCELS * //////
     if [[ "$delete_parcels" = true ]]; then
         source src/_del.sh
+        return 0
+    fi
+
+    #////// * CLEAN OPENED PARCELS * //////
+    if [[ "$clean_opened" = true ]]; then
+        source src/_clean.sh
         return 0
     fi
 
