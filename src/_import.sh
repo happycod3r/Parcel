@@ -6,7 +6,7 @@ if [[ ! -d $PARCELS_FOLDER ]]; then
 fi  
 parcels="$@"
 for parcel in "$parcels"; do
-    parcel_ext=".${target##*.}"
+    parcel_ext=".${parcel##*.}"
     if [[ "$parcel_ext" == ".parcel" ]]; then
         mv "$parcel" "$PARCELS_FOLDER"
     else

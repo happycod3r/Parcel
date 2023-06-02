@@ -24,7 +24,7 @@ function start-parcel() {
         fatal "No files or folders provided!"
     fi 
     
-    local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location parcel_archive PARCELS_FOLDER SOURCE targets_string VERSION
+    local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location cleaned_opened list_parcels parcel_archive PARCELS_FOLDER SOURCE targets_string VERSION
 
     extract_parcel=false
     delete_parcels=false
@@ -34,6 +34,7 @@ function start-parcel() {
     get_version=false
     get_location=false
     clean_opened=false
+    list_parcels=false
 
     parcel_archive="$2"
     PARCELS_FOLDER="Parcels"
@@ -66,6 +67,9 @@ function start-parcel() {
         ;;  
         -i | --import) # Move external .parcel archives into parcels folder, Parcels/.
             import_parcels=true
+        ;;
+        --list) # List .parcel archives.
+            list_parcels=true
         ;;
         \?)
             fatal "Invalid option: -$OPTARG"
@@ -141,6 +145,12 @@ function start-parcel() {
     #////// * LOCATION * //////
     if [[ "$get_location" = true ]]; then
         source src/_location.sh
+        return 0
+    fi
+
+    #////// * LIST PARCELS * //////
+    if [[ "$list_parcels" = true ]]; then
+        source src/_list.sh
         return 0
     fi
 

@@ -4,7 +4,7 @@ function doc-out() {
     echo "- ### $@" >> FUNCTION_CTRL_FLOW.md
 }
 
-function unparcel() {
+function _extract() {
 
     function out() {
         CYAN='\033[0;36m'
@@ -158,4 +158,4 @@ function unparcel() {
 
 }
 
-unparcel "$1"
+_extract "$1"
