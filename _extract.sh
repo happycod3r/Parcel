@@ -54,7 +54,7 @@ function unparcel() {
             bname="$(get-base-file-name $target)" # f1
             parcel_dir="$(pwd)/${parcel_id}" 
             bash "${SRC}/encrypt.sh" -d -i "$target" -o "$target_without_enc_ext" -k "$(cat $parcel_dir/encryption.key)"
-            sudo rm "$target"
+            rm "$target"
         fi
     }
     
@@ -69,8 +69,8 @@ function unparcel() {
         if [[ "$extension" == ".arc" ]]; then
             $BIN/arc xo $target
             target="${target%.*}"
-            sudo rm "${target}.arc"
-            sudo mv *.enc $target_dir
+            rm "${target}.arc"
+            mv *.enc $target_dir
         fi
     }
 
@@ -80,9 +80,9 @@ function unparcel() {
         target_base="$(get-base-file-name $target)"
         unzip $target 
         if [[ "$target_base" != "$parcel_id" ]]; then
-            sudo mv "$target_base" "$parcel_id"
+            mv "$target_base" "$parcel_id"
         fi
-        sudo rm $target
+        rm $target
     }
 
     function process-files() {
@@ -135,7 +135,7 @@ function unparcel() {
     SRC="$(pwd)/src"
 
     if [[ ! -d "$OPENED_PARCEL_DIR" ]]; then
-        mkdir "$OPENED_PARCEL_DIR"
+        mkdir -p "$OPENED_PARCEL_DIR"
     fi
 
     sudo mv "${ARCHIVED_PARCEL_DIR}/${parcel}" "${OPENED_PARCEL_DIR}"

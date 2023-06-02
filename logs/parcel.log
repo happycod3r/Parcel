@@ -1623,3 +1623,4 @@ dev/mydir/newdir : dev/mydir/newdir/ : OCNQIAA2HB : OCNQIAA2HB.parcel
 dev/mydir/t2.txt : .txt : OCNQIAA2HB : OCNQIAA2HB.parcel
 dev/mydir/t3.txt : .txt : OCNQIAA2HB : OCNQIAA2HB.parcel
 dev/mydir/newdir : dev/mydir/newdir/ : OCNQIAA2HB : OCNQIAA2HB.parcel
+mydir/t1.txt : .txt : PWHBLHXNUR : PWHBLHXNUR.parcel

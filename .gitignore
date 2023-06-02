@@ -5,6 +5,7 @@ clean.sh
 *.key
 *.data
 *.enc
+
 *.todo
 *.swp
 *.txt
@@ -24,5 +25,4 @@ temp/
 tmp/
 parcel/
 Parcels/
-cache/
-
+.config/

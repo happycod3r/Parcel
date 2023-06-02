@@ -2,7 +2,8 @@
 
 function start-parcel() { 
 
-    source ./_init.sh
+    source ./src/_init.sh
+    clear
 
     function fatal() {
         CYAN='\033[0;36m'
@@ -23,16 +24,15 @@ function start-parcel() {
         fatal "No files or folders provided!"
     fi 
     
-    local extract_parcel parcel_archive PARCELS_FOLDER SOURCE targets_string CYAN PURPLE NC VERSION
-
-    PARCEL_VERSION="1.0.0"
-
-    CYAN='\033[0;36m'
-    PURPLE='\033[0;35m'
-    NC='\033[0m'
+    local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location parcel_archive PARCELS_FOLDER SOURCE targets_string VERSION
 
     extract_parcel=false
     delete_parcels=false
+    import_parcels=false
+    help_needed=false
+    uninstall=false
+    get_version=false
+    get_location=false
 
     parcel_archive="$2"
     PARCELS_FOLDER="Parcels"
@@ -40,62 +40,45 @@ function start-parcel() {
     targets_string=""
 
     #////// * GET OPTIONS * //////
-    while getopts "xdvhlu" option; do
-        case $option in
-        x)
+    # [xdvhluic]
+    while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+        -x | --extract) # Open a .parcel archive.
             extract_parcel=true
         ;;
-        d)
+        -d | --delete) # Delete archived parcels from Parcels/.
             delete_parcels=true
         ;;
-        v)
-            out "Version: $PARCEL_VERSION"
-            exit 0
+        -v | --version) # Get the current version.
+            get_version=true
         ;;
-        h)
-            out "
-To encrypt and create an archive do:
-    parcel myfile.txt myfolder
-To decrypt and extract an archive/s do:
-    parcel -x
-To delete an archive/s do:
-    parcel -d
-To view this message do:
-    parcel -h
-For parcels current version do:
-    parcel -v
-For parcels install location do:
-    parcel -l
-
-for more information check out the README @ https://github.com/happycod3r/parcel
-            "
-            exit 0
+        -h | --help) # Print options.
+            help_needed=true
         ;;
-        l)
-            out "Parcel install Location: $(pwd)"
-            exit 0
+        -l | --get-location) # Get the current location of the .parcel install folder.
+            get_location=true
         ;;
-        u)
-            read -p "This will remove .parcel from your system. Continue? [n/Yes]" answer
+        -u | --uninstall) # Remove .parcel from your system.
+            uninstall=true
         ;;  
+        -i | --import) # Move external .parcel archives into parcels folder, Parcels/.
+            import_parcels=true
+        ;;
         \?)
             fatal "Invalid option: -$OPTARG"
             return 1
         ;;
-        esac
-    done
-    
-    shift $((OPTIND - 1))
+    esac; shift; done
+    if [[ "$1" == '--' ]]; then shift; fi
 
     #////// * ADD TARGETS * //////
     for arg in "$@"; do
         # Note this outter clause will probably make it impossible to unarchive any .parcel files that are inside a parcel themselves.
         if [[ ! "$arg" == *.parcel ]]; then
-            if [ -e "$arg" ]; then # if file/dir exists
-                if [ -f "$arg" ]; then # if file
+            if [[ -e "$arg" ]]; then # if file/dir exists
+                if [[ -f "$arg" ]]; then # if file
                     out "Processing file: $arg"
                     targets_string+="$arg "
-                elif [ -d "$arg" ]; then # if dir
+                elif [[ -d "$arg" ]]; then # if dir
                     out "Processing folder: $arg"
                     targets_string+="$arg "
                 fi
@@ -104,47 +87,54 @@ for more information check out the README @ https://github.com/happycod3r/parcel
                 read -p ""
                 exit 1
             fi
+        else
+            out "Target $arg is a .parcel archive."
         fi
     done
 
     #////// * EXTRACT PARCELS * //////
     if [[ "$extract_parcel" = true ]]; then
-    
-        SOURCE="_extract.sh"
-        selected_parcels=$(ls "$PARCELS_FOLDER" | fzf --multi --preview 'echo "$PARCELS_FOLDER/{}"')
-        
-        for parcel in $selected_parcels; do
-            if [[ ! -f "$parcel" ]]; then
-                out "Decrypting/extracting parcel: $parcel"
-                targets_string="$parcel"
-                bash "$SOURCE" "$targets_string"
-            fi
-        done 
+        source src/_open.sh
         return 0
     fi
 
     #////// * DELETE PARCELS * //////
     if [[ "$delete_parcels" = true ]]; then
-        selected_parcels=$(ls "$PARCELS_FOLDER" | fzf --multi --preview 'echo "$PARCELS_FOLDER/{}"')
-        for parcel in $selected_parcels; do
-            if [[ ! -f "$parcel" ]]; then
-                
-                read -p "${CYAN}[parcel]: This will delete the following parcel archives. 
-                ${selected_parcels}
-                Continue? (yes/no) " answer
-                if [[ $answer != "yes" ]]; then
-                    out "Deletion aborted."
-                    exit 0
-                fi
-
-                out "Deleting parcel: $parcel"
-
-                sudo rm -r "$PARCELS_FOLDER/${parcel}"
-            fi
-        done 
+        source src/_del.sh
         return 0
     fi
 
+    #////// * IMPORT PARCELS * //////
+    if [[ "$import_parcels" = true ]]; then
+        source src/_import.sh
+        return 0
+    fi
+
+    #////// * PRINT HELP * //////
+    if [[ "$help_needed" = true ]]; then
+        source src/_help.sh
+        return 0
+    fi
+
+    #////// * UNINSTALL * //////
+    if [[ "$uninstall" = true ]]; then
+        source src/_uninstall.sh
+        return 0
+    fi
+
+    #////// * VERSION * //////
+    if [[ "$get_version" = true ]]; then
+        source src/_version.sh
+        return 0
+    fi
+
+    #////// * LOCATION * //////
+    if [[ "$get_location" = true ]]; then
+        source src/_location.sh
+        return 0
+    fi
+
+    #////// * CREATE PARCEL * //////
     bash "$SOURCE" "$targets_string"
 }
 
