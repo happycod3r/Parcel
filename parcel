@@ -24,7 +24,7 @@ function start-parcel() {
         fatal "No files or folders provided!"
     fi 
     
-    local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location cleaned_opened list_parcels parcel_archive PARCELS_FOLDER SOURCE targets_string VERSION
+    local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location cleaned_opened list_parcels reset_pin parcel_archive PARCELS_FOLDER SOURCE targets_string VERSION
 
     extract_parcel=false
     delete_parcels=false
@@ -35,6 +35,7 @@ function start-parcel() {
     get_location=false
     clean_opened=false
     list_parcels=false
+    reset_pin=false
 
     parcel_archive="$2"
     PARCELS_FOLDER="Parcels"
@@ -70,6 +71,9 @@ function start-parcel() {
         ;;
         --list) # List .parcel archives.
             list_parcels=true
+        ;;
+        --reset) # Resets pin used for parcel.
+            reset_pin=true
         ;;
         \?)
             fatal "Invalid option: -$OPTARG"
@@ -151,6 +155,12 @@ function start-parcel() {
     #////// * LIST PARCELS * //////
     if [[ "$list_parcels" = true ]]; then
         source src/_list.sh
+        return 0
+    fi
+
+    #////// * RESET PIN * //////
+    if [[ "$reset_pin" = true ]]; then
+        source src/_reset.sh
         return 0
     fi
 

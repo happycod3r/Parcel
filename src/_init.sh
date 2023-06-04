@@ -83,7 +83,7 @@ function main() {
 
         while [[ "$good_pin" == "false" ]]; do
             read -p "Set a pin for future use:
-        pin: " pin
+            pin: " pin
 
             if [[ -z "$pin" ]]; then
                 echo "Pin is empty. Enter a valid pin to continue."
@@ -102,10 +102,71 @@ function main() {
                 local encoded_pin="$(encode $pin)"
                 echo "$encoded_pin" > $PIN_FILE
                 good_pin="true"
-                DONE="true"
+                #DONE="true"
             else
+                clear
                 echo "Invalid pin. Must be no less than 4 digits and no letter or characters."
             fi
+        done
+
+        # ------------------- CTRL QUESTION --------------
+            
+        local good_question CTRL_QUESTION_FILE
+        good_question="false"
+        CTRL_QUESTION_FILE="${CONFIG_DIRECTORY}/.q"
+
+        while [[ "$good_question" == "false" ]]; do 
+            clear
+            echo "Now setup a control question to answer to use for operations such as resetting your pin number."
+
+            read -p "Question: " ctrl_question
+
+            if [[ "$ctrl_question" == "$exit_char" ]]; then
+                echo "Press enter to exit..."
+                read -p ""
+                clear
+                exit 0
+            fi
+
+            if [[ -z "$ctrl_question" ]]; then
+                echo "The control question is empty. Enter a question to continue."
+                clear
+                continue
+            fi
+
+            good_question="true"
+            echo "$ctrl_question" > $CTRL_QUESTION_FILE
+
+        done
+
+        # --------------- CTRL ANSWER ----------------
+
+        local good_answer CTRL_ANSWER_FILE
+        good_answer="false"
+        CTRL_QUESTION_FILE="${CONFIG_DIRECTORY}/.answer"
+
+        while [[ "$good_answer" == "false" ]]; do 
+            clear
+            echo "Now write the answer to the ctrl question."
+
+            read -p "Answer: " ctrl_answer
+
+            if [[ "$ctrl_answer" == "$exit_char" ]]; then
+                echo "Press enter to exit..."
+                read -p ""
+                clear
+                exit 0
+            fi
+
+            if [[ -z "$ctrl_answer" ]]; then
+                echo "The control answer is empty. Enter an answer to the question you provided to continue."
+                clear
+                continue
+            fi
+
+            good_answer="true"
+            DONE="true"
+            echo "$ctrl_question" > $CTRL_QUESTION_FILE
 
         done
 
