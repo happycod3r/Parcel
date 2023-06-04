@@ -1,5 +1,9 @@
 #!/bin/bash
 
-out "All existing .parcel archives:"
+function _list() {
+    out "All existing .parcel archives:"
 
-ls Parcels/
+    ls Parcels/
+}
+
+_list

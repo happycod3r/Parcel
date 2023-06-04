@@ -53,7 +53,7 @@ function _extract() {
         if [[ "$extension" == ".enc" ]]; then
             bname="$(get-base-file-name $target)" # f1
             parcel_dir="$(pwd)/${parcel_id}" 
-            bash "${SRC}/encrypt.sh" -d -i "$target" -o "$target_without_enc_ext" -k "$(cat $parcel_dir/encryption.key)"
+            bash "$SRC/encrypt.sh" -d -i "$target" -o "$target_without_enc_ext" -k "$(cat $parcel_dir/encryption.key)"
             rm "$target"
         fi
     }
@@ -125,14 +125,14 @@ function _extract() {
         done
     }
 
-    local parcel parcel_id ARCHIVED_PARCEL_DIR OPENED_PARCEL_DIR bname new_name action BIN
+    local parcel parcel_id ARCHIVED_PARCEL_DIR OPENED_PARCEL_DIR bname new_name action BIN SRC
     
     parcel="$1"
     parcel_id="$(get-base-file-name $parcel)"
     OPENED_PARCEL_DIR="./Opened-Parcels"
     ARCHIVED_PARCEL_DIR="./Parcels"
-    BIN="$(pwd)/src/bin"
     SRC="$(pwd)/src"
+    BIN="$(pwd)/src/bin"
 
     if [[ ! -d "$OPENED_PARCEL_DIR" ]]; then
         mkdir -p "$OPENED_PARCEL_DIR"

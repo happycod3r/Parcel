@@ -1,3 +1,7 @@
 #!/bin/bash
 
-out "Parcel install Location: $(pwd)"
+function _location() {
+    out "Parcel install Location: $(pwd)"
+}
+
+_location

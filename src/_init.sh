@@ -2,20 +2,26 @@
 
 function main() {
     
+    fpath=('$(pwd)' $fpath)
+
     DONE="false"
-    CONFIG_DIRECTORY=".config"
-    PIN_FILE=".config/.pin"
+    CONFIG_DIRECTORY="${HOME}/.config/parcel"
+    PIN_FILE="${CONFIG_DIRECTORY}/.pin"
+    USER_FILE="${CONFIG_DIRECTORY}/.user"
 
     if [[ ! -d "$CONFIG_DIRECTORY" ]]; then
         mkdir -p "$CONFIG_DIRECTORY"
     fi
 
+    # ------------------- CURRENT USERS ------------------
+
     while [[ "$DONE" == "false" ]]; do
 
         good_pin="false"
-        pin_pattern='^[0-9]{4}$'
+        pin_pattern='^[0-9]{4}$' # 4 digits.
+        user_pattern='^[0-9a-zA-Z]{8}$' # 8 characters, numbers & letters only
         exit_char="q"
-
+        
         if [[ -f "$PIN_FILE" ]]; then
 
             correct_pin="$(cat $PIN_FILE)"

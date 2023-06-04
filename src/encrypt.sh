@@ -8,8 +8,14 @@
 #
 #  Author:   Conrad Sollitt
 #  Created:  2016 to 2020
+#  Modified: Paul McCarthy
+#  Created:  2023
 #  License:  MIT
-#
+#  
+#  ------------------------------------------------------------------
+#  !!! This is a modified version of the original encrypt.sh !!!
+#  ------------------------------------------------------------------
+#  
 #  Developer Overview and Notes
 #  - This is a Bash Script that runs from shell/terminal on Linux, Unix,
 #    and macOS. It also runs on Windows using Windows Subsystem for Linux.
@@ -80,28 +86,62 @@ FONT_ERROR="${FONT_BG_RED}${FONT_WHITE}"
 SCRIPT_PATH="${BASH_SOURCE[0]}"
 SCRIPT_NAME=$(basename "${SCRIPT_PATH}")
 
+CYAN='\033[0;36m'
+PURPLE='\033[0;35m'
+NC='\033[0m'
+
 # ---------------------------------------------------------
 # Main function, this gets called from bottom of the file
 # ---------------------------------------------------------
 main ()
 {
-    local msg time_taken
+    local msg time_taken CYAN PURPLE NC
+
     check_for_xxd
     get_options "$@"
     validate_options
     validate_files
     validate_key
+
+    CYAN='\033[0;36m'
+    PURPLE='\033[0;35m'
+    NC='\033[0m'
+
+    #DIRNAME="/a/b/c/d/e"
+    #D2=$(dirname "$DIRNAME")
+    #DIRNAME2=$(basename "$D2")/$(basename "$DIRNAME")
+    
+    original_inf_path="${in_file}"
+    inf_d2=$(dirname "$original_inf_path")
+    trimmed_in_file=$(basename "$inf_d2")/$(basename "$original_inf_path")
+
+    original_outf_path="${out_file}"
+    outf_d2=$(dirname "$original_outf_path")
+    trimmed_out_file=$(basename "$outf_d2")/$(basename "$original_outf_path")
+
     if [[ "${action}" == "encrypt" ]]; then
-        echo "Encrypting file [${in_file}] to [${out_file}] at [$(date)]"
+        echo -e "${CYAN}[parcel] ${PURPLE}Encrypting file ${NC}[${in_file}] ${PURPLE}to ${NC}[${trimmed_out_file}] ${PURPLE}at ${NC}[$(date)]"
         encrypt
-        msg="Success, file [${in_file}] has been encrypted to [${out_file}]."
+        msg="${CYAN}[parcel] ${PURPLE}Success! file ${NC}[${in_file}] ${PURPLE}has been encrypted to ${NC}[${trimmed_out_file}]."
     else
-        echo "Decrypting file [${in_file}] to [${out_file}] at [$(date)]"
+        echo -e "${CYAN}[parcel] ${PURPLE}Decrypting file ${NC}[${in_file}] ${PURPLE}to ${NC}[${trimmed_out_file}] ${PURPLE}at ${NC}[$(date)]"
         decrypt
-        msg="Success, file [${in_file}] has been decrypted to [${out_file}]."
+        msg="${CYAN}[parcel] ${PURPLE}Success, file ${NC}[${in_file}] ${PURPLE}has been decrypted to ${NC}[${out_file}]."
     fi
     time_taken=$(format_time $SECONDS)
-    echo "${msg} Time Taken: [${time_taken}]"
+    echo -e "${msg} ${PURPLE}Time Taken: ${NC}[${time_taken}]"
+    
+    # if [[ "${action}" == "encrypt" ]]; then
+    #     echo -e "${CYAN}[parcel] ${NC}Encrypting file ${PURPLE}[${in_file}] ${NC}to ${PURPLE}[${out_file}] ${NC}at ${PURPLE}[$(date)]${NC}"
+    #     encrypt
+    #     msg="${CYAN}[parcel] ${NC}Success! file ${PURPLE}[${in_file}] ${NC}has been encrypted to ${PURPLE}[${out_file}].${NC}"
+    # else
+    #     echo -e "${CYAN}[parcel] ${NC}Decrypting file ${PURPLE}[${in_file}] ${NC}to ${PURPLE}[${out_file}] ${NC}at ${PURPLE}[$(date)]${NC}"
+    #     decrypt
+    #     msg="${CYAN}[parcel] ${NC}Success, file ${PURPLE}[${in_file}] ${NC}has been decrypted to ${PURPLE}[${out_file}].${NC}"
+    # fi
+    #time_taken=$(format_time $SECONDS)
+    #echo -e "${msg} Time Taken: [${time_taken}]"
 }
 
 # -----------------------------------------------------------------------------

@@ -42,12 +42,12 @@ function start-parcel() {
     targets_string=""
 
     #////// * GET OPTIONS * //////
-    # [xdvhluic]
+    
     while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
         -x | --extract) # Open a .parcel archive.
             extract_parcel=true
         ;;
-        -c | --clean-opened) # Remove any opened parcels. Opened-Parcels/
+        -c | --clean) # Remove any opened parcels. Opened-Parcels/
             clean_opened=true
         ;;
         -d | --delete) # Delete archived parcels from Parcels/.
@@ -62,7 +62,7 @@ function start-parcel() {
         -l | --get-location) # Get the current location of the .parcel install folder.
             get_location=true
         ;;
-        -u | --uninstall) # Remove .parcel from your system.
+        --uninstall) # Remove .parcel from your system.
             uninstall=true
         ;;  
         -i | --import) # Move external .parcel archives into parcels folder, Parcels/.

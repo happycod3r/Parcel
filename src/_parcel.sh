@@ -5,6 +5,7 @@ function doc-out() {
 }
 
 function parcel() {
+    
     doc-out "parcel()"
 
     function fatal() {
@@ -84,7 +85,7 @@ function parcel() {
     }
     
     function make-encryption-key() {
-        bash src/encrypt.sh -g > encryption.key
+        bash "src/encrypt.sh" -g > encryption.key
         
         PARCEL_KEY="$(cat -u encryption.key)"
     }
@@ -97,7 +98,7 @@ function parcel() {
         extension=".${target##*.}"
         enc_file="${bname}${extension}.enc"
         
-        bash src/encrypt.sh -e -i "$target" -o "$(get-target-directory $target)/${enc_file}" -k "$(cat encryption.key)"
+        bash "src/encrypt.sh" -e -i "$target" -o "$(get-target-directory $target)/${enc_file}" -k "$(cat encryption.key)"
         
         rm "$target"
     }
@@ -108,7 +109,7 @@ function parcel() {
         target="$1"
         bname="$(get-base-file-name $target)"
         
-        ./src/bin/arc ao $bname $target
+        src/bin/arc ao $bname $target
         
         rm "$target"
         
@@ -137,6 +138,8 @@ function parcel() {
         extension=".${target##*.}"
         non_extension="${target##*.}/"
         TARGET_DATA_STRING=""
+        BIN="$(pwd)/src/bin"
+        SRC="$(pwd)/src"
         
         for file in "$directory"/*; do
         
