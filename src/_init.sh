@@ -21,11 +21,11 @@ function main() {
         pin_pattern='^[0-9]{4}$' # 4 digits.
         user_pattern='^[0-9a-zA-Z]{8}$' # 8 characters, numbers & letters only
         exit_char="q"
-        
-        if [[ -f "$PIN_FILE" ]]; then
 
+        if [[ -f "$PIN_FILE" ]]; then
+            source encode.sh
             correct_pin="$(cat $PIN_FILE)"
-            
+            decoded_pin="$(decode64 $correct_pin)"
             while [[ "$good_pin" == "false" ]]; do
 
                 read -p "Enter your pin to continue.
@@ -46,7 +46,7 @@ function main() {
 
                 if [[ $pin =~ $pin_pattern ]]; then
                 
-                    if [[ "$pin" == "$correct_pin" ]]; then
+                    if [[ "$pin" == "$decoded_pin" ]]; then
                         good_pin="true"
                         DONE="true"
                         break
@@ -82,7 +82,9 @@ function main() {
             fi
 
             if [[ $pin =~ $pin_pattern ]]; then
-                echo "$pin" > $PIN_FILE
+                source encode.sh
+                local encoded_pin="$(encode64 $pin)"
+                echo "$encoded_pin" > $PIN_FILE
                 good_pin="true"
                 DONE="true"
             else
