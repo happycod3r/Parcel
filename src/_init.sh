@@ -1,6 +1,22 @@
 #!/bin/bash 
 
 function main() {
+
+    encode() {
+        if [[ $# -eq 0 ]]; then
+            cat | base64
+        else
+            printf '%s' $1 | base64
+        fi
+    }
+
+    decode() {
+        if [[ $# -eq 0 ]]; then
+            cat | base64 --decode
+        else
+            printf '%s' $1 | base64 --decode
+        fi
+    }
     
     fpath=('$(pwd)' $fpath)
 
@@ -23,9 +39,10 @@ function main() {
         exit_char="q"
 
         if [[ -f "$PIN_FILE" ]]; then
-            source encode.sh
+        
             correct_pin="$(cat $PIN_FILE)"
-            decoded_pin="$(decode64 $correct_pin)"
+            decoded_pin="$(decode $correct_pin)"
+
             while [[ "$good_pin" == "false" ]]; do
 
                 read -p "Enter your pin to continue.
@@ -82,8 +99,7 @@ function main() {
             fi
 
             if [[ $pin =~ $pin_pattern ]]; then
-                source encode.sh
-                local encoded_pin="$(encode64 $pin)"
+                local encoded_pin="$(encode $pin)"
                 echo "$encoded_pin" > $PIN_FILE
                 good_pin="true"
                 DONE="true"
