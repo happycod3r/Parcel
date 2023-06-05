@@ -5,8 +5,6 @@ function doc-out() {
 }
 
 function parcel() {
-    
-    doc-out "parcel()"
 
     function fatal() {
         CYAN='\033[0;36m'
