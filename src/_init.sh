@@ -1,6 +1,27 @@
 #!/bin/bash 
 
+# TODO: Implement a "forgot pin" system. If the user forgets their pin and security 
+# answer as of now, they have no way to recover and will be permanently locked out.
+# You can always delete the .answer and .pin files manually which will trigger the 
+# pin setup to begin on next startup. That would essentialy do the same thing as 
+# parcel --reset.
+
 function main() {
+
+    function fatal() {
+        CYAN='\033[0;36m'
+        RED='\033[0;31m'
+        NC='\033[0m'
+        echo -e "$0: ${RED}Error:${CYAN} $@" >&2
+        exit 0
+    }
+
+    function out() {
+        CYAN='\033[0;36m'
+        PURPLE='\033[0;35m'
+        NC='\033[0m'
+        echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
+    }
 
     encode() {
         if [[ $# -eq 0 ]]; then
@@ -49,13 +70,13 @@ function main() {
                 pin: " pin
 
                 if [[ -z "$pin" ]]; then
-                    echo "Pin is empty. Enter a valid pin to continue."
+                    out "Pin is empty. Enter a valid pin to continue."
                     clear
                     continue
                 fi
 
                 if [[ "$pin" == "$exit_char" ]]; then
-                    echo "Press enter to exit..."
+                    out "Press enter to exit..."
                     read -p ""
                     clear
                     exit 0
@@ -73,7 +94,7 @@ function main() {
 
                 else
                     clear
-                    echo "Invalid pin. Must be no less than 4 digits and no letter or characters."
+                    out "Invalid pin. Must be no less than 4 digits and no letter or characters."
                 fi
 
             done
@@ -87,14 +108,14 @@ function main() {
 
             if [[ -z "$pin" ]]; then
                 clear
-                echo "Pin is empty. Enter a valid pin to continue."
+                out "Pin is empty. Enter a valid pin to continue."
                 read -p "Press enter to continue..."
                 clear
                 continue
             fi
 
             if [[ "$pin" == "$exit_char" ]]; then
-                echo "Press enter to exit..."
+                out "Press enter to exit..."
                 read -p ""
                 clear
                 exit 0
@@ -107,7 +128,7 @@ function main() {
 
             else
                 clear
-                echo "Invalid pin. Must be no less than 4 digits and no letter or characters."
+                out "Invalid pin. Must be no less than 4 digits and no letter or characters."
                 read -p "Press enter to continue..."
                 clear
             fi
@@ -122,26 +143,26 @@ function main() {
             CTRL_QUESTION_FILE="${CONFIG_DIRECTORY}/.q"
 
             while [[ "$good_question" == "false" ]]; do 
-            clear
-            echo "Now setup a control question to answer to use for operations such as resetting your pin number."
-
-            read -p "Question or (q) to quit: " ctrl_question
-
-            if [[ "$ctrl_question" == "$exit_char" ]]; then
-                echo "Press enter to exit..."
-                read -p ""
                 clear
-                exit 0
-            fi
+                out "Now setup a control question to answer to use for operations such as resetting your pin number."
 
-            if [[ -z "$ctrl_question" ]]; then
-                echo "The control question is empty. Enter a question to continue."
-                clear
-                continue
-            fi
+                read -p "Question or (q) to quit: " ctrl_question
 
-            good_question="true"
-            echo "$ctrl_question" > $CTRL_QUESTION_FILE
+                if [[ "$ctrl_question" == "$exit_char" ]]; then
+                    out "Press enter to exit..."
+                    read -p ""
+                    clear
+                    exit 0
+                fi
+
+                if [[ -z "$ctrl_question" ]]; then
+                    out "The control question is empty. Enter a question to continue."
+                    clear
+                    continue
+                fi
+
+                good_question="true"
+                echo "$ctrl_question" > $CTRL_QUESTION_FILE
 
             done
 
@@ -153,19 +174,19 @@ function main() {
 
             while [[ "$good_answer" == "false" ]]; do 
             clear
-            echo "Now write the answer to the ctrl question."
+            out "Now write the answer to the ctrl question."
 
             read -p "Answer or (q) to quit: " ctrl_answer
 
             if [[ "$ctrl_answer" == "$exit_char" ]]; then
-                echo "Press enter to exit..."
+                out "Press enter to exit..."
                 read -p ""
                 clear
                 exit 0
             fi
 
             if [[ -z "$ctrl_answer" ]]; then
-                echo "The control answer is empty. Enter an answer to the question you provided to continue."
+                out "The control answer is empty. Enter an answer to the question you provided to continue."
                 clear
                 continue
             fi

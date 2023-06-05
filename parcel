@@ -45,7 +45,7 @@ function start-parcel() {
     #////// * GET OPTIONS * //////
     
     while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
-        -x | --extract) # Open a .parcel archive.
+        -x | --extract) # Open a .parcel archive.   
             extract_parcel=true
         ;;
         -c | --clean) # Remove any opened parcels. Opened-Parcels/
