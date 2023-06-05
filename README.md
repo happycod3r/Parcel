@@ -9,15 +9,12 @@ Parcel will store your .parcel archives in a hidden folder on your computer to k
 ![Alt](res/Parcel-diagram.png)
 
 ## [Table Of Contents](#toc)
-- [.parcel](#parcel)
   - [Table Of Contents](#table-of-contents)
   - [About](#about)
   - [Install](#install)
     - [Manual Install:](#manual-install)
     - [Command-Line Install:](#command-line-install)
   - [Dependencies](#dependencies)
-      - [fzf - https://github.com/junegunn/fzf](#fzf---httpsgithubcomjunegunnfzf)
-      - [arc - https://manpages.ubuntu.com/manpages/xenial/man1/arc.1.html](#arc---httpsmanpagesubuntucommanpagesxenialman1arc1html)
   - [Configuration](#configuration)
   - [Usage](#usage)
   - [Documentation](#documentation)
@@ -33,6 +30,7 @@ I wanted to create a way to encrypt and archive personal data that would be hard
 ---
 
 ## [Install](#install)
+
 ### Manual Install:
 1. Download and place the ***Parcel*** folder in a location of your choosing.
 2. For convenience you should put Parcel on your `PATH` or in a place that is already on your `$PATH` global variable.
@@ -42,6 +40,7 @@ I wanted to create a way to encrypt and archive personal data that would be hard
 ```bash
 git clone https://github.com/happycod3r/Parcel.git
 ```
+
 2. Navigate to the script directory: Change your working directory to the cloned repository's directory:
 ```bash
 cd Parcel
@@ -68,7 +67,7 @@ Parcel will have you configure it the first time it is run. You will have to set
 
 ## [Usage](#usage)
 
-> To create an encrypted .parcel archive pass in the file and folder names/paths in any order.
+> To create an encrypted .parcel archive pass in the file and folder names/paths in any order.**
 ```bash 
 parcel file1.txt file2.doc myfolder
 #or if not on path...
@@ -170,8 +169,11 @@ bash parcel --uninstall
 
 
 ### [Archiving Methods](#archiving-methods)
-- Arc - 
+- **ARC** - "ARC" is a file compression and archival format that was developed in the 1980s by System Enhancement Associates (SEA). It was a popular compression format in the early days of personal computing, particularly on MS-DOS-based systems.
+- **ZIP** - *"ZIP"* is a file format and a popular compression method used for archiving and compressing files and folders. It stands for "ZiP Archive" or "Zone Information Protocol." The ZIP format allows you to combine multiple files and folders into a single file, reducing their overall size and making it easier to transfer or store them.
 
 --- 
 
 ### [Encryption Methods](encryption-methods)
+- **OpenSSL** - OpenSSL is a widely-used open-source software library that provides cryptographic functions, including encryption, decryption, digital signatures, and secure communications protocols.
+- **base64** - Base64 encoding is not a form of encryption but rather a method of encoding binary data into a text format. The Base64 encoding scheme uses a set of 64 characters (hence the name) that are considered safe for use in text-based situations. These characters include uppercase letters (A-Z), lowercase letters (a-z), numbers (0-9), and two additional symbols (usually '+' and '/'). In some implementations, an additional character such as '=' is used for padding.
