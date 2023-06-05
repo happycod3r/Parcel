@@ -68,7 +68,7 @@ Parcel will have you configure it the first time it is run. You will have to set
 
 ## [Usage](#usage)
 
-> To create an encrypted .parcel archive pass in the file and folder names/paths in any order.
+> To create an encrypted .parcel archive pass in the absolute file and folder paths in any order. In the current version ***1.0.0.*** Parcel needs to be run from the projects base directory: `parcel/`. I'm currently working on a revision to make it work properly from any directory, so that will be implemented really soon.  
  
 ```bash 
 parcel file1.txt file2.doc myfolder
@@ -187,7 +187,12 @@ bash parcel --uninstall
 
 ## [Documentation](#docs)
 
+As I mentioned in the Usage section, for now in version 1.0.0. Parcel needs to be run from within its base directory: `parcel/` This is because a lot of Parcels functions rely on files and folders being in a specific place for them to work properly and it always searches relative to where the `parcel` command is run. If you run it from `~/` for example it will look relative to the home directory which is not good. The following image is a layout of the current file and folder structure that is being relied on by Parcel.
 
+![Alt](res/Parcel-v1.0.0-File-Structure.png)
+
+The following is a brief description of the archiving and encryption methods used within Parcel.
+ 
 ### [Archiving Methods](#archiving-methods)
 - **ARC** - "ARC" is a file compression and archival format that was developed in the 1980s by System Enhancement Associates (SEA). It was a popular compression format in the early days of personal computing, particularly on MS-DOS-based systems.
 - **ZIP** - *"ZIP"* is a file format and a popular compression method used for archiving and compressing files and folders. It stands for "ZiP Archive" or "Zone Information Protocol." The ZIP format allows you to combine multiple files and folders into a single file, reducing their overall size and making it easier to transfer or store them.
