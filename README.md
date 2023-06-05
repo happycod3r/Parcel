@@ -1,7 +1,7 @@
 ﻿![Alt](res/Parcel.png)
 
 
-# .parcel
+# Parcel v1.0.0
 
 Parcel is an archiving and encrypting algorithm used to store and protect files in an easy to use way. Just run selected files and folders through Parcel and it will create a ***.parcel*** archive containing archived and encrypted versions of all of your files and data, also retaining the original directory structure, permissions and ownership. 
 Parcel will store your .parcel archives in a hidden folder on your computer to keep your data archived, encrypted and out of sight of any prying eyes!
@@ -25,7 +25,8 @@ Parcel will store your .parcel archives in a hidden folder on your computer to k
 
 ## [About](#about)
 
-I wanted to create a way to encrypt and archive personal data that would be hard to reverse engineer or get the original data from if you were trying to steal it. My solution was to apply multiple layers of encryption and archiving that would make it extremely hard to duplicate. I  
+Parcel will add layers of security such as encryption, encoding, scrambling, pin protection and compression on top of your files and folders then bundle them into a .parcel archive which is then hidden on your computer. The aim is to make it as hard as possible to get to the data within the .parcel. I hope to make it so that the only feasible way to open a .parcel is to use the Parcel program itself. If you can easily manually reverse engineer it then it's no good!  
+This is parcel v1.0.0, but as I research and advance the algorithm in turn adding new encryption and archiving methods I will be updating frequently until I've done all I can.
 
 ---
 
@@ -67,13 +68,16 @@ Parcel will have you configure it the first time it is run. You will have to set
 
 ## [Usage](#usage)
 
-> To create an encrypted .parcel archive pass in the file and folder names/paths in any order.**
+> To create an encrypted .parcel archive pass in the file and folder names/paths in any order.
+ 
 ```bash 
 parcel file1.txt file2.doc myfolder
 #or if not on path...
 bash parcel file1.txt file2.doc myfolder
 ```
+
 > To decrypt and extract a .parcel archive use the `-x` or `--extract` option. You don't have to supply an archive name as you will be able to choose which one to unarchive from an interactive list. You can choose more than one at a time.
+
 ```bash 
 parcel -x
 #or
@@ -85,6 +89,7 @@ bash parcel --extract
 ```
 
 > To delete .parcel archives use the `-d` or the `--delete` option. There is no need to specify which archive to delete as you will be able to choose from an interactive list. You can choose multiple at once.
+
 ```bash
 parcel -d
 #or
@@ -96,6 +101,7 @@ bash parcel --delete
 ```
 
 > To clean the *Opened-Parcels* folder use the `-c` or the `--clean` option and follow the prompt to continue. Make sure you have any important data that may be located there first.
+
 ```bash
 parcel -c
 #or
@@ -107,6 +113,7 @@ bash parcel --clean
 ```
 
 > To import a .parcel file from an external location use the `-i` or the `--import` option and specify the path to the .parcel including the .parcel name.
+
 ```bash
 parcel -i path/to/1CWNRYRPCN.parcel
 #or
@@ -118,6 +125,7 @@ bash parcel --import path/to/1CWNRYRPCN.parcel
 ```
 
 > To list all .parcel files use the `--list` option.
+
 ```bash
 parcel --list
 #or if not on path
@@ -125,6 +133,7 @@ bash parcel --list
 ```
 
 > To get the currently installed version of .parcel use the `-v` or the `--version` option.
+
 ```bash 
 parcel -v
 #or
@@ -136,6 +145,7 @@ bash parcel --version
 ```
 
 > To view the install location of .parcel use the `-l` or the `--get-location` option.
+
 ```bash 
 parcel -l
 #or
@@ -146,7 +156,16 @@ bash parcel -l
 bash parcel --get-location
 ```
 
+> To reset your pin use the `--reset` option.
+
+```bash
+parcel --reset
+#or if not on path...
+bash parcel --reset
+```
+
 > To view these options on the command line use the `-h` or the `--help` option.
+
 ```bash
 parcel -h
 #or
@@ -158,6 +177,7 @@ bash parcel --help
 ```
 
 > To uninstall .parcel use the  `--uninstall` option and follow the prompts to continue.
+
 ```bash
 parcel --uninstall
 #or
