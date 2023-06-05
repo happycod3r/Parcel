@@ -18,21 +18,22 @@ function parcel() {
     }
 
     function parcel-log() { 
-        if [[ ! -f "logs/parcel.log" ]]; then
+        local PARCEL_LOG_PATH
+        if [[ ! -f "${LOG_DIRECTORY}/parcel.log" ]]; then
             touch "parcel.log"
-            sudo mv "parcel.log" "logs/"
+            sudo mv "parcel.log" "$LOG_DIRECTORY/"
         fi
 
-        echo "$@" >> "logs/parcel.log"
+        echo "$@" >> "${LOG_DIRECTORY}/parcel.log"
     }
     
     function debug-log() {
-        if [[ ! -f "logs/debug.log" ]]; then
+        if [[ ! -f "${LOG_DIRECTORY}/debug.log" ]]; then
             touch "debug.log"
-            sudo mv "debug.log" "logs/"
+            sudo mv "debug.log" "$LOG_DIRECTORY"
         fi
         
-        echo "$@" >> logs/debug.log
+        echo "$@" >> "$LOG_DIRECTORY/debug.log"
     }
 
     function out() {
@@ -109,7 +110,7 @@ function parcel() {
         target="$1"
         bname="$(get-base-file-name $target)"
         
-        "${SCRIPT_PATH}/bin/arc" ao $bname $target
+        "src/bin/arc" ao $bname $target
         
         rm "$target"
         
@@ -174,16 +175,17 @@ function parcel() {
         exit 0
     fi
     
-    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_SCRIPT SCRIPT_ABS_PATH LOG_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY
+    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_SCRIPT SCRIPT_ABS_PATH LOG_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY CONFIG_FOLDER
     
     SCRIPT_ABS_PATH=$(readlink -f "$0")
     SCRIPT_PATH="$(dirname $SCRIPT_ABS_PATH)"
+    CONFIG_FOLDER="${HOME}/.config/Parcel"
     iteration_count=0
     targets=$@
     total_targets=$#
     current_directory="$(pwd)"
     OUTPUT_DIRECTORY="Parcels/"
-    LOG_DIRECTORY="logs/"
+    LOG_DIRECTORY="logs"
     PARCEL_DATA_FILE="parcel.data"
     LOG_START_DELIMETER="--------  $(date)  --------"
     LOG_ENDING_DELIMETER="-------------------- $(date "+%I:%M:%S") -------------------"
@@ -200,7 +202,8 @@ function parcel() {
     #NOTE: THE PARCEL ID AND NAME ARE NOW AVAILABLE FOR USE.
     #/////////////////////////////////////////////////////
     #NOTE: MAKE ALL FILES/FOLDERS FOR THE CURRENT PARCEL HERE.
-    
+    debug-log "hello"
+    parcel-log "hello"
     mkdir -p $parcel_directory
     make-encryption-key
     touch $PARCEL_DATA_FILE
