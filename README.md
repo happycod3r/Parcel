@@ -5,20 +5,27 @@
 
 Parcel is an archiving and encrypting algorithm used to store and protect files in an easy to use way. Just run selected files and folders through Parcel and it will create a ***.parcel*** archive containing archived and encrypted versions of all of your files and data, also retaining the original directory structure, permissions and ownership. 
 Parcel will store your .parcel archives in a hidden folder on your computer to keep your data archived, encrypted and out of sight of any prying eyes!
+
 ![Alt](res/Parcel-diagram.png)
 
 ## [Table Of Contents](#toc)
- - [Table Of Contents](#toc)
- - [About](#about)
- - [Install](#install)
- - [Configuration](#configuration)
- - [Usage](#usage)
- - [Dependencies](#dependencies)
- - [Documentation](#docs)
-   * [Archiving Methods](#archiving-methods)
-   * [Encryption Methods](#encryption-methods)
-  
+- [.parcel](#parcel)
+  - [Table Of Contents](#table-of-contents)
+  - [About](#about)
+  - [Install](#install)
+    - [Manual Install:](#manual-install)
+    - [Command-Line Install:](#command-line-install)
+  - [Dependencies](#dependencies)
+      - [fzf - https://github.com/junegunn/fzf](#fzf---httpsgithubcomjunegunnfzf)
+      - [arc - https://manpages.ubuntu.com/manpages/xenial/man1/arc.1.html](#arc---httpsmanpagesubuntucommanpagesxenialman1arc1html)
+  - [Configuration](#configuration)
+  - [Usage](#usage)
+  - [Documentation](#documentation)
+    - [Archiving Methods](#archiving-methods)
+    - [Encryption Methods](#encryption-methods)
+
 ---
+
 ## [About](#about)
 
 I wanted to create a way to encrypt and archive personal data that would be hard to reverse engineer or get the original data from if you were trying to steal it. My solution was to apply multiple layers of encryption and archiving that would make it extremely hard to duplicate. I  
