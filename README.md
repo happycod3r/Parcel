@@ -3,8 +3,8 @@
 
 # Parcel v1.0.0
 
-Parcel is an archiving and encrypting algorithm used to store and protect files in an easy to use way. Just run selected files and folders through Parcel and it will create a ***.parcel*** archive containing archived and encrypted versions of all of your files and data, also retaining the original directory structure, permissions and ownership. 
-Parcel will store your .parcel archives in a hidden folder on your computer to keep your data archived, encrypted and out of sight of any prying eyes!
+Parcel is an archiving and encrypting algorithm used to store and protect files in an easy to use way. Just run selected files and folders through Parcel and it will create a ***.parcel*** archive containing compressed and encrypted versions of all of your files and data.
+Parcel will store your .parcel archives in a hidden folder on your computer to keep your data out of sight of any prying eyes!
 
 ![Alt](res/Parcel-diagram.png)
 
