@@ -20,6 +20,9 @@ Parcel will store your .parcel archives in a hidden folder on your computer to k
   - [Documentation](#documentation)
     - [Archiving Methods](#archiving-methods)
     - [Encryption Methods](#encryption-methods)
+  - [Contributing](#contributing)
+  - [Security](#security)
+  - [Contacts](#contacts) 
 
 ---
 
@@ -202,3 +205,29 @@ The following is a brief description of the archiving and encryption methods use
 ### [Encryption Methods](encryption-methods)
 - **OpenSSL** - OpenSSL is a widely-used open-source software library that provides cryptographic functions, including encryption, decryption, digital signatures, and secure communications protocols.
 - **base64** - Base64 encoding is not a form of encryption but rather a method of encoding binary data into a text format. The Base64 encoding scheme uses a set of 64 characters (hence the name) that are considered safe for use in text-based situations. These characters include uppercase letters (A-Z), lowercase letters (a-z), numbers (0-9), and two additional symbols (usually '+' and '/'). In some implementations, an additional character such as '=' is used for padding.
+---
+
+## [Contributing](#contributing)
+
+If you have any feature requests, suggestions or general questions you can reach me via any of the methods listed below in the [Contacts](#contacts) section.
+
+---
+
+## [Security](#security)
+
+### Reporting a vulnerability or bug?
+
+**Do not submit an issue or pull request**: A general rule of thumb is to never publicly report bugs or vulnerabilities because you might inadvertently reveal it to unethical people who may use it for bad. Instead, you can email me directly at: [paulmccarthy676@gmail.com](mailto:paulmccarthy676@gmail.com). I will deal with the issue privately and submit a patch as soon as possible.
+
+---
+
+## [Contacts](#contacts)
+
+**Author:** Paul M.
+
+* Email: [paulmccarthy676@gmail.com](mailto:paulmccarthy676@gmail.com)
+* Github: [https://github.com/happycod3r](https://github.com/happycod3r)
+* Linkedin: [https://www.linkedin.com/in/paul-mccarthy-89165a269/]( https://www.linkedin.com/in/paul-mccarthy-89165a269/)
+* Facebook: [https://www.facebook.com/paulebeatz]( https://www.facebook.com/paulebeatz)
+
+---
