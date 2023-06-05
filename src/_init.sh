@@ -44,7 +44,7 @@ function main() {
             decoded_pin="$(decode $correct_pin)"
 
             while [[ "$good_pin" == "false" ]]; do
-
+                clear
                 read -p "Enter your pin to continue.
                 pin: " pin
 
