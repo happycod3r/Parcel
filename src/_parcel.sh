@@ -109,7 +109,7 @@ function parcel() {
         target="$1"
         bname="$(get-base-file-name $target)"
         
-        src/bin/arc ao $bname $target
+        "${SCRIPT_PATH}/bin/arc" ao $bname $target
         
         rm "$target"
         
@@ -174,9 +174,10 @@ function parcel() {
         exit 0
     fi
     
-    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_DIRECTORY LOG_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY
+    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_SCRIPT SCRIPT_ABS_PATH LOG_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY
     
-    THIS_DIRECTORY="$(pwd)"
+    SCRIPT_ABS_PATH=$(readlink -f "$0")
+    SCRIPT_PATH="$(dirname $SCRIPT_ABS_PATH)"
     iteration_count=0
     targets=$@
     total_targets=$#

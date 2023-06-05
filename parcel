@@ -1,9 +1,6 @@
 #!/bin/bash
 
-function start-parcel() { 
-
-    source ./src/_init.sh
-    clear
+function start_parcel() { 
 
     function fatal() {
         CYAN='\033[0;36m'
@@ -19,10 +16,6 @@ function start-parcel() {
         NC='\033[0m'
         echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
     }
-
-    if [[ $# -eq 0 ]]; then
-        fatal "No files or folders provided!"
-    fi 
     
     local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location cleaned_opened list_parcels reset_pin parcel_archive PARCELS_FOLDER SOURCE targets_string VERSION
 
@@ -36,11 +29,21 @@ function start-parcel() {
     clean_opened=false
     list_parcels=false
     reset_pin=false
+    display_options=false
 
     parcel_archive="$2"
     PARCELS_FOLDER="Parcels"
-    SOURCE="src/_parcel.sh"
+    SCRIPT_ABS_PATH=$(readlink -f "$0")
+    SCRIPT_PATH="$(dirname $SCRIPT_ABS_PATH)"
+    SOURCE="${SCRIPT_PATH}/src/_parcel.sh"
     targets_string=""
+
+    source "${SCRIPT_PATH}/src/_init.sh"
+    clear
+
+    if [[ $# -eq 0 ]]; then
+        display_options=true
+    fi 
 
     #////// * GET OPTIONS * //////
     
@@ -81,7 +84,7 @@ function start-parcel() {
         ;;
     esac; shift; done
     if [[ "$1" == '--' ]]; then shift; fi
-
+    
     #////// * ADD TARGETS * //////
     for arg in "$@"; do
         # Note this outter clause will probably make it impossible to unarchive any .parcel files that are inside a parcel themselves.
@@ -104,63 +107,69 @@ function start-parcel() {
         fi
     done
 
+    #////// * DISPLAY OPTIONS * //////
+    if [[ "$display_options" = true ]]; then
+        source "${SCRIPT_PATH}/src/_help.sh"
+        return 0
+    fi
+
     #////// * EXTRACT PARCELS * //////
     if [[ "$extract_parcel" = true ]]; then
-        source src/_open.sh
+        source "${SCRIPT_PATH}/src/_open.sh"
         return 0
     fi
 
     #////// * DELETE PARCELS * //////
     if [[ "$delete_parcels" = true ]]; then
-        source src/_del.sh
-        return 0
+        source "${SCRIPT_PATH}/src/_del.sh"
+        return 0    
     fi
 
     #////// * CLEAN OPENED PARCELS * //////
     if [[ "$clean_opened" = true ]]; then
-        source src/_clean.sh
+        source "${SCRIPT_PATH}/src/_clean.sh"
         return 0
     fi
 
     #////// * IMPORT PARCELS * //////
     if [[ "$import_parcels" = true ]]; then
-        source src/_import.sh
+        source "${SCRIPT_PATH}/src/_import.sh"
         return 0
     fi
 
     #////// * PRINT HELP * //////
     if [[ "$help_needed" = true ]]; then
-        source src/_help.sh
+        source "${SCRIPT_PATH}/src/_help.sh"
         return 0
     fi
 
     #////// * UNINSTALL * //////
     if [[ "$uninstall" = true ]]; then
-        source src/_uninstall.sh
+        source "${SCRIPT_PATH}/src/_uninstall.sh"
         return 0
     fi
 
     #////// * VERSION * //////
     if [[ "$get_version" = true ]]; then
-        source src/_version.sh
+        source "${SCRIPT_PATH}/src/_version.sh"
         return 0
     fi
 
     #////// * LOCATION * //////
     if [[ "$get_location" = true ]]; then
-        source src/_location.sh
+        source "${SCRIPT_PATH}/src/_location.sh"
         return 0
     fi
 
     #////// * LIST PARCELS * //////
     if [[ "$list_parcels" = true ]]; then
-        source src/_list.sh
+        source "${SCRIPT_PATH}/src/_list.sh"
         return 0
     fi
 
     #////// * RESET PIN * //////
     if [[ "$reset_pin" = true ]]; then
-        source src/_reset.sh
+        source "${SCRIPT_PATH}/src/_reset.sh"
         return 0
     fi
 
@@ -168,5 +177,5 @@ function start-parcel() {
     bash "$SOURCE" "$targets_string"
 }
 
-start-parcel $@
+start_parcel $@
 
