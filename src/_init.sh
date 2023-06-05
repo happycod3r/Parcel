@@ -24,22 +24,22 @@ function main() {
     CONFIG_DIRECTORY="${HOME}/.config/parcel"
     PIN_FILE="${CONFIG_DIRECTORY}/.pin"
     USER_FILE="${CONFIG_DIRECTORY}/.user"
+    new_user="true"
 
     if [[ ! -d "$CONFIG_DIRECTORY" ]]; then
         mkdir -p "$CONFIG_DIRECTORY"
     fi
 
-    # ------------------- CURRENT USERS ------------------
-
     while [[ "$DONE" == "false" ]]; do
-
         good_pin="false"
         pin_pattern='^[0-9]{4}$' # 4 digits.
-        user_pattern='^[0-9a-zA-Z]{8}$' # 8 characters, numbers & letters only
         exit_char="q"
 
+    # ------------------- CURRENT USERS ------------------
+
         if [[ -f "$PIN_FILE" ]]; then
-        
+
+            new_user="false"
             correct_pin="$(cat $PIN_FILE)"
             decoded_pin="$(decode $correct_pin)"
 
@@ -79,14 +79,16 @@ function main() {
             done
         fi
 
-        # ------------------- NEW USERS ------------------
+        # --------------- NEW USERS ------------------
 
         while [[ "$good_pin" == "false" ]]; do
-            read -p "Set a pin for future use:
-            pin: " pin
+            read -p "Set a pin for future use
+            Pin or (q) to quit: " pin
 
             if [[ -z "$pin" ]]; then
+                clear
                 echo "Pin is empty. Enter a valid pin to continue."
+                read -p "Press enter to continue..."
                 clear
                 continue
             fi
@@ -102,24 +104,28 @@ function main() {
                 local encoded_pin="$(encode $pin)"
                 echo "$encoded_pin" > $PIN_FILE
                 good_pin="true"
-                #DONE="true"
+
             else
                 clear
                 echo "Invalid pin. Must be no less than 4 digits and no letter or characters."
+                read -p "Press enter to continue..."
+                clear
             fi
         done
 
-        # ------------------- CTRL QUESTION --------------
+        if [[ "$new_user" == "true" ]]; then
+        
+            # --------------- CTRL QUESTION --------------
             
-        local good_question CTRL_QUESTION_FILE
-        good_question="false"
-        CTRL_QUESTION_FILE="${CONFIG_DIRECTORY}/.q"
+            local good_question CTRL_QUESTION_FILE
+            good_question="false"
+            CTRL_QUESTION_FILE="${CONFIG_DIRECTORY}/.q"
 
-        while [[ "$good_question" == "false" ]]; do 
+            while [[ "$good_question" == "false" ]]; do 
             clear
             echo "Now setup a control question to answer to use for operations such as resetting your pin number."
 
-            read -p "Question: " ctrl_question
+            read -p "Question or (q) to quit: " ctrl_question
 
             if [[ "$ctrl_question" == "$exit_char" ]]; then
                 echo "Press enter to exit..."
@@ -137,19 +143,19 @@ function main() {
             good_question="true"
             echo "$ctrl_question" > $CTRL_QUESTION_FILE
 
-        done
+            done
 
-        # --------------- CTRL ANSWER ----------------
+            # --------------- CTRL ANSWER ----------------
 
-        local good_answer CTRL_ANSWER_FILE
-        good_answer="false"
-        CTRL_QUESTION_FILE="${CONFIG_DIRECTORY}/.answer"
+            local good_answer CTRL_ANSWER_FILE
+            good_answer="false"
+            CTRL_ANSWER_FILE="${CONFIG_DIRECTORY}/.answer"
 
-        while [[ "$good_answer" == "false" ]]; do 
+            while [[ "$good_answer" == "false" ]]; do 
             clear
             echo "Now write the answer to the ctrl question."
 
-            read -p "Answer: " ctrl_answer
+            read -p "Answer or (q) to quit: " ctrl_answer
 
             if [[ "$ctrl_answer" == "$exit_char" ]]; then
                 echo "Press enter to exit..."
@@ -166,9 +172,10 @@ function main() {
 
             good_answer="true"
             DONE="true"
-            echo "$ctrl_question" > $CTRL_QUESTION_FILE
+            echo "$(encode $ctrl_answer)" > $CTRL_ANSWER_FILE
 
-        done
+            done
+        fi
 
         if [[ $DONE == "true" ]]; then
             break
