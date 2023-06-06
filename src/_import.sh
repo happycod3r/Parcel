@@ -5,8 +5,9 @@ function _import() {
     if [[ ! -d $PARCELS_FOLDER ]]; then
         mkdir -p "$PARCELS_FOLDER"
     fi  
-    parcels="$@"
-    for parcel in "$parcels"; do
+    parcels="$*" # b4 shellcheck I had "$@"
+
+    for parcel in $parcels; do
         parcel_ext=".${parcel##*.}"
         if [[ "$parcel_ext" == ".parcel" ]]; then
             mv "$parcel" "$PARCELS_FOLDER"
@@ -24,4 +25,4 @@ function _import() {
     done
 }
 
-_import
+_import "$@"

@@ -6,7 +6,7 @@ function _extract() {
         CYAN='\033[0;36m'
         PURPLE='\033[0;35m'
         NC='\033[0m'
-        echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
+        echo -e "${CYAN}[parcel] ${PURPLE}$*${NC}"
         sleep 0.3
     }
 
@@ -14,7 +14,7 @@ function _extract() {
         CYAN='\033[0;36m'
         RED='\033[0;31m'
         NC='\033[0m'
-        echo -e "${CYAN}[parcel]${RED}$@${NC}"
+        echo -e "${CYAN}[parcel]${RED}$*${NC}"
         sleep 1
     }
 
@@ -22,7 +22,7 @@ function _extract() {
         local target target_fqp target_path
         target="$1"
         target_fqp="$(readlink -f $target)"
-        target_path=$(echo "${target_fqp%/*}")
+        target_path="${target_fqp%/*}"
         echo "$target_path"
     }
 
@@ -63,10 +63,10 @@ function _extract() {
         extension=".${target##*.}"
 
         if [[ "$extension" == ".arc" ]]; then
-            $BIN/arc xo $target
+            "$BIN/arc" xo "$target"
             target="${target%.*}"
             rm "${target}.arc"
-            mv *.enc $target_dir
+            mv ./*.enc "$target_dir"
         fi
     }
 
@@ -74,11 +74,11 @@ function _extract() {
         local target
         target="$1"
         target_base="$(get-base-file-name $target)"
-        unzip $target 
+        unzip "$target" 
         if [[ "$target_base" != "$parcel_id" ]]; then
             mv "$target_base" "$parcel_id"
         fi
-        rm $target
+        rm "$target"
     }
 
     function process-files() {
@@ -121,7 +121,7 @@ function _extract() {
         done
     }
 
-    local parcel parcel_id ARCHIVED_PARCEL_DIR OPENED_PARCEL_DIR bname new_name action BIN SRC
+    local parcel parcel_id ARCHIVED_PARCEL_DIR OPENED_PARCEL_DIR bname action BIN SRC
     
     parcel="$1"
     parcel_id="$(get-base-file-name $parcel)"
@@ -151,6 +151,8 @@ function _extract() {
     action="decrypt-target"
     action_arg="$parcel_id"
     process-files "$parcel_id" "$action" "$action_arg"
+
+    out "$parcel_id extracted successfully!"
 
 }
 
