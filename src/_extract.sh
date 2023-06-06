@@ -1,9 +1,5 @@
 #!/bin/bash
 
-function doc-out() {
-    echo "- ### $@" >> FUNCTION_CTRL_FLOW.md
-}
-
 function _extract() {
 
     function out() {

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-function doc-out() {
-    echo "- ### $@" >> FUNCTION_CTRL_SHOW.md
-}
-
 function parcel() {
 
     function fatal() {
@@ -130,6 +126,7 @@ function parcel() {
     }
 
     function process-files() {
+        
         local directory action extension non_extension TARGET_DATA_STRING
         
         directory="$1"
@@ -141,7 +138,6 @@ function parcel() {
         SRC="$(pwd)/src"
         
         for file in "$directory"/*; do
-        
             extension=".${file##*.}"
             non_extension="${file##*.}/"
         
@@ -200,8 +196,6 @@ function parcel() {
     #NOTE: THE PARCEL ID AND NAME ARE NOW AVAILABLE FOR USE.
     #/////////////////////////////////////////////////////
     #NOTE: MAKE ALL FILES/FOLDERS FOR THE CURRENT PARCEL HERE.
-    debug-log "hello"
-    parcel-log "hello"
     mkdir -p $parcel_directory
     make-encryption-key
     touch $PARCEL_DATA_FILE
@@ -295,7 +289,8 @@ function parcel() {
     rm -r "$parcel_directory"
     mv ./${parcel_directory}.zip  ./${parcel_name}    
     mv $parcel_name $OUTPUT_DIRECTORY
-    PARCEL="$(pwd)/$OUTPUT_DIRECTORY${parcel_name}"
+
+    export LAST_PARCEL="$(pwd)/$OUTPUT_DIRECTORY${parcel_name}"
 }
 
-parcel $@
+parcel "$@"

@@ -106,10 +106,6 @@ main ()
     CYAN='\033[0;36m'
     PURPLE='\033[0;35m'
     NC='\033[0m'
-
-    #DIRNAME="/a/b/c/d/e"
-    #D2=$(dirname "$DIRNAME")
-    #DIRNAME2=$(basename "$D2")/$(basename "$DIRNAME")
     
     original_inf_path="${in_file}"
     inf_d2=$(dirname "$original_inf_path")

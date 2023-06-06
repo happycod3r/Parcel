@@ -6,7 +6,7 @@
 # pin setup to begin on next startup. That would essentialy do the same thing as 
 # parcel --reset.
 
-function main() {
+function sec-gate1() {
 
     function fatal() {
         CYAN='\033[0;36m'
@@ -206,4 +206,4 @@ function main() {
 
 }
 
-main
+sec-gate1

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function start_parcel() { 
+function start-parcel() { 
 
     function fatal() {
         CYAN='\033[0;36m'
@@ -17,7 +17,7 @@ function start_parcel() {
         echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
     }
     
-    local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location cleaned_opened list_parcels reset_pin parcel_archive PARCELS_FOLDER SOURCE targets_string VERSION
+    local extract_parcel delete_parcels import_parcels help_needed uninstall  get_version get_location clean_opened list_parcels reset_pin PARCELS_FOLDER SOURCE targets_string
 
     extract_parcel=false
     delete_parcels=false
@@ -31,7 +31,6 @@ function start_parcel() {
     reset_pin=false
     display_options=false
 
-    parcel_archive="$2"
     PARCELS_FOLDER="Parcels"
     SCRIPT_ABS_PATH=$(readlink -f "$0")
     SCRIPT_PATH="$(dirname $SCRIPT_ABS_PATH)"
@@ -177,5 +176,5 @@ function start_parcel() {
     bash "$SOURCE" "$targets_string"
 }
 
-start_parcel $@
+start-parcel "$@"
 
