@@ -1,6 +1,6 @@
 # Global Environment Variables
 
-> ## The following is a list of all global environment variables set by Parcel after running the `parcel` command for the first time. 
+## The following is a list of all global environment variables set by Parcel after running the `parcel` command for the first time. 
 ---
 <br/>
 
