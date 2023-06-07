@@ -12,7 +12,7 @@ function sec-gate1() {
         CYAN='\033[0;36m'
         RED='\033[0;31m'
         NC='\033[0m'
-        echo -e "$0: ${RED}Error:${CYAN} $@" >&2
+        echo -e "$0: ${RED}Error:${CYAN} $*" >&2
         exit 0
     }
 
@@ -20,14 +20,14 @@ function sec-gate1() {
         CYAN='\033[0;36m'
         PURPLE='\033[0;35m'
         NC='\033[0m'
-        echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
+        echo -e "${CYAN}[parcel] ${PURPLE}$*${NC}"
     }
 
     encode() {
         if [[ $# -eq 0 ]]; then
             cat | base64
         else
-            printf '%s' $1 | base64
+            printf '%s' "$1" | base64
         fi
     }
 
@@ -35,11 +35,11 @@ function sec-gate1() {
         if [[ $# -eq 0 ]]; then
             cat | base64 --decode
         else
-            printf '%s' $1 | base64 --decode
+            printf '%s' "$1" | base64 --decode
         fi
     }
     
-    fpath=('$(pwd)' $fpath)
+    fpath=("$(pwd)" "$fpath")
 
     DONE="false"
     CONFIG_DIRECTORY="${HOME}/.config/parcel"
@@ -122,8 +122,9 @@ function sec-gate1() {
             fi
 
             if [[ $pin =~ $pin_pattern ]]; then
-                local encoded_pin="$(encode $pin)"
-                echo "$encoded_pin" > $PIN_FILE
+                local encode_pin
+                encoded_pin="$(encode $pin)"
+                echo "$encoded_pin" > "$PIN_FILE"
                 good_pin="true"
 
             else
@@ -162,7 +163,7 @@ function sec-gate1() {
                 fi
 
                 good_question="true"
-                echo "$ctrl_question" > $CTRL_QUESTION_FILE
+                echo "$ctrl_question" > "$CTRL_QUESTION_FILE"
 
             done
 
@@ -193,7 +194,7 @@ function sec-gate1() {
 
             good_answer="true"
             DONE="true"
-            echo "$(encode $ctrl_answer)" > $CTRL_ANSWER_FILE
+            echo "$(encode $ctrl_answer)" > "$CTRL_ANSWER_FILE"
 
             done
         fi

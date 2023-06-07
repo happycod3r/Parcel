@@ -18,7 +18,7 @@ function parcel() {
             sudo mv "parcel.log" "$LOG_DIRECTORY/"
         fi
 
-        echo "$@" >> "${LOG_DIRECTORY}/parcel.log"
+        echo "$*" >> "${LOG_DIRECTORY}/parcel.log"
     }
     
     function debug-log() {
@@ -27,7 +27,7 @@ function parcel() {
             sudo mv "debug.log" "$LOG_DIRECTORY"
         fi
         
-        echo "$@" >> "$LOG_DIRECTORY/debug.log"
+        echo "$*" >> "$LOG_DIRECTORY/debug.log"
     }
 
     function out() {
@@ -35,11 +35,11 @@ function parcel() {
         PURPLE='\033[0;35m'
         NC='\033[0m'
         
-        echo -e "${CYAN}[parcel] ${PURPLE}$@${NC}"
+        echo -e "${CYAN}[parcel] ${PURPLE}$*${NC}"
     }
 
     function error-out {
-        echo -e "$@"
+        echo -e "$*"
         sleep 1
     }
     
@@ -75,7 +75,7 @@ function parcel() {
         
         target="$1"
         
-        gpg --symmetric $target 
+        gpg --symmetric "$target" 
         rm "$target"
     }
     
@@ -138,6 +138,7 @@ function parcel() {
         SRC="$(pwd)/src"
         
         for file in "$directory"/*; do
+            
             extension=".${file##*.}"
             non_extension="${file##*.}/"
         
@@ -169,11 +170,8 @@ function parcel() {
         exit 0
     fi
     
-    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY PARCEL THIS_SCRIPT SCRIPT_ABS_PATH LOG_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY CONFIG_FOLDER
-    
-    SCRIPT_ABS_PATH=$(readlink -f "$0")
-    SCRIPT_PATH="$(dirname $SCRIPT_ABS_PATH)"
-    CONFIG_FOLDER="${HOME}/.config/Parcel"
+    local iteration_count targets total_targets current_directory parcel_directory random_suffix parcel_id parcel_name OUTPUT_DIRECTORY LOG_DIRECTORY extension non_extension PARCEL_DATA_FILE TARGET_DATA_STRING LOG_START_DELIMETER LOG_ENDING_DELIMETER PARCEL_KEY
+
     iteration_count=0
     targets=$@
     total_targets=$#
@@ -266,7 +264,7 @@ function parcel() {
                 error-out "\n$TARGET_DATA_STRING\n"            
             fi
     
-            write-parcel-data $TARGET_DATA_STRING
+            write-parcel-data "$TARGET_DATA_STRING"
             continue
         fi
     done
@@ -280,17 +278,16 @@ function parcel() {
     #NOTE: ANY LAST MINUTE FILES THAT SHOULD GO IN parcel/ GOES HERE.
     
     mv "encryption.key" "$parcel_directory/"
-    mv $PARCEL_DATA_FILE "$parcel_directory/"
+    mv "$PARCEL_DATA_FILE" "$parcel_directory/"
     
     #/////////////////////////////////////////////////////
     #NOTE: ARCHIVING STARTS HERE.
     
     zip -r "./${parcel_directory}.zip" "$parcel_directory"
     rm -r "$parcel_directory"
-    mv ./${parcel_directory}.zip  ./${parcel_name}    
-    mv $parcel_name $OUTPUT_DIRECTORY
-
-    export LAST_PARCEL="$(pwd)/$OUTPUT_DIRECTORY${parcel_name}"
+    mv "./${parcel_directory}.zip"  "./${parcel_name}"    
+    mv "$parcel_name" "$OUTPUT_DIRECTORY"
+    
 }
 
-parcel "$@"
+parcel $@
