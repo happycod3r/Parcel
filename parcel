@@ -79,7 +79,6 @@ function start-parcel() {
         ;;
         \?)
             fatal "Invalid option: -$OPTARG"
-            return 1
         ;;
     esac; shift; done
     if [[ "$1" == '--' ]]; then shift; fi
