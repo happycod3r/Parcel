@@ -18,6 +18,7 @@ Parcel will store your .parcel archives in a hidden folder on your computer to k
   - [Configuration](#configuration)
   - [Usage](#usage)
   - [Documentation](#documentation)
+    - [Exports](#exports)
     - [Archiving Methods](#archiving-methods)
     - [Encryption Methods](#encryption-methods)
   - [Contributing](#contributing)
