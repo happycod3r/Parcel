@@ -103,8 +103,7 @@ function parcel() {
         
         target="$1"
         bname="$(get-base-file-name $target)"
-        
-        "src/bin/arc" ao $bname $target
+        sudo "$(pwd)/src/bin/arc" ao $bname $target
         
         rm "$target"
         
@@ -253,8 +252,8 @@ function parcel() {
                 process-files "$target" "$action"
     
                 zip-target "$target"
-                rm -r "$target"
-                mv "${target}.zip" "$parcel_directory/"
+                sudo rm -r "$target"
+                sudo mv "${target}.zip" "$parcel_directory/"
             else
     
                 #/////////////////////////////////////////////////////
@@ -277,16 +276,16 @@ function parcel() {
     #/////////////////////////////////////////////////////
     #NOTE: ANY LAST MINUTE FILES THAT SHOULD GO IN parcel/ GOES HERE.
     
-    mv "encryption.key" "$parcel_directory/"
-    mv "$PARCEL_DATA_FILE" "$parcel_directory/"
+    sudo mv "encryption.key" "$parcel_directory/"
+    sudo mv "$PARCEL_DATA_FILE" "$parcel_directory/"
     
     #/////////////////////////////////////////////////////
     #NOTE: ARCHIVING STARTS HERE.
     
-    zip -r "./${parcel_directory}.zip" "$parcel_directory"
-    rm -r "$parcel_directory"
-    mv "./${parcel_directory}.zip"  "./${parcel_name}"    
-    mv "$parcel_name" "$OUTPUT_DIRECTORY"
+    sudo zip -r "./${parcel_directory}.zip" "$parcel_directory"
+    sudo rm -r "$parcel_directory"
+    sudo mv "./${parcel_directory}.zip"  "./${parcel_name}"    
+    sudo mv "$parcel_name" "$OUTPUT_DIRECTORY"
     
 }
 

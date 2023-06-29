@@ -49,8 +49,8 @@ function _extract() {
         if [[ "$extension" == ".enc" ]]; then
             bname="$(get-base-file-name $target)" # f1
             parcel_dir="$(pwd)/${parcel_id}" 
-            bash "$SRC/encrypt.sh" -d -i "$target" -o "$target_without_enc_ext" -k "$(cat $parcel_dir/encryption.key)"
-            rm "$target"
+            sudo bash "$SRC/encrypt.sh" -d -i "$target" -o "$target_without_enc_ext" -k "$(cat $parcel_dir/encryption.key)"
+            sudo rm "$target"
         fi
     }
     
@@ -63,10 +63,10 @@ function _extract() {
         extension=".${target##*.}"
 
         if [[ "$extension" == ".arc" ]]; then
-            "$BIN/arc" xo "$target"
+            sudo "$BIN/arc" xo "$target"
             target="${target%.*}"
-            rm "${target}.arc"
-            mv ./*.enc "$target_dir"
+            sudo rm "${target}.arc"
+            sudo mv ./*.enc "$target_dir"
         fi
     }
 
@@ -74,11 +74,11 @@ function _extract() {
         local target
         target="$1"
         target_base="$(get-base-file-name $target)"
-        unzip "$target" 
+        sudo unzip "$target" 
         if [[ "$target_base" != "$parcel_id" ]]; then
-            mv "$target_base" "$parcel_id"
+            sudo mv "$target_base" "$parcel_id"
         fi
-        rm "$target"
+        sudo rm "$target"
     }
 
     function process-files() {
@@ -131,7 +131,7 @@ function _extract() {
     BIN="$(pwd)/src/bin"
 
     if [[ ! -d "$OPENED_PARCEL_DIR" ]]; then
-        mkdir -p "$OPENED_PARCEL_DIR"
+        sudo mkdir -p "$OPENED_PARCEL_DIR"
     fi
 
     sudo mv "${ARCHIVED_PARCEL_DIR}/${parcel}" "${OPENED_PARCEL_DIR}"

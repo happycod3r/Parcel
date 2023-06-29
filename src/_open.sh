@@ -6,7 +6,7 @@ function _open() {
 
     if [[ -d "Parcels" ]]; then
 
-        selected_parcels=$(ls "$PARCELS_FOLDER" | fzf --multi --cycle --no-sort --preview='echo "$PARCELS_FOLDER/{}"' --preview-window down:10% --layout='reverse-list' --color bg:#222222,preview-bg:#333333)
+        selected_parcels=$(ls "$PARCELS_FOLDER" | "$(pwd)/src/bin/fzf" --multi --cycle --no-sort --preview='echo "$PARCELS_FOLDER/{}"' --preview-window down:10% --layout='reverse-list' --color bg:#222222,preview-bg:#333333)
 
         for parcel in $selected_parcels; do
             if [[ ! -f "$parcel" ]]; then

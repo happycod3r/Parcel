@@ -41,6 +41,12 @@ function sec-gate1() {
     
     fpath=("$(pwd)" "$fpath")
 
+    # May need to make fzf & arc executable
+    sudo chmod +rwx "$(pwd)/src/bin/arc"
+    sudo chown "$USERNAME" "$(pwd)/src/bin/arc"
+    sudo chmod +rwx "$(pwd)/src/bin/fzf"
+    sudo chown "$USERNAME" "$(pwd)/src/bin/fzf"
+
     DONE="false"
     CONFIG_DIRECTORY="${HOME}/.config/parcel"
     PIN_FILE="${CONFIG_DIRECTORY}/.pin"
@@ -134,70 +140,6 @@ function sec-gate1() {
                 clear
             fi
         done
-
-        if [[ "$new_user" == "true" ]]; then
-        
-            # --------------- CTRL QUESTION --------------
-            
-            local good_question CTRL_QUESTION_FILE
-            good_question="false"
-            CTRL_QUESTION_FILE="${CONFIG_DIRECTORY}/.q"
-
-            while [[ "$good_question" == "false" ]]; do 
-                clear
-                out "Now setup a control question to answer to use for operations such as resetting your pin number."
-
-                read -p "Question or (q) to quit: " ctrl_question
-
-                if [[ "$ctrl_question" == "$exit_char" ]]; then
-                    out "Press enter to exit..."
-                    read -p ""
-                    clear
-                    exit 0
-                fi
-
-                if [[ -z "$ctrl_question" ]]; then
-                    out "The control question is empty. Enter a question to continue."
-                    clear
-                    continue
-                fi
-
-                good_question="true"
-                echo "$ctrl_question" > "$CTRL_QUESTION_FILE"
-
-            done
-
-            # --------------- CTRL ANSWER ----------------
-
-            local good_answer CTRL_ANSWER_FILE
-            good_answer="false"
-            CTRL_ANSWER_FILE="${CONFIG_DIRECTORY}/.answer"
-
-            while [[ "$good_answer" == "false" ]]; do 
-            clear
-            out "Now write the answer to the ctrl question."
-
-            read -p "Answer or (q) to quit: " ctrl_answer
-
-            if [[ "$ctrl_answer" == "$exit_char" ]]; then
-                out "Press enter to exit..."
-                read -p ""
-                clear
-                exit 0
-            fi
-
-            if [[ -z "$ctrl_answer" ]]; then
-                out "The control answer is empty. Enter an answer to the question you provided to continue."
-                clear
-                continue
-            fi
-
-            good_answer="true"
-            DONE="true"
-            echo "$(encode $ctrl_answer)" > "$CTRL_ANSWER_FILE"
-
-            done
-        fi
 
         if [[ $DONE == "true" ]]; then
             break

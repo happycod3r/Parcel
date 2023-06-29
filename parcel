@@ -30,7 +30,7 @@ function start-parcel() {
     list_parcels=false
     reset_pin=false
     display_options=false
- 
+
     PARCELS_FOLDER="Parcels"
     SCRIPT_ABS_PATH=$(readlink -f "$0")
     SCRIPT_PATH="$(dirname $SCRIPT_ABS_PATH)"
