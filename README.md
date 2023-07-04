@@ -9,18 +9,20 @@ Parcel will store your .parcel archives in a hidden folder on your computer to k
 ![Alt](res/Parcel-diagram.png)
 
 ## [Table Of Contents](#toc)
-  - [Table Of Contents](#table-of-contents)
+  - [Table Of Contents](#toc)
   - [About](#about)
   - [Install](#install)
-    - [Manual Install:](#manual-install)
-    - [Command-Line Install:](#command-line-install)
+    - [Manual Install](#manual_install)
+    - [Command-Line Install](#command_line_install)
+      - [Using Git Clone](#git_clone)
+      - [Using the curl command](#curl)
   - [Dependencies](#dependencies)
   - [Configuration](#configuration)
   - [Usage](#usage)
   - [Documentation](#documentation)
     - [Exports](#exports)
-    - [Archiving Methods](#archiving-methods)
-    - [Encryption Methods](#encryption-methods)
+    - [Archiving Methods](#archiving_methods)
+    - [Encryption Methods](#encryption_methods)
   - [Contributing](#contributing)
   - [Security](#security)
   - [Contacts](#contacts) 
@@ -36,11 +38,16 @@ This is parcel v1.0.0, but as I research and advance the algorithm in turn addin
 
 ## [Install](#install)
 
-### Manual Install:
+To download and install .Parcel follow choose an install method and follow the corresponding steps. Once
+fininshed jump to the [Usage](#usage) section.
+
+### [Manual Install](#manual_install)
 1. Download and place the ***Parcel*** folder in a location of your choosing.
 2. For convenience you should put Parcel on your `PATH` or in a place that is already on your `$PATH` global variable.
 
-### Command-Line Install:
+### [Command-Line Install](#command_line_install)
+
+#### [Using Git Clone:](#using_git_clone)
 1. Clone the repository: Open your terminal and navigate to the directory where you want to clone the repository. Run the following command:
 ```bash
 git clone https://github.com/happycod3r/Parcel.git
@@ -56,7 +63,23 @@ If necessary, make Parcel executable. You can use the chmod command for this:
 cd path/to/parcel
 sudo chmod +x parcel
 ```
+#### [Using Curl:](#curl)
 
+1. Clone the repository: Open your terminal and navigate to the directory where you want to clone the repository. Run the following command:
+```bash
+curl https://github.com/happycod3r/Parcel.git
+```
+
+2. Navigate to the script directory: Change your working directory to the cloned repository's directory:
+```bash
+cd Parcel
+```
+
+If necessary, make Parcel executable & change ownership to yourself. You can use the `chmod` & `chown` commands for this:
+```bash
+sudo chmod +x parcel
+sudo chown $USERNAME
+```
 ## [Dependencies](#dependencies)
 
 **Parcel** only has 2 dependencies, these being **fzf** the command line fuzzy finder and **arc** pc archiving utility, and both are packaged with it, so there is no need to actually install anything. 
